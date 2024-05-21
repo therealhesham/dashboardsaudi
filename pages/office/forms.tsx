@@ -7,8 +7,8 @@ import SectionTitle from 'example/components/Typography/SectionTitle'
 // import CountList from "../"
 import country from "./countries.json"
 import Layout from 'example/containers/Layout'
-import { MailIcon } from 'icons'
-
+import { MailIcon } from 'icons';
+import "arabic-fonts/src/css/arabic-fonts.css";
 function Forms() {
   return (
     <Layout>
@@ -31,8 +31,8 @@ function Forms() {
           <span>Nationality</span>
             <Select className="mt-1">
 
-{country.map(e=>
-    <option>{e.country}</option>
+{country.map((e,i)=>
+    <option key={i}>{e.country}</option>
 
 
 )}
@@ -63,8 +63,8 @@ function Forms() {
         </Label>
       <Label>
   <span>Religion</span>
-  <Select className="mt-1">
-    <option style={{fontFamily:""}}>مسلم</option>
+  <Select style={{fontSize:"15px" }} >
+    <option >مسلم</option>
     <option>هندوسي</option>
     <option>مسيحي</option>
     <option>بدون ديانة</option>
