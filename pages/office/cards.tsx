@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { Card, CardBody } from '@roketid/windmill-react-ui'
-import PageTitle from 'example/components/Typography/PageTitle'
-import SectionTitle from 'example/components/Typography/SectionTitle'
-import CTA from 'example/components/CTA'
-import InfoCard from 'example/components/Cards/InfoCard'
-import RoundIcon from 'example/components/RoundIcon'
-import Layout from 'example/containers/Layout'
+import PageTitle from 'office/components/Typography/PageTitle'
+import SectionTitle from 'office/components/Typography/SectionTitle'
+import CTA from 'office/components/CTA'
+import InfoCard from 'office/components/Cards/InfoCard'
+import RoundIcon from 'office/components/RoundIcon'
+import Layout from 'office/containers/Layout'
 import { CartIcon, ChatIcon, MoneyIcon, PeopleIcon } from 'icons'
 
 function Cards() {

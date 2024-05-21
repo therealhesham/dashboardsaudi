@@ -1,5 +1,5 @@
-import PageTitle from 'example/components/Typography/PageTitle'
-import Layout from 'example/containers/Layout'
+import PageTitle from 'office/components/Typography/PageTitle'
+import Layout from 'office/containers/Layout'
 
 function Blank() {
   return (

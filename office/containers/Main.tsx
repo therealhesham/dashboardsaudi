@@ -1,7 +1,7 @@
 /* @ts-ignore */
 
 import React from 'react'
-import RoundIcon from 'example/components/RoundIcon';
+import RoundIcon from 'office/components/RoundIcon';
 import { TwitterIcon } from 'icons';
 import { TwitchOutlined, TwitterOutlined ,FacebookFilled} from '@ant-design/icons';
 interface IMain{
