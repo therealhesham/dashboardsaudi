@@ -64,8 +64,7 @@ function SidebarContent({ linkClicked }: ISidebarContent) {
                   <span className='ml-4'>{route.name}</span>
                 </a>
               </Link>
-            </li>
-          )
+            </li>          )
         )}
       </ul>
       <div className="px-6 my-6">
