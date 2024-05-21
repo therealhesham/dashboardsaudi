@@ -26,7 +26,7 @@ export function routeIsActive (pathname: String, route: IRoute): boolean {
 const routes: IRoute[] = [
   {
     path: '/office', 
-    icon: 'Office', 
+    icon: 'FormsIcon', 
     name: 'Office Dashboard', // 
     exact: true,
   },
