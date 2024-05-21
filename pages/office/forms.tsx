@@ -31,8 +31,9 @@ function Forms() {
           <span>Nationality</span>
             <Select className="mt-1">
 
+
 {country.map((e,i)=>
-    <option key={i}>{e.country}</option>
+    <option key={i} >{e.country} </option>
 
 
 )}
@@ -63,15 +64,34 @@ function Forms() {
         </Label>
       <Label>
   <span>Religion</span>
-  <Select style={{fontSize:"15px" }} >
-    <option >مسلم</option>
-    <option>هندوسي</option>
-    <option>مسيحي</option>
-    <option>بدون ديانة</option>
+  <Select  style={{fontSize:"15px" }} >
+    <option  >Muslim</option>
+    <option>Hindu</option>
+    <option>Christian</option>
+    <option>Irreligious</option>
 
 
 
   </Select>
+</Label>
+<Label>
+  <span>Skills</span>
+<div style={{backgroundColor:"inherit",borderRadius:"5px" , borderColor:"black 50%",borderWidth:"1px"}} >
+<div style={{margin:"10px"}}>
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"blueviolet",borderRadius:"6px"}}> cooking</span>
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"red",borderRadius:"6px"}}> cooking</span>
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"red",borderRadius:"6px"}}> cooking</span>
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"red",borderRadius:"6px"}}> cooking</span>
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"red",borderRadius:"6px"}}> cooking</span>
+
+  <span style={{ margin:"10px",padding:"4px",justifyContent:"center",backgroundColor:"red",borderRadius:"6px"}}> cooking</span>
+</div>
+
+
+
+{/* <span style={{maxWidth:"50%"}}> cooking</span> */}
+
+</div>
 </Label>
         <Label className="mt-4">
           <span>Multiselect</span>
@@ -85,16 +105,16 @@ function Forms() {
         </Label>
 
         <Label className="mt-4">
-          <span>Message</span>
+          <span>Notes</span>
           <Textarea className="mt-1" rows={3} placeholder="Enter some long form content." />
         </Label>
-
+{/* 
         <Label className="mt-6" check>
           <Input type="checkbox" />
           <span className="ml-2">
             I agree to the <span className="underline">privacy policy</span>
           </span>
-        </Label>
+        </Label> */}
       </div>
 
       <SectionTitle>Validation</SectionTitle>
@@ -182,6 +202,8 @@ function Forms() {
           </div>
         </Label>
       </div>
+   
+                                       
     </Layout>
   )
 }
