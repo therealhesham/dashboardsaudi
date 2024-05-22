@@ -1,7 +1,6 @@
 // @ts-nocheck 
 import React, { useState, useEffect } from 'react'
-import { Doughnut, Line } from 'react-chartjs-2'
-
+import { Doughnut, Line, Pie } from 'react-chartjs-2'
 import CTA from 'example/components/CTA'
 import InfoCard from 'example/components/Cards/InfoCard'
 import ChartCard from 'example/components/Chart/ChartCard'
@@ -85,6 +84,20 @@ function Dashboard() {
 
   return (
     <Layout>
+
+      <PageTitle>Charts</PageTitle>
+      <div className="grid gap-6 mb-8 md:grid-cols-2 ">
+      {/* <div  style={{scale:"40%"}}> */}
+        <ChartCard title="معلومات عن العمالة" > 
+          <Pie {...doughnutOptions} />
+          <ChartLegend legends={doughnutLegends} />
+        </ChartCard>
+{/* </div> */}
+        <ChartCard title="المكاتب الاكثر ادراجا للعمالة">
+          <Line {...lineOptions} />
+          <ChartLegend legends={lineLegends} />
+        </ChartCard>
+      </div>
       <PageTitle>Dashboard</PageTitle>
 
       {/* <CTA /> */}
@@ -191,18 +204,6 @@ function Dashboard() {
         </TableFooter>
       </TableContainer>
 
-      <PageTitle>Charts</PageTitle>
-      <div className="grid gap-6 mb-8 md:grid-cols-2">
-        <ChartCard title="Revenue">
-          <Doughnut {...doughnutOptions} />
-          <ChartLegend legends={doughnutLegends} />
-        </ChartCard>
-
-        <ChartCard title="Traffic">
-          <Line {...lineOptions} />
-          <ChartLegend legends={lineLegends} />
-        </ChartCard>
-      </div>
     </Layout>
   )
 }

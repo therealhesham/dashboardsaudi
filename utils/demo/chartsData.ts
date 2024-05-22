@@ -5,9 +5,9 @@ export interface ILegends{
 
 
 export const doughnutLegends: ILegends[] = [
-  { title: 'Shirts', color: 'bg-blue-500' },
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
+  { title: ' المتاح من العمالة ', color: 'bg-blue-500' },
+  { title: 'عمالة تم تشغيلهم', color: 'bg-teal-600' }
+  // { title: 'Bags', color: 'bg-purple-600' },
 ]
 
 export const lineLegends: ILegends[] = [
@@ -16,24 +16,24 @@ export const lineLegends: ILegends[] = [
 ]
 
 export const barLegends: ILegends[] = [
-  { title: 'Shoes', color: 'bg-teal-600' },
-  { title: 'Bags', color: 'bg-purple-600' },
+  { title: ' المتاح من العمالة ', color: 'bg-teal-600' },
+  { title: 'عمالة تم تشغيلهم', color: 'bg-purple-600' },
 ]
 
 export const doughnutOptions = {
   data: {
     datasets: [
       {
-        data: [33, 33, 33],
+        data: [67, 33],
         /**
          * These colors come from Tailwind CSS palette
          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
          */
-        backgroundColor: ['#0694a2', '#1c64f2', '#7e3af2'],
+        backgroundColor: ['#0694a2', '#1c64f2'],
         label: 'Dataset 1',
       },
     ],
-    labels: ['Shoes', 'Shirts', 'Bags'],
+    labels: ['المتاح من العمالة', 'عمالة تم تشغيلهم'],
   },
   options: {
     responsive: true,
