@@ -11,18 +11,22 @@ import { MailIcon } from 'icons'
 function Forms() {
   return (
     <Layout>
-      <PageTitle>Forms</PageTitle>
+      <PageTitle>اضافة مكتب خارجي </PageTitle>
       <CTA />
-      <SectionTitle>Elements</SectionTitle>
+      {/* <SectionTitle>Elements</SectionTitle> */}
 
       <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <Label>
-          <span>Name</span>
-          <Input className="mt-1" placeholder="Jane Doe" />
+          <span>اسم المكتب</span>
+          <Input className="mt-1" placeholder="اسم المكتب"  type='text'/>
+        </Label>
+        <Label>
+          <span>الرقم التعريفي للدخول</span>
+          <Input className="mt-1" placeholder="الرقم التعريفي للدخول" type='number'/>
         </Label>
 
         <Label className="mt-4">
-          <span>Disabled</span>
+          <span>P</span>
           <Input disabled className="mt-1" placeholder="Jane Doe" />
         </Label>
 
