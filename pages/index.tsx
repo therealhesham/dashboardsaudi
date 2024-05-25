@@ -47,7 +47,7 @@ aria-hidden='true'
                 />
               </Label>
 
-              <Link href='/example' passHref={true}>
+              <Link href='/admin' passHref={true}>
                 <Button className='mt-4' block style={{backgroundColor:"#003749"}}>
                   Log in
                 </Button>
