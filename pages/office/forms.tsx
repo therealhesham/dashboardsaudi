@@ -75,6 +75,11 @@ function Forms() {
   </Select>
 </Label>
 <Label>
+  <span>passport number</span>
+                    <Input  className="mt-1"  type='text' />
+  
+</Label>
+<Label>
   <span>Skills</span>
 <div style={{backgroundColor:"inherit",borderRadius:"5px" , borderColor:"black 50%",borderWidth:"1px"}} >
 <div style={{margin:"10px"}}>

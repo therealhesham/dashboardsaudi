@@ -9,32 +9,17 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = "postgresql://rawaes_qemam:heshambadr12@wwwsg1-ts105.a2hosting.com/home/rawaes/postgresql:5432/rawaes_new"
-}
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+  provider = "mongodb"
+  url      = "mongodb+srv://heshammoha231992:BozLnMORjollMgoC@cluster0.ewjihyo.mongodb.net/rawaesdashboard"
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  admin       Boolean    
+  pictureurl  String
+  username    String
+  password    String
+  role        String
+  idnumber Int   @unique
 }
+
