@@ -9,6 +9,42 @@ import country from "./countries.json"
 import Layout from 'office/containers/Layout'
 import { MailIcon } from 'icons';
 import "arabic-fonts/src/css/arabic-fonts.css";
+
+
+  const handleSignUp = async (e: React.SyntheticEvent) => {
+    
+    e.preventDefault();
+    //@ts-ignore
+await fetch('../api/postcv',{method:"post",headers: {
+        "Content-Type": "application/json",
+      },body:JSON.stringify({
+        email: "ssss"
+      })}).then(e=>
+ 
+  e.text()
+  // console.log(e.text())
+
+
+).then(s=>
+{  
+  console.log(s)
+}
+)
+    
+      .then((response) => {
+
+        console.log(response);
+        
+        
+        // router.replace('/example/dashboard');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+
 function Forms() {
   return (
     <Layout>
@@ -58,7 +94,12 @@ function Forms() {
 
 
         <Label className='mt-6'>
-          <span>CV </span>
+          <span>Picture </span>
+                   <Input  className="file-input file-input-bordered file-input-sm w-full max-w-xs"  type='file' />
+
+        </Label>
+        <Label className='mt-6'>
+          <span>Full body picture </span>
                    <Input  className="file-input file-input-bordered file-input-sm w-full max-w-xs"  type='file' />
 
         </Label>

@@ -25,7 +25,6 @@ import {
 } from '@roketid/windmill-react-ui'
 
 import {
-  doughnutOptions,
   lineOptions,
   doughnutLegends,
   lineLegends,
@@ -55,34 +54,87 @@ function Dashboard() {
     Legend
   )
 
+  
+  const [officelist,setofficelist]=useState([])
+  function datas() {
+    
+  }
+  
+  const doughnutOptions={
+  data: {
+    datasets: [
+      {
+        data: [67, 33],
+        /**
+         * These colors come from Tailwind CSS palette
+         * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
+         */
+        backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
+        label: 'Dataset 1',
+      },
+    ],
+    labels: officelist.length>0?[...officelist]:0,
+  },
+  options: {
+    responsive: true,
+    cutoutPercentage: 80,
+  },
+  legend: {
+    display: false,
+  },
+}
+// console.log(officelist)
   const [page, setPage] = useState(1)
+  const [length,setLength]=useState(0)
   const [data, setData] = useState([])
-
+  const [time,setTime]=useState(0)
+  const [office,setOffice]=useState([])
   // pagination setup
   const resultsPerPage = 10
   const totalResults = response.length
+setTimeout(() => {
+  setTime(new Date().getSeconds())
+}, 10000);
+// pagination change control
+const [fulldata,setFulldata]=useState([])
+  const [paginatedData,setPaginatedData]=useState([])
+// console.log(time)
 
-  // pagination change control
-  function onPageChange(p: number) {
-    setPage(p)
+
+function onPageChange(p: number) {
+    // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
+setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
+    // setPage(p)
   }
-
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
-      async function names( )  {
+    try {
+    (async function names( )  {
       fetch("./api/hello").then(response => response.json())
   .then(json  => {
-    console.log('parsed json', json) // access json.body here
-    setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage))
+    json?setLength(json.length):"";
+    // console.log('parsed json', json) // access json.body here
+    setFulldata(json)
+    json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
   // setData(json)   
-  } ) 
-    }
+const arr=[];
+  json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
+  setofficelist(arr)
+    
+  } 
+  // names();
+  )
+})()
 
-    names()
-  }, [page])
 
-  return (
+} catch (error) {
+  console.log(error)
+}  
+
+}, [])
+
+return (
     <Layout>
 
       <PageTitle>Charts</PageTitle>
@@ -104,7 +156,7 @@ function Dashboard() {
 
       {/* <!-- Cards --> */}
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <InfoCard title=" المتاح من العاملين" value="9820">
+        <InfoCard title=" المتاح من العاملين" value={length}>
           {/* @ts-ignore */}
           <RoundIcon
             icon={PeopleIcon}
@@ -114,9 +166,10 @@ function Dashboard() {
           />
         </InfoCard>
 
-        <InfoCard title="المكاتب الخارجية" value="8">
+        <InfoCard  title="المكاتب الخارجية" value={officelist.length}>
           {/* @ts-ignore */}
           <RoundIcon
+          
             icon={MoneyIcon}
             iconColorClass="text-green-500 dark:text-green-100"
             bgColorClass="bg-yellow-100 dark:bg-green-500"
@@ -156,7 +209,7 @@ function Dashboard() {
             </tr>
           </TableHeader>
           <TableBody>
-            {data.map((e, i) => (
+            {paginatedData?.map((e, i) => (
               <TableRow key={i}>
                 <TableCell>
                   <div className="flex items-center text-sm" style={{width:"200px"}}>

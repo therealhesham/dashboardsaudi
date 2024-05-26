@@ -91,7 +91,7 @@ function Dashboard() {
 
       {/* <!-- Cards --> */}
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <InfoCard title=" المتاح من العاملين" value="9820">
+        <InfoCard title="   المتاح للاستقدام بقاعدة البيانات" value={data.length}>
           {/* @ts-ignore */}
           <RoundIcon
             icon={PeopleIcon}
