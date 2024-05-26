@@ -11,8 +11,8 @@ export const doughnutLegends: ILegends[] = [
 ]
 
 export const lineLegends: ILegends[] = [
-  { title: 'Organic', color: 'bg-teal-600' },
-  { title: 'Paid', color: 'bg-purple-600' },
+  { title: 'عمال', color: 'bg-teal-600' },
+  { title: 'سس', color: 'bg-purple-600' },
 ]
 
 export const barLegends: ILegends[] = [
