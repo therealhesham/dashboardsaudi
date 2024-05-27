@@ -41,6 +41,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import Link from 'next/link'
 
 function Dashboard() {
   Chart.register(
@@ -90,15 +91,15 @@ function Dashboard() {
   const [time,setTime]=useState(0)
   const [office,setOffice]=useState([])
   // pagination setup
+  const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
-  const totalResults = response.length
-setTimeout(() => {
-  setTime(new Date().getSeconds())
-}, 10000);
+  const totalResults = fulldata.length
+  
+// setTimeout(() =
 // pagination change control
-const [fulldata,setFulldata]=useState([])
   const [paginatedData,setPaginatedData]=useState([])
-// console.log(time)
+  // console.log(time)
+  const [listType,setTypeList] = useState("workers")
 
 
 function onPageChange(p: number) {
@@ -110,23 +111,23 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // here you would make another server request for new data
   useEffect(() => {
     try {
-    (async function names( )  {
-      fetch("./api/hello").then(response => response.json())
+    async function names( )  {
+     await fetch("./api/hello").then(response => response.json())
   .then(json  => {
     json?setLength(json.length):"";
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-  // setData(json)   
+console.log(new Date().getSeconds())
+    // setData(json)   
 const arr=[];
   json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
-  setofficelist(arr)
-    
-  } 
+  setofficelist(arr)} 
   // names();
-  )
-})()
 
+)
+}
+names()
 
 } catch (error) {
   console.log(error)
@@ -156,17 +157,21 @@ return (
 
       {/* <!-- Cards --> */}
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <InfoCard title=" المتاح من العاملين" value={length}>
           {/* @ts-ignore */}
-          <RoundIcon
-            icon={PeopleIcon}
-            iconColorClass="text-orange-500 dark:text-orange-100"
-            bgColorClass="bg-orange-100 dark:bg-orange-500"
-            className="mr-4"
-          />
+          <div  style={{cursor:"pointer"}} onClick={e=>setTypeList("workers")}>
+        <InfoCard title=" المتاح من العاملين" value={length}  >
+                 <RoundIcon
+                 
+                 icon={PeopleIcon}
+                 iconColorClass="text-orange-500 dark:text-orange-100"
+                 bgColorClass="bg-orange-100 dark:bg-orange-500"
+                 className="mr-4"
+                 />
         </InfoCard>
-
-        <InfoCard  title="المكاتب الخارجية" value={officelist.length}>
+                 </div>
+ 
+          <div  style={{cursor:"pointer"}} onClick={e=>setTypeList("offices")}>
+        <InfoCard  title="المكاتب الخارجية" value={officelist.length}  >
           {/* @ts-ignore */}
           <RoundIcon
           
@@ -174,8 +179,9 @@ return (
             iconColorClass="text-green-500 dark:text-green-100"
             bgColorClass="bg-yellow-100 dark:bg-green-500"
             className="mr-4"
-          />
+            />
         </InfoCard>
+            </div>
 
         <InfoCard title="المشرفين" value="1">
           {/* @ts-ignore */}
@@ -197,15 +203,16 @@ return (
           />
         </InfoCard>
       </div>
-
+{listType =="workers"?
       <TableContainer>
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>اسم العامل</TableCell>
-              <TableCell>العمر</TableCell>
-              <TableCell>الحالة الاجتماعية</TableCell>
-              <TableCell>الجنسيات</TableCell>
+              {listType =="workers"?<TableCell>اسم العامل</TableCell>:<TableCell>اسماء المكاتب</TableCell>}
+              {listType =="workers"?<TableCell>العمر</TableCell>: null}
+              {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
+              {listType =="workers"?<TableCell>الجنسيات</TableCell>:null}
+              {listType =="workers"?<TableCell>المكتب</TableCell>:null}
             </tr>
           </TableHeader>
           <TableBody>
@@ -243,10 +250,22 @@ return (
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   </span>
                 </TableCell>
+                <TableCell>
+                  <Link href={"/admin/officeinfo/"+e?.fields.office}  >                 
+                  {/* <span className="text-sm"> */}
+                  <span className="text-sm">{e?.fields.office}</span>
+
+                    
+                    {/* {new Date(user.date).toLocaleDateString()} */}
+                  {/* </span> */}
+                </Link>
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>
         </Table>
+
         <TableFooter>
           <Pagination
             totalResults={totalResults}
@@ -256,7 +275,16 @@ return (
           />
         </TableFooter>
       </TableContainer>
-
+: 
+<TableBody>
+<ul >
+{officelist.map((e, i) => (
+                <li style={{height:"150px"}} key={i}>{e}</li>
+     
+              ))
+}          </ul>
+               </TableBody>
+                }
     </Layout>
   )
 }

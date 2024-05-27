@@ -16,9 +16,10 @@ datasource db {
 model User {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   admin       Boolean    
-  pictureurl  String
+  pictureurl  String    
   username    String
   password    String
+  repeatpassword String   
   role        String
   idnumber Int   @unique
 }

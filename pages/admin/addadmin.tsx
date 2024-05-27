@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
-import { Input, HelperText, Label, Select, Textarea } from '@roketid/windmill-react-ui'
+import { Input, HelperText, Label, Select, Textarea, Button } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
 
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
+import axios from 'axios'
 
 
 
@@ -16,8 +17,9 @@ function Addadmin() {
   const [password, setPassword] = useState<string>('');
   const [pictureurl, setpictureurl] = useState<string>('');
   const [username, setusername] = useState<string>('');
-const [idnumber, setidnumber] = useState<string>('');
+const [idnumber, setidnumber] = useState(0);
 const [role, setrole] = useState<string>('');
+const [cloudinaryImage, setCloudinaryImage] = useState("")
 
 
   const handleSignUp = async (e: React.SyntheticEvent) => {
@@ -25,11 +27,15 @@ const [role, setrole] = useState<string>('');
     e.preventDefault();
     //@ts-ignore
 await fetch('../api/addadmin',{method:"post",headers: {
+'Accept': 'application/json',
+
         "Content-Type": "application/json",
-      },body:JSON.stringify({
+
+
+},body:JSON.stringify({
 admin,
 password,
-pictureurl,
+pictureurl:cloudinaryImage,
 idnumber,
 role,
 username
@@ -57,6 +63,54 @@ username
         console.log(error);
       });
   };
+
+
+  
+  const data = new FormData();
+//@ts-ignore
+  const createFormData = (photo) => {
+//@ts-ignore
+    data.append("file", {uri:photo,type:"test/jpg",name:"amacphoto"});
+  data.append(
+    "upload_preset",
+    "z8q1vykv"
+  );
+  data.append("cloud_name","duo8svqci");
+  data.append("folder", "samples");
+
+  
+  
+
+  return data
+};
+
+
+//@ts-nocheck
+//@ts-ignore
+const handleUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    formData.append(
+      "upload_preset",
+      "z8q1vykv"
+    );
+    formData.append("cloud_name","duo8svqci");
+    formData.append("folder", "samples");
+// axios
+   await axios.post(
+      `https://api.cloudinary.com/v1_1/duo8svqci/image/upload`,
+      formData
+    )
+     .then((response) => {
+       console.log(response);
+       setCloudinaryImage(response.data.secure_url);
+     })
+     .catch((error) => {
+       console.log(error);
+     });  
+  };
+
 
 
 
@@ -89,7 +143,7 @@ username
 
         <Label className='mt-6'>
           <span>صورة شخصية </span>
-                   <Input  className="file-input file-input-bordered file-input-sm w-full max-w-xs"  type='file' onChange={(e=>setpictureurl(e.target.value))}/>
+                   <Input  className="file-input file-input-bordered file-input-sm w-full max-w-xs"  type='file' onChange={handleUpload}/>
 
         </Label>
       {/* </div> */}
@@ -108,6 +162,7 @@ username
 
   </Select>
 </Label>
+<Button onClick={handleSignUp}>Add Admin</Button>
 
       </div>
     </Layout>

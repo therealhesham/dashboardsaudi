@@ -25,9 +25,9 @@ export function routeIsActive (pathname: String, route: IRoute): boolean {
 
 const routes: IRoute[] = [
   {
-    path: '/admin', // the url
-    icon: 'HomeIcon', // the component being exported from icons/index.js
-    name: 'Dashboard', // name that appear in Sidebar
+    path: '/admin', 
+    icon: 'HomeIcon', 
+    name: 'Dashboard', 
     exact: true,
   },
   {
@@ -36,14 +36,14 @@ const routes: IRoute[] = [
     name: 'Forms',
   },
   {
-    path: '/admin/cards',
+    path: '/admin/addadmin',
     icon: 'CardsIcon',
-    name: 'Cards',
+    name: 'Add New Admin',
   },
   {
-    path: '/admin/charts',
+    path: '/admin/resetpassword',
     icon: 'ChartsIcon',
-    name: 'Charts',
+    name: 'Reset Admin Password',
   },
 
   {

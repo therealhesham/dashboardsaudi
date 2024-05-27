@@ -10,23 +10,35 @@ type Data = {
 }
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
-// sendSuggestion()
-  const result =  await new Promise((resolve,reject)=>{
+  console.log(req.query)
+  console.log(req.query.pid)
 
+// sendSuggestion()
+      //@ts-ignore 
+
+const arr=[];
+  const result =  await new Promise((resolve,reject)=>{
+      //@ts-ignore 
 
     base('كل البيانات').select({
-      //  fields:{}
+      //@ts-ignore
+      // fields:["office"],
         // Selecting the first 3 records in Grid view:
         view: "Grid view"
     }).eachPage(function page(records, fetchNextPage) {
         // This function (`page`) will get called for each page of records.
-    
         records.forEach(function(record,s) {
-            console.log(s)
-            console.log('Retrieved', record.get('Name'));
-        });
-    
- resolve(records)       
+            // console.log(s)
+            // console.log('Retrieved', record.get("office"));
+    // console.log(req.query.pid == record.get("office"))
+    //@ts-ignore
+    if(req.query.pid == record.get("office") ) arr.push(record);
+          });
+      //@ts-ignore 
+    // console.log(arr)
+      //@ts-ignore 
+ resolve(arr) 
+
     }, function done(err) {
         if (err) { console.error(err); return; }
     });
@@ -34,7 +46,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
  
 })
 
-  res.status(200).json(result)
+  res.json(result)
 }
 
   // export base;
