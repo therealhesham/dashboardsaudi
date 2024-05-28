@@ -19,6 +19,8 @@ import {
   Avatar,
   Button,
   Pagination,
+  Input,
+  Label,
 } from '@roketid/windmill-react-ui'
 import { EditIcon, TrashIcon } from 'icons'
 
@@ -49,18 +51,46 @@ export default function Page() {
 }, [new Date().getMilliseconds()])
 
 
-
+// Label
 return (   <Layout>
    <header>
+<img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 
-    
    </header>
+<div style={{display: "grid" ,gridTemplateColumns: "repeat(3, auto)",gridRowGap: "1px",gridColumnGap: "9px",alignItems:"center",width:"100%"}}>
+
+        <Label className="mt-4">
+          <span>الاسم</span>
+          <Input className="mt-1" value="الاسم" />
+        </Label>
+
+<Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
+          <span>الجنسية</span>
+          <Input className="mt-1" value="الجنسية" />
+        </Label>
+<Label className="mt-4">
+          <span>تاريخ الميلاد</span>
+          <Input className="mt-1" value="تاريخ الميلاد" />
+        </Label>
+<Label className="mt-4">
+          <span>العمر</span>
+          <Input className="mt-1" value="العمر" />
+        </Label>
+<Label className="mt-4">
+          <span>الديانة</span>
+          <Input className="mt-1" value="الديانة" />
+        </Label>
 
 
-    <Footer/>
+</div>
+
+
     
-    
-    
+ <footer>
+<img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924374/40a3153b-1b92-43c1-a1d9-d0476d37a0df.png'/>
+  
+  
+  </footer>   
        </Layout>
 )
 }

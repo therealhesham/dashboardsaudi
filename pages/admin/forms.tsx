@@ -74,12 +74,12 @@ await fetch('../api/signup',{method:"post",headers: {
 
         <Label className="mt-4">
           <span>الرقم السري</span>
-          <Input disabled className="mt-1" placeholder="الرقم السري" />
+          <Input className="mt-1" placeholder="الرقم السري" />
         </Label>
 
         <Label className="mt-4">
           <span>اعادة الرقم السري</span>
-          <Input disabled className="mt-1" placeholder="الرقم السري" />
+          <Input className="mt-1" placeholder="الرقم السري" />
         </Label>
 
 
