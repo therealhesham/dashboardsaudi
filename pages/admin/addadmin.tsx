@@ -8,6 +8,7 @@ import SectionTitle from 'example/components/Typography/SectionTitle'
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import axios from 'axios'
+import { set } from 'mongoose'
 
 
 
@@ -41,13 +42,14 @@ role,
 username
 
       })}).then(e=>
- 
-  e.text()
-  // console.log(e.text())
-
+ {
+  if (e.status == 301) return alert("Error")
+        console.log(e.status);
+  e.text();}
 
 ).then(s=>
 {  
+  
   console.log(s)
 }
 )
@@ -66,24 +68,7 @@ username
 
 
   
-  const data = new FormData();
-//@ts-ignore
-  const createFormData = (photo) => {
-//@ts-ignore
-    data.append("file", {uri:photo,type:"test/jpg",name:"amacphoto"});
-  data.append(
-    "upload_preset",
-    "z8q1vykv"
-  );
-  data.append("cloud_name","duo8svqci");
-  data.append("folder", "samples");
-
   
-  
-
-  return data
-};
-
 
 //@ts-nocheck
 //@ts-ignore
@@ -103,11 +88,9 @@ const handleUpload = async (e) => {
       formData
     )
      .then((response) => {
-       console.log(response);
        setCloudinaryImage(response.data.secure_url);
      })
      .catch((error) => {
-       console.log(error);
      });  
   };
 
@@ -152,7 +135,7 @@ const handleUpload = async (e) => {
 
 <Label>
   <span>الرتبة</span>
-  <Select  style={{fontSize:"15px" }} >
+  <Select  style={{fontSize:"15px" }} onChange={(e)=>setrole(e.target.value)} >
 
     <option disabled >------</option>
 

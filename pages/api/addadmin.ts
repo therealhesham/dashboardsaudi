@@ -8,9 +8,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+try {
+  const createAdmin=await prisma.user.create({data:{ repeatpassword:req.body.password,admin:req.body.admin,password:req.body.password,pictureurl:req.body.pictureurl,idnumber:Number(req.body.idnumber),role:req.body.role,username:req.body.username}})
 
-const createAdmin=await prisma.user.create({data:{ repeatpassword:req.body.password,admin:req.body.admin,password:req.body.password,pictureurl:req.body.pictureurl,idnumber:Number(req.body.idnumber),role:req.body.role,username:req.body.username}})
-// createAdmin
-console.log(createAdmin)
-res.json(createAdmin)
+  res.status(200).send(createAdmin)
+
+} catch (error) {
+  console.log(error)
+  res.status(301).send("createAdmin")
+
+// res.send("error")  
 }
+
+}
+
+
