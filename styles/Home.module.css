@@ -8,6 +8,30 @@
   height: 100vh;
 }
 
+
+.divbox{
+
+
+    display:grid;
+    /* gred */
+  
+  align-items: stretch;
+    /* row-gap: "4px"; */
+    /* justify-content: center; */
+    justify-items: center;
+    align-items: center;
+
+    grid-template-columns: repeat(3, auto);
+grid-template-rows: repeat(3, auto);
+
+/* grid-template-columns: 22px; */
+    grid-row-gap: 22px;
+    justify-content: space-evenly;
+  grid-column-gap: 22px;
+  
+  
+  }
+
 .main {
   padding: 5rem 0;
   flex: 1;

@@ -122,7 +122,8 @@ console.log(new Date().getSeconds())
     // setData(json)   
 const arr=[];
   json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
-  setofficelist(arr)} 
+  setofficelist(arr)
+} 
   // names();
 
 )

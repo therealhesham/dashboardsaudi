@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import React, { useState } from 'react'
 
 import { Input, HelperText, Label, Select, Textarea, Button } from '@roketid/windmill-react-ui'

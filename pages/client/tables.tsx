@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-import PageTitle from 'example/components/Typography/PageTitle'
-import SectionTitle from 'example/components/Typography/SectionTitle'
-import CTA from 'example/components/CTA'
+import PageTitle from 'office/components/Typography/PageTitle'
+import SectionTitle from 'office/components/Typography/SectionTitle'
+import CTA from 'office/components/CTA'
 import {
   Table,
   TableHeader,
@@ -19,7 +19,7 @@ import {
 import { EditIcon, TrashIcon } from 'icons'
 
 import response, { ITableData } from 'utils/demo/tableData'
-import Layout from 'example/containers/Layout'
+import Layout from 'office/containers/Layout'
 // make a copy of the data, for the second table
 const response2 = response.concat([])
 
@@ -70,17 +70,17 @@ function Tables() {
     <Layout>
       <PageTitle>Tables</PageTitle>
 
-      {/* <CTA /> */}
+      <CTA />
 
       <SectionTitle>Simple table</SectionTitle>
       <TableContainer className="mb-8">
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>Name</TableCell>
-              <TableCell>Assignee</TableCell>
-              <TableCell>رقم ال CV</TableCell>
-              <TableCell>Created At</TableCell>
+              <TableCell>Client</TableCell>
+              <TableCell>Amount</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Date</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
