@@ -57,7 +57,7 @@ return (   <Layout>
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 
    </header>
-<div style={{display: "grid" ,gridTemplateColumns: "repeat(3, auto)",gridRowGap: "1px",gridColumnGap: "9px",alignItems:"center",width:"100%"}}>
+<div style={{direction:"rtl", display: "grid" ,gridTemplateColumns: "repeat(3, auto)",gridRowGap: "1px",gridColumnGap: "9px",alignItems:"center",width:"100%"}}>
 
         <Label className="mt-4">
           <span>الاسم</span>
@@ -80,6 +80,110 @@ return (   <Layout>
           <span>الديانة</span>
           <Input className="mt-1" value="الديانة" />
         </Label>
+<Label className="mt-4">
+          <span>جواز السفر</span>
+          <Input className="mt-1" value="جواز السفر" />
+        </Label>
+<Label className="mt-4">
+          <span>تاريخ الاصدار</span>
+          <Input className="mt-1" value="تاريخ الاصدار" />
+        </Label>
+
+<Label className="mt-4">
+          <span>تاريخ الانتهاء</span>
+          <Input className="mt-1" value="تاريخ الانتهاء" />
+        </Label>
+
+<Label className="mt-4">
+          <span>الحالة الاجتماعية</span>
+          <Input className="mt-1" value="الحالة الاجتماعية" />
+        </Label>
+
+
+<Label className="mt-4">
+          <span>عدد الاطفال</span>
+          <Input className="mt-1" value="عدد الاطفال" />
+        </Label>
+
+
+
+<Label className="mt-4">
+          <span>الراتب</span>
+          <Input className="mt-1" value="الراتب" />
+        </Label>
+
+
+<Label className="mt-4">
+          <span>الدرجة العلمية</span>
+          <Input className="mt-1" value="الدرجة العلمية" />
+        </Label>
+
+
+<Label className="mt-4">
+          <span>العربية   </span>
+          <Input className="mt-1" value="الدرجة العلمية" />
+        </Label>
+
+
+
+<Label className="mt-4">
+          <span>   الانجليزي</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+
+{/* <div style={{}}> */}
+<div style={{display :'grid',gridTemplateColumns: "repeat(2, auto)",gridColumnStart:1,gridColumnEnd:4}}>
+
+<Label className="mt-4" style={{gridColumnStart:1,gridColumnEnd:3}}>
+          <span>   سنوات وأماكن الخبرات</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+
+<Label className="mt-4" >
+          <span>   سنوات وأماكن الخبرات</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+
+<Label className="mt-4" >
+          <span>   الغسيل</span>
+          <Input className="mt-1" value="" />
+        </Label>
+
+<Label className="mt-4" >
+          <span>   الكوي</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+<Label className="mt-4" >
+          <span>التنظيف</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+<Label className="mt-4" >
+          <span>العناية بالأطفال</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+<Label className="mt-4" >
+          <span>رعاية كبار السن</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+
+<Label className="mt-4" >
+          <span>الطبخ</span>
+          <Input className="mt-1" value="الانجليزي" />
+        </Label>
+
+
+
+</div>
+
+{/* </div> */}
+
 
 
 </div>
