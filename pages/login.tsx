@@ -1,19 +1,31 @@
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-// import "./api/signin"
+// import ""
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
-
+import { useRouter } from 'next/router'
+import { ClipLoader } from 'react-spinners'
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
-  const [email,setEmail]= useState("");
+  const [idnumber,setIDnumber]= useState("");
+  const [Success,setsuccess]=useState(false)
+  const [error,setError]=useState("");
   const [password,setPassword]=useState("")
   const imgSource = mode === 'dark' ? '/assets/img/rpng.png' : '/assets/img/rpng.png'
+  const router=useRouter()
+
+  const TurnOffOn =()=>{
+setError("خطأ في تسجيل الدخول") ;
+setsuccess(false);;
+
+  }
   const handleSignIn = async (e: React.SyntheticEvent) => {
     
     e.preventDefault();
     //@ts-ignore
+    setError("")
+    setsuccess(true)
 await fetch('./api/signin',{method:"post",headers: {
 'Accept': 'application/json',
 
@@ -21,40 +33,55 @@ await fetch('./api/signin',{method:"post",headers: {
 
 
 },body:JSON.stringify({
-email,password
+idnumber,password
 
       })}).then(e=>
- {
-  if (e.status == 301) return alert("Error")
-        console.log(e.status);
-  e.text();}
-
-).then(s=>
-{  
+{        
+  // console.log(e);
   
-  console.log(s)
-}
-)
-    
-      .then((response) => {
+if(e.status == 301) return TurnOffOn(); 
 
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
-      .catch((error) => {
-        console.log(error);
+if(e.status == 200){e.text();
+
+  router.replace('/admin');}
+
+}
+).catch((error) => {
+       TurnOffOn()
       });
   };
 
 
   
-  
 
   return (
-    <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
-      <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    //@ts-nocheck
+    //@ts-ignore
+  Success? 
+  // 
+  
+  
+   <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+        <div className='flex flex-col overflow-y-auto md:flex-row'>
+          <div className='relative h-32 md:h-auto md:w-1/2'>
+            <Image
+
+
+aria-hidden='true'
+              className='hidden object-scale-down w-full h-full'
+              src={imgSource}
+              alt='شعار روائس القمم'
+              layout='fill'
+            />
+          </div>
+          <main className='flex items-center justify-center p-6 sm:p-12 md:w-1/2'>
+           <ClipLoader/>
+  
+          </main>
+        </div>
+      </div>
+  :<div><div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+  <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
         <div className='flex flex-col overflow-y-auto md:flex-row'>
           <div className='relative h-32 md:h-auto md:w-1/2'>
             <Image
@@ -72,14 +99,15 @@ aria-hidden='true'
               <h1 className='mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200'>
                 Login
               </h1>
+          {error?<span style={{color:"red"}}>خطأ في البيانات</span>:null}
               <Label>
-                <span>Email</span>
+                <span>ID number</span>
                 <Input
-                onChange={e=>setEmail(e.target.value)}
+                onChange={e=>setIDnumber(e.target.value)}
                   className='mt-1'
-                  type='email'
-                  value={email}
-                  placeholder='Email Address'
+                  type='number'
+                  value={idnumber}
+                  placeholder='ID Number'
                 />
               </Label>
 
@@ -102,10 +130,10 @@ aria-hidden='true'
 
               <hr className='my-8' />
 
-              <Button block layout='outline'>
+              {/* <Button block layout='outline'>
                 <GithubIcon className='w-4 h-4 mr-2' aria-hidden='true' />
                 Github
-              </Button>
+              </Button> */}
               <Button className='mt-4' block layout='outline'>
                 <TwitterIcon className='w-4 h-4 mr-2' aria-hidden='true' />
                 Twitter
@@ -129,7 +157,8 @@ aria-hidden='true'
           </main>
         </div>
       </div>
-    </div>
+    </div></div>
+  
   );
 }
 

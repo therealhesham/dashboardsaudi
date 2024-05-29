@@ -4,7 +4,7 @@
     "plugin:react/recommended",
     // "airbnb",
     "eslint:recommended",
-  ],   "parser": "@babel/eslint-parser",   "parserOptions": {
+    "plugin:prettier/recommended"   ],   "parser": "@babel/eslint-parser",   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },

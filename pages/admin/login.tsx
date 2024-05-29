@@ -33,10 +33,10 @@ await fetch('../api/signin',{method:"post",headers: {
       },body:JSON.stringify({
         email: "ssss"
       })}).then(e=>
- 
-  e.text()
-  // console.log(e.text())
-
+ {
+  e.text();
+  console.log(e.text())
+}
 
 ).then(s=>
 {  

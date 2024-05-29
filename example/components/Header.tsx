@@ -112,7 +112,7 @@ function Header() {
               <Avatar
                 className="align-middle"
                 
-                src="https://res.cloudinary.com/duo8svqci/image/upload/v1716217103/yd8zi2zk9ksdiwejgxkv.png"
+                src=""
                 alt=""
                 aria-hidden="true"
               />
