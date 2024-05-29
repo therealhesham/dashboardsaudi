@@ -1,13 +1,56 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
+// import "./api/signin"
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
 
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
+  const [email,setEmail]= useState("");
+  const [password,setPassword]=useState("")
   const imgSource = mode === 'dark' ? '/assets/img/rpng.png' : '/assets/img/rpng.png'
+  const handleSignIn = async (e: React.SyntheticEvent) => {
+    
+    e.preventDefault();
+    //@ts-ignore
+await fetch('./api/signin',{method:"post",headers: {
+'Accept': 'application/json',
+
+        "Content-Type": "application/json",
+
+
+},body:JSON.stringify({
+email,password
+
+      })}).then(e=>
+ {
+  if (e.status == 301) return alert("Error")
+        console.log(e.status);
+  e.text();}
+
+).then(s=>
+{  
+  
+  console.log(s)
+}
+)
+    
+      .then((response) => {
+
+        console.log(response);
+        
+        
+        // router.replace('/example/dashboard');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  
+  
 
   return (
     <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
@@ -32,8 +75,10 @@ aria-hidden='true'
               <Label>
                 <span>Email</span>
                 <Input
+                onChange={e=>setEmail(e.target.value)}
                   className='mt-1'
                   type='email'
+                  value={email}
                   placeholder='Email Address'
                 />
               </Label>
@@ -41,17 +86,19 @@ aria-hidden='true'
               <Label className='mt-4'>
                 <span>Password</span>
                 <Input
+                onChange={e=>setPassword(e.target.value)}
                   className='mt-1'
                   type='password'
+                  value={password}
                   placeholder='***************'
                 />
               </Label>
 
-              <Link href='/example' passHref={true}>
-                <Button className='mt-4' block style={{backgroundColor:"#003749"}}>
+              {/* <Link href='/example' passHref={true}> */}
+                <Button  onClick={handleSignIn} className='mt-4' block style={{backgroundColor:"#003749"}}>
                   Log in
                 </Button>
-              </Link>
+              {/* </Link> */}
 
               <hr className='my-8' />
 
