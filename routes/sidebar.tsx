@@ -30,6 +30,13 @@ const routes: IRoute[] = [
     name: 'Dashboard', 
     exact: true,
   },
+{
+    path: '/clientlist', 
+    icon: 'HomeIcon', 
+    name: 'Clientlist', 
+    // exact: true,
+  },
+  
   {
     path: '/admin/forms',
     icon: 'FormsIcon',
@@ -50,33 +57,6 @@ const routes: IRoute[] = [
     path: '/admin/tables',
     icon: 'TablesIcon',
     name: 'Tables',
-  },
-  {
-    icon: 'PagesIcon',
-    name: 'Pages',
-    routes: [
-      // submenu
-      {
-        path: '/admin/login',
-        name: 'Login',
-      },
-      {
-        path: '/admin/create-account',
-        name: 'Create account',
-      },
-      {
-        path: '/admin/forgot-password',
-        name: 'Forgot password',
-      },
-      {
-        path: '/admin/404',
-        name: '404',
-      },
-      {
-        path: '/admin/blank',
-        name: 'Blank',
-      },
-    ],
   },
 ]
 
