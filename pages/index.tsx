@@ -40,7 +40,7 @@ idnumber,password
   // console.log(e);
   
 if(e.status == 301) return TurnOffOn(); 
-
+if(e.status != 200) return TurnOffOn();
 if(e.status == 200){e.text();
 
   router.replace('/admin');}
