@@ -150,8 +150,8 @@ return (
               <TableCell>Full Name</TableCell>
               <TableCell>Assignee</TableCell>
               <TableCell>رقم ال CV</TableCell>
-              <TableCell>Created At</TableCell>
               <TableCell>Notes</TableCell>
+              <TableCell>Created At</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
@@ -169,8 +169,10 @@ return (
                 </TableCell>
                 <TableCell>
                   <span className="text-md">
-                  <span className="text-md">{e?.fields["رقم الCV"]}</span>
-
+               
+               <Link href={"./cvdetails/"+e.fields["رقم الCV"]} >
+                  <span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{e?.fields["رقم الCV"]}</span>
+</Link>
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   </span>
