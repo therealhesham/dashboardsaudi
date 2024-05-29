@@ -26,10 +26,9 @@ setsuccess(false);;
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch('./api/signin',{method:"post",headers: {
+await fetch('https://rawaes-dashboard.vercel.app/api/signin',{method:"post",headers: {
 'Accept': 'application/json',
-
-        "Content-Type": "application/json",
+"Content-Type": "application/json",
 
 
 },body:JSON.stringify({
