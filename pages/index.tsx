@@ -8,7 +8,6 @@ import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-u
 import { GithubIcon, TwitterIcon} from 'icons'
 import { useRouter } from 'next/router'
 import { ClipLoader } from 'react-spinners'
-import axios from 'axios'
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
   const [idnumber,setIDnumber]= useState("");
@@ -24,33 +23,33 @@ setsuccess(false);;
 
   }
   const handleSignIn = async (e: React.SyntheticEvent) => {
-    await axios.post("https://rawaes-dashboard.vercel.app/api/signin",{idnumber,password}).then(e=>console.log(e))
-//     e.preventDefault();
-//     //@ts-ignore
-//     setError("")
-//     setsuccess(true)
-// await fetch('./api/signin',{method:"POST",headers: {
-// 'Accept': 'application/json',
-// "Content-Type": "application/json",
+    
+    e.preventDefault();
+    //@ts-ignore
+    setError("")
+    setsuccess(true)
+await fetch('./api/signin',{method:"POST",headers: {
+'Accept': 'application/json',
+"Content-Type": "application/json",
 
 
-// },body:JSON.stringify({
-// idnumber,password
+},body:JSON.stringify({
+idnumber,password
 
-//       })}).then(e=>
-// {        
-//   // console.log(e);
+      })}).then(e=>
+{        
+  // console.log(e);
   
-// if(e.status == 301) return TurnOffOn(); 
-// if(e.status != 200) return TurnOffOn();
-// if(e.status == 200){e.text();
+if(e.status == 301) return TurnOffOn(); 
+if(e.status != 200) return TurnOffOn();
+if(e.status == 200){e.text();
 
-//   router.replace('/admin');}
+  router.replace('/admin');}
 
-// }
-// ).catch((error) => {
-//        TurnOffOn()
-//       });
+}
+).catch((error) => {
+       TurnOffOn()
+      });
   };
 
 

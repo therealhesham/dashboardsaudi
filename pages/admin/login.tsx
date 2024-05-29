@@ -1,71 +1,89 @@
+'use client'
 
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getSession, signIn, signOut, useSession } from 'next-auth/react';
+
+// import ""
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
-import { useRouter } from 'next/router';
-import { user } from 'utils/usercontext';
-
-      //@ts-ignore
-
+import { useRouter } from 'next/router'
+import { ClipLoader } from 'react-spinners'
 function LoginPage() {
-
-const router = useRouter()
   const { mode } = useContext(WindmillContext)
+  const [idnumber,setIDnumber]= useState("");
+  const [Success,setsuccess]=useState(false)
+  const [error,setError]=useState("");
+  const [password,setPassword]=useState("")
   const imgSource = mode === 'dark' ? '/assets/img/rpng.png' : '/assets/img/rpng.png'
+  const router=useRouter()
 
-const userinfo=useContext(user)
+  const TurnOffOn =()=>{
+setError("خطأ في تسجيل الدخول") ;
+setsuccess(false);;
 
-  const { data: session } = useSession();
-  console.log('Session: ', session);
-
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-
+  }
   const handleSignIn = async (e: React.SyntheticEvent) => {
     
     e.preventDefault();
     //@ts-ignore
-await fetch('../api/signin',{method:"post",headers: {
-        "Content-Type": "application/json",
-      },body:JSON.stringify({
-        email: "ssss"
+    setError("")
+    setsuccess(true)
+await fetch('"../api/signin"',{method:"POST",headers: {
+'Accept': 'application/json',
+"Content-Type": "application/json",
+
+
+},body:JSON.stringify({
+idnumber,password
+
       })}).then(e=>
- {
-  e.text();
-  console.log(e.text())
-}
+{        
+  // console.log(e);
+  
+if(e.status == 301) return TurnOffOn(); 
+if(e.status != 200) return TurnOffOn();
+if(e.status == 200){e.text();
 
-).then(s=>
-{  
-  console.log(s)
-}
-)
-    // console.log('Email: ', email);
-     await signIn('credentials', {
-      redirect: false,
-      email:"heshamahmedbadr@gmail.com"
-      // password,
-    })
-      .then((response) => {
+  router.replace('/admin');}
 
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
-      .catch((error) => {
-        console.log(error);
+}
+).catch((error) => {
+       TurnOffOn()
       });
   };
 
-      //@ts-ignore
+
+  
 
   return (
-    <div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
-      <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+    //@ts-nocheck
+    //@ts-ignore
+  Success? 
+  // 
+  
+  
+   <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
+        <div className='flex flex-col overflow-y-auto md:flex-row'>
+          <div className='relative h-32 md:h-auto md:w-1/2'>
+            <Image
+
+
+aria-hidden='true'
+              className='hidden object-scale-down w-full h-full'
+              src={imgSource}
+              alt='شعار روائس القمم'
+              layout='fill'
+            />
+          </div>
+          <main className='flex items-center justify-center p-6 sm:p-12 md:w-1/2'>
+           <ClipLoader/>
+  
+          </main>
+        </div>
+      </div>
+  :<div><div className='flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
+  <div className='flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800'>
         <div className='flex flex-col overflow-y-auto md:flex-row'>
           <div className='relative h-32 md:h-auto md:w-1/2'>
             <Image
@@ -81,36 +99,43 @@ aria-hidden='true'
           <main className='flex items-center justify-center p-6 sm:p-12 md:w-1/2'>
             <div className='w-full'>
               <h1 className='mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200'>
-                Admin Login Page
+                Login
               </h1>
-              <Label className='font-serif'>
-                <h1 >ID number</h1>
+          {error?<span style={{color:"red"}}>خطأ في البيانات</span>:null}
+              <Label>
+                <span>ID number</span>
                 <Input
+                onChange={e=>setIDnumber(e.target.value)}
                   className='mt-1'
-                  type='text'
-                  placeholder='ID number'
+                  type='number'
+                  value={idnumber}
+                  placeholder='ID Number'
                 />
               </Label>
 
               <Label className='mt-4'>
-                <span>OTP</span>
+                <span>Password</span>
                 <Input
+                onChange={e=>setPassword(e.target.value)}
                   className='mt-1'
-                  type='text'
-                  placeholder='OTP'
+                  type='password'
+                  value={password}
+                  placeholder='***************'
                 />
               </Label>
 
-              <Link href='/example/login' passHref={true}>
-                     {/* //@ts-ignore */}
-                <Button className='mt-4' onClick={handleSignIn} block style={{backgroundColor:"#003749"}}>
+              {/* <Link href='/example' passHref={true}> */}
+                <Button  onClick={handleSignIn} className='mt-4' block style={{backgroundColor:"#003749"}}>
                   Log in
                 </Button>
-              </Link>
+              {/* </Link> */}
 
               <hr className='my-8' />
 
-              
+              {/* <Button block layout='outline'>
+                <GithubIcon className='w-4 h-4 mr-2' aria-hidden='true' />
+                Github
+              </Button> */}
               <Button className='mt-4' block layout='outline'>
                 <TwitterIcon className='w-4 h-4 mr-2' aria-hidden='true' />
                 Twitter
@@ -134,34 +159,9 @@ aria-hidden='true'
           </main>
         </div>
       </div>
-    </div>
+    </div></div>
+  
   );
 }
-// getSession
-// getServerSideProps
-
-
-//@ts-ignore
-export const getServerSideProps: GetServerSideProps = async (
-//@ts-ignore
-  
-  context
-) => {
-  const session = await getSession(context);
-console.log(context)
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: '/',
-  //       permananet: false,
-  //     },
-  //   };
-  // }
-
-  return {
-    props: { session },
-  };
-};
-
 
 export default LoginPage
