@@ -19,7 +19,7 @@ model User {
   pictureurl      String    
   username        String
   password        String
-  repeatpassword  String   
+  repeatpassword  String   @ignore
   role            String
   idnumber        Int   @unique
 }
