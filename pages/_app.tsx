@@ -20,11 +20,15 @@ const router = useRouter()
 const queryClient =new QueryClient;
 useEffect(()=>{
   try {
-
+console.log(router.pathname)
     const token = Cookies.get("token")
+    console.log(token)
   const decoder = jwtDecode(token);
+    console.log(decoder)
+
   setUser(decoder)
-router.replace("/admin")
+if(router.pathname=="/") router.replace("/admin");
+if(router.pathname=="/login") router.replace("/admin");
 
   } catch (error) {
     router.replace("/login")

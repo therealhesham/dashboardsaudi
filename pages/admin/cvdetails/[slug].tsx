@@ -88,7 +88,7 @@ export default function Page() {
     
 
 
-}, [new Date().getMilliseconds()])
+}, [])
 console.log(data)
 const getTargetElement = () => document.getElementById("cv");
 

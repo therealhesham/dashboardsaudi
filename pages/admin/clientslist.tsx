@@ -143,7 +143,7 @@ return (
       <PageTitle>Our Clients</PageTitle>
       <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       </div>
-{listType =="workers"?
+
       <TableContainer>
         <Table>
           <TableHeader>
@@ -211,16 +211,8 @@ return (
           />
         </TableFooter>
       </TableContainer>
-: 
-<TableBody>
-<ul >
-{officelist.map((e, i) => (
-                <li style={{height:"150px"}} key={i}>{e}</li>
-     
-              ))
-}          </ul>
-               </TableBody>
-                }
+
+                
     </Layout>
   )
 }
