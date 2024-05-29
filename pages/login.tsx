@@ -1,7 +1,9 @@
+'use client'
+
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-// import ""
+import cookies from "js-cookie";
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
 import { useRouter } from 'next/router'
@@ -26,24 +28,27 @@ setsuccess(false);;
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch('./api/signin',{method:"post",headers: {
+await fetch('./api/signin',{method:"POST",headers: {
 'Accept': 'application/json',
-
-        "Content-Type": "application/json",
+"Content-Type": "application/json",
 
 
 },body:JSON.stringify({
 idnumber,password
 
-      })}).then(e=>
+      })}).then(async (e)=>
 {        
   // console.log(e);
   
 if(e.status == 301) return TurnOffOn(); 
+if(e.status != 200) return TurnOffOn();
+if(e.status == 200){
+  const s= await e.text();
+cookies.set("token",s)
+// console.log(s)
 
-if(e.status == 200){e.text();
-
-  router.replace('/admin');}
+  router.replace('/admin');
+}
 
 }
 ).catch((error) => {

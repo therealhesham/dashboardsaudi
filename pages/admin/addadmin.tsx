@@ -1,17 +1,18 @@
 //@ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Input, HelperText, Label, Select, Textarea, Button } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
-
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import axios from 'axios'
 import { set } from 'mongoose'
-
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
+import { jwtDecode } from 'jwt-decode'
 
 
 function Addadmin() {
@@ -23,8 +24,21 @@ function Addadmin() {
 const [idnumber, setidnumber] = useState(0);
 const [role, setrole] = useState<string>('');
 const [cloudinaryImage, setCloudinaryImage] = useState("")
+const router = useRouter()
+useEffect(()=>{
 
+try {
 
+    const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+console.log(decoder.idnumber)
+
+  } catch (error) {
+    router.replace("/login")
+  }
+  
+
+},[])
   const handleSignUp = async (e: React.SyntheticEvent) => {
     
     e.preventDefault();

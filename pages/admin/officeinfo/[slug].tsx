@@ -20,21 +20,27 @@ import {
   Button,
   Pagination,
 } from '@roketid/windmill-react-ui'
-import { EditIcon, TrashIcon } from 'icons'
 
+import { EditIcon, TrashIcon } from 'icons'
 import response, { ITableData } from 'utils/demo/tableData'
 import Layout from 'example/containers/Layout'
 import { ClipLoader, ClockLoader } from 'react-spinners'
 import { usePDF } from 'react-to-pdf'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 
 
-const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
   console.log(router.query.slug)
   const [data,setData]=useState([]);
+  
   useEffect(() => {
-  (async function name() {
+      try {
+        const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+console.log(decoder.idnumber)
+(async function name() {
      await fetch(`../../api/admin/${router.query.slug}`).then(response => response.json())
      .then(json  => {
    setData(json)
@@ -45,6 +51,10 @@ export default function Page() {
   })()
     
 
+  } catch (error) {
+    router.replace("/login")
+  }
+  
 
 }, [new Date().getMilliseconds()])
 //@ts-ignore

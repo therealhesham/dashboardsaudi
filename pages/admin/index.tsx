@@ -1,5 +1,5 @@
 // @ts-nocheck 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Doughnut, Line, Pie } from 'react-chartjs-2'
 import CTA from 'example/components/CTA'
 import InfoCard from 'example/components/Cards/InfoCard'
@@ -10,7 +10,6 @@ import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'example/containers/Layout'
 import response, { ITableData } from 'utils/demo/tableData'
 import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from 'icons'
-
 import {
   TableBody,
   TableContainer,
@@ -42,7 +41,10 @@ import {
   Legend,
 } from 'chart.js'
 import Link from 'next/link'
-
+import { User } from 'utils/usercontext'
+import { useRouter } from 'next/router'
+import { jwtDecode } from 'jwt-decode'
+import Cookies from 'js-cookie'
 function Dashboard() {
   Chart.register(
     ArcElement,
@@ -94,13 +96,13 @@ function Dashboard() {
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
   const totalResults = fulldata.length
-  
+  const user =useContext(User)
 // setTimeout(() =
 // pagination change control
   const [paginatedData,setPaginatedData]=useState([])
   // console.log(time)
   const [listType,setTypeList] = useState("workers")
-
+const router = useRouter()
 
 function onPageChange(p: number) {
     // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
@@ -110,6 +112,16 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
+        
+try {
+
+    const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+  
+console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/login")
+  }
     try {
     async function names( )  {
      await fetch("./api/hello").then(response => response.json())
@@ -135,10 +147,11 @@ names()
 }  
 
 }, [])
-
+console.log(user)
 return (
     <Layout>
-
+      {/* {alert(user.username)} */}
+<h1 style={{fontSize:"23px"}}> Hello {user.name}</h1>
       <PageTitle>Charts</PageTitle>
       <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       {/* <div  style={{scale:"40%"}}> */}

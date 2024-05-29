@@ -111,7 +111,20 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // here you would make another server request for new data
   useEffect(() => {
     try {
-    async function names( )  {
+    
+    
+try {
+
+    const token = Cookies.get("token")
+     const decoder = jwtDecode(token);
+console.log(dcoder.idnumber)
+
+  
+  } catch (error) {
+    router.replace("/login")
+  }
+  
+      async function names( )  {
      await fetch("../api/clients").then(response => response.json())
   .then(json  => {
     json?setLength(json.length):"";

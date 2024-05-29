@@ -5,6 +5,7 @@ import { IIcon } from 'icons'
 import SidebarSubmenu from './SidebarSubmenu'
 import { Button } from '@roketid/windmill-react-ui'
 import { useRouter } from 'next/router'
+import cookies from "js-cookie";
 
 function Icon({ icon, ...props }: IIcon){
   // @ts-ignore
@@ -19,8 +20,14 @@ interface ISidebarContent{
 function SidebarContent({ linkClicked }: ISidebarContent) {
   const { pathname } = useRouter();
    const appName = process.env.NEXT_PUBLIC_APP_NAME
-console.log(pathname)
-  return (
+const Signout = ()=>{
+
+cookies.remove("token")
+
+}
+
+
+   return (
     <div className="text-gray-500 dark:text-gray-400">
       <Link href="/" passHref>
         <div className='ml-6 py-6'>
@@ -68,11 +75,8 @@ console.log(pathname)
         )}
       </ul>
       <div className="px-6 my-6">
-        <Button>
-          Create account
-          <span className="ml-2" aria-hidden="true">
-            +
-          </span>
+        <Button onClick={Signout}>
+        Sign Out
         </Button>
       </div>
     </div>
