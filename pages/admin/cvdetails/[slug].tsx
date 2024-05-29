@@ -1,7 +1,7 @@
 //@ts-nocheck
 //@ts-ignore
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from "next/router"
 
 import PageTitle from 'example/components/Typography/PageTitle'
@@ -23,13 +23,53 @@ import {
   Label,
 } from '@roketid/windmill-react-ui'
 import { EditIcon, TrashIcon } from 'icons'
-
+import { useReactToPrint } from "react-to-print";
 import response, { ITableData } from 'utils/demo/tableData'
 import Layout from 'example/containers/Layout'
 import { ClipLoader, ClockLoader, GridLoader } from 'react-spinners'
 import Header from 'example/components/Header'
+import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
+import { PrinterFilled } from '@ant-design/icons'
+const options: Options = {
+  filename: "advanced-example.pdf",
+  method: "save",
+  // default is Resolution.MEDIUM = 3, which should be enough, higher values
+  // increases the image quality but also the size of the PDF, so be careful
+  // using values higher than 10 when having multiple pages generated, it
+  // might cause the page to crash or hang.
+  resolution: Resolution.EXTREME,
+  page: {
+    // margin is in MM, default is Margin.NONE = 0
+    margin: Margin.SMALL,
+    // default is 'A4'
+    format: "letter",
+    // default is 'portrait'
+    orientation: "landscape"
+  },
+  canvas: {
+    // default is 'image/jpeg' for better size performance
+    mimeType: "image/jpeg",
+    qualityRatio: 1
+  },
+  // Customize any value passed to the jsPDF instance and html2canvas
+  // function. You probably will not need this and things can break,
+  // so use with caution.
+  overrides: {
+    // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+    pdf: {
+      compress: true
+    },
+    // see https://html2canvas.hertzen.com/configuration for more options
+    canvas: {
+      useCORS: true
+    }
+  }
+};
 
 
+// import { usePDF } from 'react-to-pdf'
+// uses
+// usePDF
 const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
@@ -50,13 +90,24 @@ export default function Page() {
 
 }, [new Date().getMilliseconds()])
 console.log(data)
+const getTargetElement = () => document.getElementById("cv");
 
+const downloadPdf = () => generatePDF(getTargetElement, options);
+ const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+// const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 // Label
+
 return (   <Layout>
-{data.length>0? <div> <header>
+
+{data.length>0? <div  id='cv' ref={componentRef}> <header>
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 
    </header>
+<a ><button onClick={handlePrint}>Print PDF <PrinterFilled/></button></a>
 
    <div style={{display:"flex",flexDirection:"row",flexWrap: "nowrap"}}>
 <div style={{flexBasis: "50%"}}>
@@ -64,10 +115,10 @@ return (   <Layout>
 src={data.length>0?data[0].fields.Picture[0].url:null}
       width={500}
       height={500}
-      alt="Picture of the author"
+      alt=""
 />
 </div>
-   <div style={{direction:"rtl",display: "grid" ,gridTemplateColumns: "repeat(5, auto)"}}>
+   <div  style={{direction:"rtl",display: "grid" ,gridTemplateColumns: "repeat(5, auto)"}}>
 
     {/* <div style={{gridColumnStart:4,gridColumnEnd:6}}> */}
 {/* <Image 

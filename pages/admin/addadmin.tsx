@@ -40,6 +40,7 @@ admin,
 password,
 pictureurl:cloudinaryImage,
 idnumber,
+repeatpassword,
 role,
 username
 

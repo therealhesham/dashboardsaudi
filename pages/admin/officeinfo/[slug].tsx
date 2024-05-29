@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useRouter } from "next/router"
-
+// usePDF
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
 import CTA from 'example/components/CTA'
@@ -25,6 +25,7 @@ import { EditIcon, TrashIcon } from 'icons'
 import response, { ITableData } from 'utils/demo/tableData'
 import Layout from 'example/containers/Layout'
 import { ClipLoader, ClockLoader } from 'react-spinners'
+import { usePDF } from 'react-to-pdf'
 
 
 const response2 = response.concat([]);
