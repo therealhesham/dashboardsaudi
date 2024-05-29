@@ -29,7 +29,6 @@ import {
   doughnutLegends,
   lineLegends,
 } from 'utils/demo/chartsData'
-
 import {
   Chart,
   ArcElement,
@@ -42,6 +41,7 @@ import {
   Legend,
 } from 'chart.js'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 function ClientsList() {
   Chart.register(
@@ -94,7 +94,7 @@ function ClientsList() {
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
   const totalResults = fulldata.length
-  
+const router = useRouter()  
 // setTimeout(() =
 // pagination change control
   const [paginatedData,setPaginatedData]=useState([])
@@ -112,17 +112,6 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   useEffect(() => {
     try {
     
-    
-try {
-
-    const token = Cookies.get("token")
-     const decoder = jwtDecode(token);
-console.log(dcoder.idnumber)
-
-  
-  } catch (error) {
-    router.replace("/login")
-  }
   
       async function names( )  {
      await fetch("../api/clients").then(response => response.json())
@@ -131,7 +120,6 @@ console.log(dcoder.idnumber)
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-console.log(new Date().getSeconds())
     // setData(json)   
 // const arr=[];
   // json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
