@@ -35,6 +35,16 @@ const routes: IRoute[] = [
     icon: 'HomeIcon', 
     name: 'Clientlist', 
     // exact: true,
+  },{
+    path: '/admin/employees', 
+    icon: 'HomeIcon', 
+    name: 'Employees', 
+    // exact: true,
+  },{
+    path: '/admin/externaloffices', 
+    icon: 'HomeIcon', 
+    name: 'Foreign offices', 
+    // exact: true,
   },
   
   {
@@ -51,13 +61,7 @@ const routes: IRoute[] = [
     path: '/admin/resetpassword',
     icon: 'ChartsIcon',
     name: 'Reset Admin Password',
-  },
-
-  {
-    path: '/admin/tables',
-    icon: 'TablesIcon',
-    name: 'Tables',
-  },
+  }
 ]
 
 export type {IRoute}
