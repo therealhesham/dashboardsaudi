@@ -24,3 +24,59 @@ model User {
   idnumber        Int   @unique
 }
 
+model FemalWorker {
+
+id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+clientname        String
+insurance         String
+musanedContract    String
+visanumber         String
+idnumber          String
+mobilenumber      Int
+passportnumber    String
+workername        String
+age               Int
+experience            String
+contractstatus         String  
+city                   String
+orderDate           DateTime
+dayDate             DateTime
+duration            String
+externaloffice      String
+nationality         String
+externalmusanedcontract String
+visaordernumber     String
+notes           String
+
+
+}
+
+
+
+model MaleWorker {
+
+id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+clientname        String
+insurance         String
+musanedContract    String
+visanumber         String
+idnumber          String
+mobilenumber      Int
+passportnumber    String
+workername        String
+age               Int
+job                String
+experience            String
+contractstatus         String  
+city                   String
+orderDate           DateTime
+dayDate             DateTime
+duration            String
+externaloffice      String
+nationality         String
+externalmusanedcontract String
+visaordernumber     String
+notes           String
+
+
+}
