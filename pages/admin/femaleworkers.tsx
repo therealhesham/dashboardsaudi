@@ -210,110 +210,110 @@ return (
 
                 
                 <TableCell>
-                  <span className="text-md">{e?.fields.clientname}</span>
+                  <span className="text-md">{e?.clientname}</span>
 
                 </TableCell>
                  <TableCell>
-                  <span className="text-md">{e?.fields.insurance}</span>
-
-                </TableCell>
-
-                 <TableCell>
-                  <span className="text-md">{e?.fields.musanedContract}</span>
+                  <span className="text-md">{e.insurance}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.visanumber}</span>
+                  <span className="text-md">{e.musanedContract}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.idnumber}</span>
+                  <span className="text-md">{e.visanumber}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.mobilenumber}</span>
+                  <span className="text-md">{e.idnumber}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.passportnumber}</span>
+                  <span className="text-md">{e.mobilenumber}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.workername}</span>
+                  <span className="text-md">{e.passportnumber}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.age}</span>
+                  <span className="text-md">{e.workername}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.experience}</span>
+                  <span className="text-md">{e.age}</span>
 
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.contractstatus}</span>
+                  <span className="text-md">{e.experience}</span>
 
                 </TableCell>
 
-
                  <TableCell>
-                  <span className="text-md">{e?.fields.city}</span>
+                  <span className="text-md">{e.contractstatus}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.orderDate}</span>
+                  <span className="text-md">{e.city}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.dayDate}</span>
+                  <span className="text-md">{e.orderDate}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.duration}</span>
+                  <span className="text-md">{e.dayDate}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.externaloffice}</span>
+                  <span className="text-md">{e.duration}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.nationality}</span>
+                  <span className="text-md">{e.externaloffice}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.externalmusanedcontract}</span>
+                  <span className="text-md">{e.nationality}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.visaordernumber}</span>
+                  <span className="text-md">{e.externalmusanedcontract}</span>
 
                 </TableCell>
 
 
                  <TableCell>
-                  <span className="text-md">{e?.fields.notes}</span>
+                  <span className="text-md">{e.visaordernumber}</span>
+
+                </TableCell>
+
+
+                 <TableCell>
+                  <span className="text-md">{e.notes}</span>
 
                 </TableCell>
 
