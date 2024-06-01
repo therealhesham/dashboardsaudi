@@ -57,7 +57,7 @@ notes}})
 
 } catch (error) {
   console.log(error)
-  res.status(301).send("createAdmin")
+  res.status(301).send("error")
 
 // res.send("error")  
 }

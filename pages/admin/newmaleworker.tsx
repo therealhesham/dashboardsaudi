@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Input, HelperText, Label, Select, Textarea, Button, Modal, ModalHeader, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
+import { Input, HelperText, Label, Select, Textarea,  Button,Modal, ModalHeader, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
-
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function Male() {
@@ -53,7 +56,7 @@ notes:yup.string()
   .required()
 
 
-  const { register,formState: { errors }, handleSubmit } = useForm({
+  const { register,formState: { errors } ,handleSubmit } = useForm({
     resolver: yupResolver(schema),
   })
 
@@ -62,16 +65,19 @@ notes:yup.string()
     e.preventDefault();
 
   };
+
+  
 //@ts-ignore
 const onSubmit = async (data) => {
+try {
+ 
   // console.log(errors)
   await fetch('../api/addmaleworker',{method:"post",headers: {
         "Content-Type": "application/json",
       },body:JSON.stringify(data)}).then(e=>
- 
-  e.text()
-  // console.log(e.text())
-
+ {
+  e.text();
+}
 
 ).then(s=>
 {  
@@ -80,33 +86,38 @@ const onSubmit = async (data) => {
 }
 )
     
-      .then((response) => {
-
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
       .catch((error) => {
+        setShow(true)
         console.log(error);
-      });
+      }); 
+} catch (error) {
+  setShow(true)
 }
+}
+const [showA, setShowA] = useState(true);
+  const [showB, setShowB] = useState(true);
+  const toggleShowA = () => setShowA(!showA);
+  const toggleShowB = () => setShowB(!showB);
+ const [show, setShow] = useState(false);
 
-
-
-// console.log(errors)
+function setshowTrue(){
+ setShow(true)
+}
   return (
 
+<div>  
   
     <Layout>
-      <CTA />
+      
+
+
        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalHeader>Data Inserted Successfully</ModalHeader>
         <ModalBody>
           Thank you for inserting Data , check DataBase in case of you need to update Data
         </ModalBody>
         <ModalFooter>
-          <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
+          <Button className="w-full sm:w-auto" onClick={closeModal}>
             Close
           </Button>
          
@@ -119,7 +130,7 @@ const onSubmit = async (data) => {
         <Label>
           <span>اسم العميل</span>
           <Input aria-invalid={errors.clientname ? "true" : "false"} {...register("clientname", { required: true })} className="mt-1" placeholder="اسم العميل"  type='text' onChange={(e=>setOffice(e.target.value))}/>
-        
+        {errors.clientname?<span style={{backgroundColor:"pink"}}>{errors.clientname.message}</span>:""}
         </Label>
         <Label>
 
@@ -227,6 +238,7 @@ const onSubmit = async (data) => {
 </form>
  
     </Layout>
+</div>
   )
 }
 

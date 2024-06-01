@@ -80,3 +80,33 @@ notes           String
 
 
 }
+
+model HomeMaid {
+
+id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+clientname       String
+clientnameinenglishlanguage   String
+internalmusanedContract       String
+nationalidnumber              String
+contacntnumber                String
+passportnumber                String
+kingdomentrydate              String
+daydate                       Int
+workduration                  String
+cost                          String
+homemaidnumber                String
+notes                         String
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
