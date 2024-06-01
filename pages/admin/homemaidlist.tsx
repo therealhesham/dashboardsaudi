@@ -189,7 +189,7 @@ return (
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{dayjs().get("year")+"-"+dayjs().get("month")+"-"+dayjs().get("day")}</span>
+                  <span className="text-md">{dayjs().get("year")+"-"+(dayjs().get("month")+1) +"-"+dayjs().get("D")}</span>
 
                 </TableCell>
 

@@ -99,7 +99,40 @@ notes                         String
 }
 
 
+model Transfer{
+id                 String    @id @default(auto()) @map("_id") @db.ObjectId
 
+client            String
+mobilenumber      String
+nationalidnumber  String
+passportnumber    String
+homemaid          String
+nationality       String
+kingdomentrydate  String
+daydate           DateTime 
+workduration      Int
+newclientname     String
+newclientmobilenumber String
+newclientnationalidnumber String
+newclientcity     String
+experimentstart   String
+experimentend   String
+dealcost        String
+paid            String
+restofpaid      String
+experimentresult  String
+accomaditionnumber  String
+
+marketeername String
+
+notes     String
+
+
+
+
+
+
+}
 
 
 
