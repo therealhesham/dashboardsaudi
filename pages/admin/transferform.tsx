@@ -70,7 +70,7 @@ notes:yup.string()
 //@ts-ignore
 const onSubmit = async (data) => {
   // console.log(errors)
-  await fetch('../api/addfemaleworker',{method:"post",headers: {
+  await fetch('../api/addtransfer',{method:"post",headers: {
         "Content-Type": "application/json",
       },body:JSON.stringify(data)}).then(e=>
  

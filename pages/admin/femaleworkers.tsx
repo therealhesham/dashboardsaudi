@@ -43,6 +43,7 @@ import {
 } from 'chart.js'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { DeleteOutlined } from '@ant-design/icons'
 
 function FemaleWorkers() {
   Chart.register(
@@ -56,36 +57,6 @@ function FemaleWorkers() {
     Legend
   )
 
-  
-//   const [officelist,setofficelist]=useState([])
-//   function datas() {
-    
-//   }
-  
-//   const doughnutOptions={
-//   data: {
-//     datasets: [
-//       {
-//         data: [67, 33],
-//         /**
-//          * These colors come from Tailwind CSS palette
-//          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-//          */
-//         backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
-//         label: 'Dataset 1',
-//       },
-//     ],
-//     labels: officelist.length>0?[...officelist]:0,
-//   },
-//   options: {
-//     responsive: true,
-//     cutoutPercentage: 80,
-//   },
-//   legend: {
-//     display: false,
-//   },
-// }
-// console.log(officelist)
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
@@ -108,6 +79,8 @@ function onPageChange(p: number) {
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
   }
+
+const [id,setID] = useState("")
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
@@ -121,10 +94,7 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-    // setData(json)   
-// const arr=[];
-  // json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
-  // setofficelist(arr)
+ 
 } 
   // names();
 
@@ -136,8 +106,20 @@ names()
   console.log(error)
 }  
 
-}, [])
-console.log(paginatedData)
+}, [id])
+
+
+
+
+
+const cancelRecord=async(e)=>{
+await fetch("../api/cancelfemaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
+console.log(id)
+}
+
+
+
+
 return (
   // <Layout>
 
@@ -161,7 +143,6 @@ return (
 // externalmusanedcontract String
 // visaordernumber     String
 // notes           String
-
 <div>
   <Button onClick={()=> router.back()}>الرجوع للخلف</Button>
       <PageTitle>Female Workers DataBase</PageTitle>
@@ -173,6 +154,8 @@ return (
         <Table>
           <TableHeader>
             <tr>
+<TableCell>الغاء</TableCell>
+
               <TableCell>اسم العميل</TableCell>
               <TableCell>التأمين</TableCell>
               <TableCell>عقد مساند الداخلي</TableCell>
@@ -208,6 +191,11 @@ return (
               <TableRow key={i}>
 
 
+                <TableCell>
+                 
+
+<DeleteOutlined onClick={()=>cancelRecord(e.id)} style={{color:"red"}} />
+                </TableCell>
                 
                 <TableCell>
                   <span className="text-md">{e?.clientname}</span>

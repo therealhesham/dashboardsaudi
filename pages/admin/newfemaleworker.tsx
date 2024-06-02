@@ -4,11 +4,11 @@ import { Input, HelperText, Label, Select, Textarea, Button, Modal, ModalHeader,
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
-
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { AntCloudOutlined } from '@ant-design/icons'
 
 
 
@@ -64,32 +64,13 @@ notes:yup.string()
 //@ts-ignore
 const onSubmit = async (data) => {
   // console.log(errors)
-  await fetch('../api/addfemaleworker',{method:"post",headers: {
+  const fetcher = await fetch('../api/addfemaleworker',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify(data)}).then(e=>
- 
-  e.text()
-  // console.log(e.text())
+      },body:JSON.stringify(data)})
+      const e= await fetcher.text()
+if(fetcher.status == 200) return openModal;
 
-
-).then(s=>
-{  
-  openModal()
-  console.log(s)
-}
-)
-    
-      .then((response) => {
-
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-}
+    }
 
 
 
