@@ -9,11 +9,13 @@ import SectionTitle from 'example/components/Typography/SectionTitle'
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import axios from 'axios'
-import { set } from 'mongoose'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
-import { jwtDecode } from 'jwt-decode'
-
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { jwtDecode } from 'jwt-decode';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import yup, { number, string } from "yup";
+import { ClipLoader } from 'react-spinners'
 
 function Addadmin() {
 
@@ -39,53 +41,35 @@ console.log(decoder.idnumber)
   
 
 },[])
-  const handleSignUp = async (e: React.SyntheticEvent) => {
-    
-    e.preventDefault();
-    //@ts-ignore
-await fetch('../api/addadmin',{method:"post",headers: {
-'Accept': 'application/json',
-
-        "Content-Type": "application/json",
-
-
-},body:JSON.stringify({
-admin,
-password,
-pictureurl:cloudinaryImage,
-idnumber,
-// repeatpassword,
-role,
-username
-
-      })}).then(e=>
- {
-  if (e.status == 301) return alert("Error")
-        console.log(e.status);
-  e.text();}
-
-).then(s=>
-{  
-  
-  console.log(s)
+  const [fetching,setFetching] = useState(false);  
+const errorfunc=()=>{
+setFetching(false)
+openErrorModal()
 }
-)
-    
-      .then((response) => {
-
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
+const truefunc=()=>{
+setFetching(false)
+  openModal();
   
+}
+//@ts-ignore
+const handleSignUp = async (data) => {
+  // console.log(errors)
+
+setFetching(true)
+  const fetcher = await fetch('../api/addadmin',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify(data)})
+
+      const e= await fetcher.text()
+      console.log(fetcher.status)
+if(fetcher.status == 200) return truefunc();
+errorfunc()
+
+}
+
+const Schema =yup.object({admin:yup.string(),password:yup.string(),role:yup.string(),pictureurl:yup.string(),role:yup.string(),idnumber:yup.number(),admin:yup.boolean(),username:yup.string()})
   
+const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
 //@ts-nocheck
 //@ts-ignore
@@ -113,26 +97,62 @@ const handleUpload = async (e) => {
 
 
 
-
   return (
     <Layout>
+
+<Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
+        <ModalHeader color='pink' style={{color:"red"}}>Error Inserting Data</ModalHeader>
+        <ModalBody>
+          Check Internet Connectivity
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeErrorModal}>
+            Close
+          </Button>
+         
+        </ModalFooter>
+      </Modal>
+    
+
+
+
+
+       <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalHeader>Data Inserted Successfully</ModalHeader>
+        <ModalBody>
+          Thank you for inserting Data , check DataBase in case of you need to update Data
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
+            Close
+          </Button>
+         
+        </ModalFooter>
+      </Modal>
+
+
       <PageTitle>اضافة مدير </PageTitle>
       
-
+{fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  </div>: <form onSubmit={handleSubmit(handleSignUp)}>
       <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+
         <Label>
           <span>اسم المستخدم</span>
-          <Input  className="mt-1" placeholder="اسم المستخدم"  type='text' onChange={(e=>setusername(e.target.value))}/>
+          <Input  className="mt-1"   {...register("username",{required:true})} placeholder="اسم المستخدم"  type='text' />
+       {errors.username ?<span style={{color:"red"}}>{errors.username.message}</span>:null }
+       
         </Label>
         <Label>
 
           <span>الرقم السري</span>
-          <Input className="mt-1" placeholder="الرقم السري"  type='password' onChange={(e=>setPassword(e.target.value))}/>
+          <Input className="mt-1" placeholder="الرقم السري" {...register("password",{required:true})}  type='password' onChange={(e=>setPassword(e.target.value))}/>
+        {errors.password?<span style={{color :"red"}}>{errors.password.message}</span>:null}
         </Label>
         <Label>
 
           <span>الرقم التعريفي للدخول</span>
-          <Input className="mt-1" placeholder="الرقم التعريفي للدخول" type='number' onChange={(e=>setidnumber(e.target.value))}/>
+          <Input className="mt-1" {...register("idnumber",{required:true})} placeholder="الرقم التعريفي للدخول" type='number' onChange={(e=>setidnumber(e.target.value))}/>
+        {errors.idnumber?<span style={{color:"red"}}>{errors.idnumber.message}</span>:null}
         </Label>
 
         {/* <Label>
@@ -152,7 +172,7 @@ const handleUpload = async (e) => {
 
 <Label>
   <span>الرتبة</span>
-  <Select  style={{fontSize:"15px" }} onChange={(e)=>setrole(e.target.value)} >
+  <Select  style={{fontSize:"15px" }} {...register("role",{required:false})} onChange={(e)=>setrole(e.target.value)} >
 
     <option disabled >------</option>
 
@@ -165,6 +185,7 @@ const handleUpload = async (e) => {
 <Button onClick={handleSignUp}>Add Admin</Button>
 
       </div>
+</form>}
     </Layout>
   )
 }

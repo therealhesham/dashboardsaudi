@@ -91,22 +91,6 @@ errorfunc()
 
 }
 
-//@ts-ignore
-const onSubmit = async (data) => {
-  // console.log(errors)
-
-setFetching(true)
-  const fetcher = await fetch('../api/addhomemaid',{method:"post",headers: {'Accept':'application/json',
-        "Content-Type": "application/json",
-      },body:JSON.stringify(data)})
-
-      const e= await fetcher.text()
-      console.log(fetcher.status)
-if(fetcher.status == 200) return truefunc();
-errorfunc()
-
-}
-
 // console.log(errors)
   return (
 

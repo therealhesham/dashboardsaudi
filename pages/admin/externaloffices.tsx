@@ -42,6 +42,8 @@ import {
 } from 'chart.js'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 
 function Employees() {
   Chart.register(
@@ -71,7 +73,6 @@ const router = useRouter()
   
   const [listType,setTypeList] = useState("workers")
 
-
 function onPageChange(p: number) {
   
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
@@ -80,6 +81,19 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
+    try{
+
+const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+  
+console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/login")
+  }
+
+
+    
+    
     try {
     
   

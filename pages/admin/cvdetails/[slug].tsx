@@ -30,6 +30,7 @@ import { ClipLoader, ClockLoader, GridLoader } from 'react-spinners'
 import Header from 'example/components/Header'
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { PrinterFilled } from '@ant-design/icons'
+import Cookies from 'js-cookie'
 const options: Options = {
   filename: "advanced-example.pdf",
   method: "save",
@@ -70,12 +71,24 @@ const options: Options = {
 // import { usePDF } from 'react-to-pdf'
 // uses
 // usePDF
+
 const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
   console.log(router.query.slug)
   const [data,setData]=useState([]);
   useEffect(() => {
+    try{
+
+const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+  
+console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/login")
+  }
+
+
   (async function name() {
      await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
      .then(json  => {
