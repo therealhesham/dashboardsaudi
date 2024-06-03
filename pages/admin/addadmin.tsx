@@ -40,6 +40,14 @@ console.log(decoder.idnumber)
   
 
 },[])
+ const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
+   function openErrorModal() {
+    setIsErrorModalOpen(true)
+  }
+  function closeErrorModal() {
+    setIsErrorModalOpen(false)
+  }
+
   const [fetching,setFetching] = useState(false);  
 const errorfunc=()=>{
 setFetching(false)
