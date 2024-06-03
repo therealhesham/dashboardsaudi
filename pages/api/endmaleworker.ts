@@ -9,12 +9,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
 try {
-    const maleworkerlist=await prisma.maleWorker.findMany();
-  res.status(200).send(maleworkerlist)
+  //  console.log("deleter",)
+  const deletefemaleworker=await prisma.maleWorker.update({where:{id:req.body.id},data:{ended:true}})
+  res.status(200).send(req.body.id)
 
 } catch (error) {
   console.log(error)
-  res.status(301).send("maleworkerlist")
+  res.status(301).send("failedending")
 
 // res.send("error")  
 }

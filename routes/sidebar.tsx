@@ -35,6 +35,27 @@ const routes: IRoute[] = [
     icon: 'HomeIcon', 
     name: 'Clientlist', 
     // exact: true,
+  },
+{
+    path: '/admin/femaleworkers', 
+    icon: 'HomeIcon', 
+    name: 'Female Workers List', 
+    // exact: true,
+  },{
+    path: '/admin/maleworkers', 
+    icon: 'HomeIcon', 
+    name: 'Male Workers List', 
+    // exact: true,
+  },{
+    path: '/admin/newmaleworker', 
+    icon: 'FormsIcon', 
+    name: 'Add Male Worker', 
+    // exact: true,
+  },{
+    path: '/admin/newfemaleworker', 
+    icon: 'FormsIcon', 
+    name: 'Add Female Worker', 
+    // exact: true,
   },{
     path: '/admin/employees', 
     icon: 'HomeIcon', 

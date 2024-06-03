@@ -137,7 +137,20 @@ names()
 }  
 
 }, [])
-console.log(paginatedData)
+
+
+
+const cancelRecord=async(e)=>{
+await fetch("../api/cancelmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
+console.log(id)
+}
+const endRecord=async(e)=>{
+await fetch("../api/endmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
+console.log(id)
+}
+
+
+
 return (
   // <Layout>
 
@@ -197,6 +210,9 @@ return (
 <TableCell>المكتب الخارجي</TableCell>
 <TableCell>مدة التقديم</TableCell>
 <TableCell>تاريخ اليوم</TableCell>
+
+<TableCell>الغاء العقد</TableCell>
+<TableCell>انهاء العقد</TableCell>
 
 
 
@@ -315,6 +331,19 @@ return (
                  <TableCell>
                   <span className="text-md">{e.notes}</span>
 
+                </TableCell>
+
+
+                <TableCell>
+                 
+
+<DeleteOutlined onClick={()=>cancelRecord(e.id)} style={{color:"dodgerblue"}} />
+                </TableCell>
+
+                <TableCell>
+                 
+
+<DeleteOutlined onClick={()=>endRecord(e.id)} style={{color:"red"}} />
                 </TableCell>
 
 

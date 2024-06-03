@@ -9,6 +9,7 @@ import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { ClipLoader } from 'react-spinners'
 
 
 
@@ -53,44 +54,81 @@ notes:yup.string()
     e.preventDefault();
 
   };
+
+  
+ const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
+  function openErrorModal() {
+    setIsErrorModalOpen(true)
+  }
+  function closeErrorModal() {
+    setIsErrorModalOpen(false)
+  }
+
+
+  const [fetching,setFetching] = useState(false);  
+const errorfunc=()=>{
+setFetching(false)
+openErrorModal()
+}
+const truefunc=()=>{
+setFetching(false)
+  openModal();
+  
+}
 //@ts-ignore
 const onSubmit = async (data) => {
   // console.log(errors)
-  await fetch('../api/addhomemaid',{method:"post",headers: {
+
+setFetching(true)
+  const fetcher = await fetch('../api/addfemaleworker',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify(data)}).then(e=>
- 
-  e.text()
-  // console.log(e.text())
+      },body:JSON.stringify(data)})
 
+      const e= await fetcher.text()
+      console.log(fetcher.status)
+if(fetcher.status == 200) return truefunc();
+errorfunc()
 
-).then(s=>
-{  
-  openModal()
-  console.log(s)
-}
-)
-    
-      .then((response) => {
-
-        console.log(response);
-        
-        
-        // router.replace('/example/dashboard');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
 }
 
+//@ts-ignore
+const onSubmit = async (data) => {
+  // console.log(errors)
 
+setFetching(true)
+  const fetcher = await fetch('../api/addhomemaid',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify(data)})
+
+      const e= await fetcher.text()
+      console.log(fetcher.status)
+if(fetcher.status == 200) return truefunc();
+errorfunc()
+
+}
 
 // console.log(errors)
   return (
 
   
     <Layout>
-      
+      <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
+        <ModalHeader color='pink' style={{color:"red"}}>Error Inserting Data</ModalHeader>
+        <ModalBody>
+          Check Internet Connectivity
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeErrorModal}>
+            Close
+          </Button>
+         
+        </ModalFooter>
+      </Modal>
+    
+
+
+
+
        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <ModalHeader>Data Inserted Successfully</ModalHeader>
         <ModalBody>
@@ -103,8 +141,9 @@ const onSubmit = async (data) => {
          
         </ModalFooter>
       </Modal>
-      {/* <SectionTitle>Elements</SectionTitle> */}
-<form onSubmit={handleSubmit(onSubmit)}>
+{fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
+</div>
+: <form onSubmit={handleSubmit(onSubmit)}>
       <PageTitle>اضافة عمالة ذكور</PageTitle>
        <div dir='rtl' style={{display:"grid",gridTemplateColumns: "auto auto auto",gap:"19px"}} className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <Label>
@@ -210,8 +249,7 @@ const onSubmit = async (data) => {
   <Button type="submit" > <h2>Submit</h2>
 </Button>
 
-</form>
- 
+</form>} 
     </Layout>
   )
 }

@@ -110,8 +110,7 @@ names()
 
 }, [])
 
-console.log(dayjs().get("year")+"-"+(dayjs().get("month")+1) +"-"+dayjs().get("D"))
-console.log(paginatedData)
+
 return (
   
 <div>

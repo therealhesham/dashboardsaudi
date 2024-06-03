@@ -44,6 +44,7 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DeleteOutlined } from '@ant-design/icons'
+import dayjs from 'dayjs'
 
 function FemaleWorkers() {
   Chart.register(
@@ -116,6 +117,11 @@ const cancelRecord=async(e)=>{
 await fetch("../api/cancelfemaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
 console.log(id)
 }
+const endRecord=async(e)=>{
+await fetch("../api/endfemaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
+console.log(id)
+}
+
 
 
 
@@ -123,26 +129,6 @@ console.log(id)
 return (
   // <Layout>
 
-// clientname        String
-// insurance         String
-// musanedContract    String
-// visanumber         String
-// idnumber          String
-// mobilenumber      Int
-// passportnumber    String
-// workername        String
-// age               Int
-// experience            String
-// contractstatus         String  
-// city                   String
-// orderDate           DateTime
-// dayDate             DateTime
-// duration            String
-// externaloffice      String
-// nationality         String
-// externalmusanedcontract String
-// visaordernumber     String
-// notes           String
 <div>
   <Button onClick={()=> router.back()}>الرجوع للخلف</Button>
       <PageTitle>Female Workers DataBase</PageTitle>
@@ -154,7 +140,6 @@ return (
         <Table>
           <TableHeader>
             <tr>
-<TableCell>الغاء</TableCell>
 
               <TableCell>اسم العميل</TableCell>
               <TableCell>التأمين</TableCell>
@@ -170,7 +155,6 @@ return (
               <TableCell>حالة العقد</TableCell>
 <TableCell>المدينة</TableCell>
 
-              <TableCell>تاريخ تقديم الطلب</TableCell>
 
 <TableCell>رقم طلب التأشيرة</TableCell>
 <TableCell>ملاحظات</TableCell>
@@ -178,8 +162,11 @@ return (
 </TableCell>
 <TableCell>الجنسية</TableCell>
 <TableCell>المكتب الخارجي</TableCell>
-<TableCell>مدة التقديم</TableCell>
+              <TableCell>تاريخ تقديم الطلب</TableCell>
 <TableCell>تاريخ اليوم</TableCell>
+<TableCell>مدة التقديم</TableCell>
+<TableCell>الغاء العقد</TableCell>
+<TableCell>انهاء العقد</TableCell>
 
 
 
@@ -191,11 +178,6 @@ return (
               <TableRow key={i}>
 
 
-                <TableCell>
-                 
-
-<DeleteOutlined onClick={()=>cancelRecord(e.id)} style={{color:"red"}} />
-                </TableCell>
                 
                 <TableCell>
                   <span className="text-md">{e?.clientname}</span>
@@ -305,7 +287,17 @@ return (
 
                 </TableCell>
 
+                <TableCell>
+                 
 
+<DeleteOutlined onClick={()=>cancelRecord(e.id)} style={{color:"dodgerblue"}} />
+                </TableCell>
+
+                <TableCell>
+                 
+
+<DeleteOutlined onClick={()=>endRecord(e.id)} style={{color:"red"}} />
+                </TableCell>
 
 
 

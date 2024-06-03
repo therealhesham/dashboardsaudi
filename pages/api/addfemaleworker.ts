@@ -56,7 +56,8 @@ notes}})
   res.status(200).send(createfemaleworker)
 
 } catch (error) {
-  res.status(301).send("error")
+  console.log(error)
+  res.status(301).send(error)
 
 // res.send("error")  
 }
