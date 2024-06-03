@@ -130,7 +130,7 @@ return (
 
 <div>
   <Button onClick={()=> router.back()}>الرجوع للخلف</Button>
-      <PageTitle>Male Workers DataBase</PageTitle>
+      <PageTitle>Female Workers DataBase</PageTitle>
   
       <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       </div>
