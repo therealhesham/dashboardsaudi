@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { jwtDecode } from 'jwt-decode';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import yup, { number, string } from "yup";
+import * as yup from "yup";
 import { ClipLoader } from 'react-spinners'
 
 function Addadmin() {
@@ -155,11 +155,6 @@ const handleUpload = async (e) => {
         {errors.idnumber?<span style={{color:"red"}}>{errors.idnumber.message}</span>:null}
         </Label>
 
-        {/* <Label>
-
-          <span>الرتبة</span>
-          <Input className="mt-1" placeholder="الرقم التعريفي للدخول" type='number' onChange={(e=>setrole(e.target.value))}/>
-        </Label> */}
 
         <Label className='mt-6'>
           <span>صورة شخصية </span>
