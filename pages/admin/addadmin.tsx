@@ -17,6 +17,7 @@ import * as yup from "yup";
 import { ClipLoader } from 'react-spinners'
 function Addadmin() {
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [admin, setadmin] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [pictureurl, setpictureurl] = useState<string>('');
@@ -45,6 +46,12 @@ console.log(decoder.idnumber)
   }
   function closeErrorModal() {
     setIsErrorModalOpen(false)
+  }
+  function openModal() {
+    setIsModalOpen(true)
+  }
+  function closeModal() {
+    setIsModalOpen(false)
   }
 
   const [fetching,setFetching] = useState(false);  
