@@ -152,19 +152,18 @@ return (
     <Layout>
       {/* {alert(user.username)} */}
 <h1 style={{fontSize:"23px"}}> Hello {user.name}</h1>
-      <PageTitle>Charts</PageTitle>
+      {/* <PageTitle>Charts</PageTitle>
       <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       {/* <div  style={{scale:"40%"}}> */}
-        <ChartCard title="معلومات عن العمالة" > 
-          <Pie {...doughnutOptions} />
-          <ChartLegend legends={doughnutLegends} />
-        </ChartCard>
-{/* </div> */}
-        <ChartCard title="المكاتب الاكثر ادراجا للعمالة">
-          <Line {...lineOptions} />
-          <ChartLegend legends={lineLegends} />
-        </ChartCard>
-      </div>
+        {/* <ChartCard title="معلومات عن العمالة" >  */}
+          {/* <Pie {...doughnutOptions} /> */}
+          {/* <ChartLegend legends={doughnutLegends} /> */}
+        {/* </ChartCard> */}
+        {/* <ChartCard title="المكاتب الاكثر ادراجا للعمالة"> */}
+          {/* <Line {...lineOptions} /> */}
+          {/* <ChartLegend legends={lineLegends} /> */}
+        {/* </ChartCard> */} 
+      {/* </div> */}
       <PageTitle>Dashboard</PageTitle>
 
       {/* <CTA /> */}
