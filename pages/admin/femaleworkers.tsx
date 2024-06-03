@@ -112,7 +112,6 @@ names()
 
 
 
-
 const cancelRecord=async(e)=>{
 await fetch("../api/cancelfemaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
 console.log(id)

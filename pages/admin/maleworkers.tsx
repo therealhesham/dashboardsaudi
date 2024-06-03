@@ -43,6 +43,7 @@ import {
 } from 'chart.js'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { DeleteOutlined } from '@ant-design/icons'
 
 function FemaleWorkers() {
   Chart.register(
@@ -148,7 +149,6 @@ const endRecord=async(e)=>{
 await fetch("../api/endmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
 console.log(id)
 }
-
 
 
 return (

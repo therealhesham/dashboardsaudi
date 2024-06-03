@@ -133,7 +133,7 @@ console.log(decoder.idnumber)
 console.log(new Date().getSeconds())
     // setData(json)   
 const arr=[];
-  json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
+  json?.length>0?json.map(e=>{if(!arr.includes(e.fields["External office - المكتب الخارجي"])) arr.push(e.fields["External office - المكتب الخارجي"])}):console.log(json.length)
   setofficelist(arr)
 } 
   // names();
@@ -239,7 +239,7 @@ return (
                       alt="User image"
                     />
                     <div>
-                      <p className="font-semibold" >{e?.fields.fname}</p>
+                      <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         
                       </p>
@@ -247,26 +247,26 @@ return (
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{e?.fields.age}</span>
+                  <span className="text-sm">{e?.fields["age - العمر"]}</span>
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{e?.fields.maritalstatus}</span>
+                  <span className="text-sm">{e?.fields["marital status - الحالة الاجتماعية"]}</span>
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                  <span className="text-sm">{e?.fields.nationality}</span>
+                  <span className="text-sm">{e?.fields["Nationality - الجنسية"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Link href={"/admin/officeinfo/"+e?.fields.office}  >                 
+                  <Link href={"/admin/officeinfo/"+e?.fields["External office - المكتب الخارجي"]}  >                 
                   {/* <span className="text-sm"> */}
-                  <span className="text-sm">{e?.fields.office}</span>
+                  <span className="text-sm">{e?.fields["External office - المكتب الخارجي"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}

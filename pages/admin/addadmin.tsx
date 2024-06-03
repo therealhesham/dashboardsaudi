@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { ClipLoader } from 'react-spinners'
+import { DeleteOutlined } from '@ant-design/icons'
 function Addadmin() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,6 +41,7 @@ console.log(decoder.idnumber)
   
 
 },[])
+// DeleteOutlined
  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
    function openErrorModal() {
     setIsErrorModalOpen(true)
