@@ -22,6 +22,7 @@ import {
   Avatar,
   Badge,
   Pagination,
+  Modal,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -42,7 +43,6 @@ import {
 } from 'chart.js'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
 function Transfer() {
   Chart.register(
     ArcElement,
