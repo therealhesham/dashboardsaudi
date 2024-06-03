@@ -1,8 +1,7 @@
 //@ts-nocheck
 
 import React, { useEffect, useState } from 'react'
-
-import { Input, HelperText, Label, Select, Textarea, Button, Modal } from '@roketid/windmill-react-ui'
+import { Input, HelperText, Label, Select, Textarea, Button, Modal, ModalHeader, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
