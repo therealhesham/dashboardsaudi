@@ -69,11 +69,11 @@ setFetching(false)
 //@ts-ignore
 const handleSignUp = async (data) => {
   // console.log(errors)
-
+console.log(data)
 setFetching(true)
   const fetcher = await fetch('../api/addadmin',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify(data)})
+      },body:JSON.stringify({...data,admin:true})})
 
       const e= await fetcher.text()
       console.log(fetcher.status)
@@ -82,7 +82,7 @@ errorfunc()
 
 }
 
-const Schema =yup.object({admin:yup.string(),password:yup.string(),role:yup.string(),pictureurl:yup.string(),role:yup.string(),idnumber:yup.number(),admin:yup.boolean(),username:yup.string()})
+const Schema =yup.object({admin:true,password:yup.string(),role:yup.string(),role:yup.string(),idnumber:yup.number(),admin:yup.boolean(),username:yup.string()})
   
 const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
@@ -148,12 +148,14 @@ const handleUpload = async (e) => {
 
       <PageTitle>اضافة مدير </PageTitle>
       
-{fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  </div>: <form onSubmit={handleSubmit(handleSignUp)}>
+{fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  </div>:
+ <form onSubmit={handleSubmit(handleSignUp)}>
       <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
         <Label>
           <span>اسم المستخدم</span>
-          <Input  className="mt-1"   {...register("username",{required:true})} placeholder="اسم المستخدم"  type='text' />
+          
+<Input  className="mt-1"   {...register("username",{required:true})} placeholder="اسم المستخدم"  type='text' />
        {errors.username ?<span style={{color:"red"}}>{errors.username.message}</span>:null }
        
         </Label>
@@ -192,7 +194,7 @@ const handleUpload = async (e) => {
 
   </Select>
 </Label>
-<Button onClick={handleSignUp}>Add Admin</Button>
+<Button type='submit'>Add Admin</Button>
 
       </div>
 </form>}
