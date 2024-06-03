@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 
-import { Input, HelperText, Label, Select, Textarea, Button } from '@roketid/windmill-react-ui'
+import { Input, HelperText, Label, Select, Textarea, Button, Modal } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
@@ -16,7 +16,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { ClipLoader } from 'react-spinners'
-
 function Addadmin() {
 
   const [admin, setadmin] = useState<boolean>(false);
