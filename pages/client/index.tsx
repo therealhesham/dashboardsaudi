@@ -166,7 +166,7 @@ repos.map(e=><div key={e.fields.id} className="card card-compact card-side w-100
 export async function getServerSideProps(){
 
 //  async function names( )  {
-      const repo = await fetch(`${process.env.NEXTAUTH_URL}/api/hello`)
+      const repo = await fetch(`https://rawaes-dashboard.vercel.app/api/hello`)
       const repos =  await repo.json()
   
 console.log(repos)
