@@ -83,17 +83,89 @@ function Dashboard({repos}) {
   const [array,setArray]=useState([])
 const [arrayreligion,setArrayReligion]=useState([])
 const [searchData,setSearchdata]= useState([])
+const [data,setData] = useState(repos);
+const [religion,setReligon]=useState("الكل")
+const [nationality,setNationality]=useState("الكل")
+
+  const [previousNationality,setPreviousNationality]=useState("");
+
+const [previousreligion,setPreviousreligion]=useState("");
 
 useEffect(()=>{
+  setData(repos)
 
-const arr=[];
+  function Deepsearch(){
+  if (religion == "الكل" && nationality != "الكل"){
+
+const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+
+
+// const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
+  setData(searchdata)
+
+
+
+
+  }
+
+if (religion != "الكل" && nationality == "الكل"){
+// const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+
+
+const sec = repos.filter(e=>e.fields["Religion - الديانة"] == religion); 
+  setData(sec)
+
+
+
+}
+
+if (religion == "الكل" && nationality == "الكل"){
+//
+  setData(repos)
+
+
+
+}
+if (religion != "الكل" && nationality != "الكل"){
+
+
+const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+
+
+const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
+  setData(sec)
+
+}
+
+
+}
+// )( )
+
+religion.length > 5 ? Deepsearch(): "";
+nationality.length > 5 ?Deepsearch():"";
+
+console.log(religion,nationality)
+  const arr=[];
   repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality - الجنسية"])) arr.push(e.fields["Nationality - الجنسية"])}):console.log("json.length")
 setArray(arr)
 const secarray=[]
   repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields["Religion - الديانة"])) secarray.push(e.fields["Religion - الديانة"])}):console.log("json.length")
 setArrayReligion(secarray)
+  // console.log(nationality != previousNationality)
 
-},[])
+
+// if(nationality != previousNationality){  
+//   console.log("sss")
+//   // setData(repos)
+//  setData([...repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality)]) ;
+// }
+
+// if(religion != previousreligion)
+// { 
+//   setData([...data.filter(e=>e.fields["Religion - الديانة"] == religion)]);
+// }
+
+},[religion,nationality])
 
 
 return (
@@ -102,9 +174,14 @@ return (
 <div>
 <div style={{width:"250px"}}>
 <Label >
-          <span>Nationality</span>
-            <Select className="mt-1">
 
+  
+          <span>Nationality</span>
+            <Select className="mt-1" onChange={e=>{
+              setPreviousNationality(nationality)
+              setNationality(e.target.value)}}>
+
+<option placeholder='الكل'>الكل</option>
 
 {array.map((e,i)=>
     <option key={i} >{e} </option>
@@ -117,9 +194,11 @@ return (
 
 <Label >
           <span>Religion</span>
-            <Select className="mt-1">
+            <Select className="mt-1" onChange={e=>{
+              setPreviousreligion(religion)
+              setReligon(e.target.value)}}>
 
-
+<option placeholder='الكل'>الكل</option>
 {arrayreligion.map((e,i)=>
     <option key={i} >{e} </option>
 
@@ -131,7 +210,7 @@ return (
 
 </div>
   <div className={Style.divbox}>{
-repos.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
+data.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}>  <img     src={e.fields.Picture[0].url}  />
 </div>
