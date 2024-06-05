@@ -200,8 +200,8 @@ return (
               <TableCell>حالة العقد</TableCell>
 <TableCell>المدينة</TableCell>
 
-              <TableCell>تاريخ تقديم الطلب</TableCell>
 
+              <TableCell>تاريخ تقديم الطلب</TableCell>
 <TableCell>رقم طلب التأشيرة</TableCell>
 <TableCell>ملاحظات</TableCell>
 <TableCell>عقد مساند الخارجي
@@ -209,7 +209,6 @@ return (
 <TableCell>الجنسية</TableCell>
 <TableCell>المكتب الخارجي</TableCell>
 <TableCell>مدة التقديم</TableCell>
-<TableCell>تاريخ اليوم</TableCell>
 
 <TableCell>الغاء العقد</TableCell>
 <TableCell>انهاء العقد</TableCell>

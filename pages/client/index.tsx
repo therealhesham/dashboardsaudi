@@ -87,10 +87,10 @@ const [searchData,setSearchdata]= useState([])
 useEffect(()=>{
 
 const arr=[];
-  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields.nationality)) arr.push(e.fields.nationality)}):console.log("json.length")
+  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality - الجنسية"])) arr.push(e.fields["Nationality - الجنسية"])}):console.log("json.length")
 setArray(arr)
 const secarray=[]
-  repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields.religion)) secarray.push(e.fields.religion)}):console.log("json.length")
+  repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields["Religion - الديانة"])) secarray.push(e.fields["Religion - الديانة"])}):console.log("json.length")
 setArrayReligion(secarray)
 
 },[])
@@ -133,14 +133,18 @@ return (
   <div className={Style.divbox}>{
 repos.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
   <div className="pic"> 
-    <figure style={{width:"200px",height:"200px"}} >  <img   style={{marginTop:"1px"}} width={200} height={200} src={e.fields.Picture[0].url}  />
-</figure>
+    <div  style={{width:"80px",height:"70px"}}>  <img     src={e.fields.Picture[0].url}  />
+</div>
 </div>
   <div className="card-body" >
-    <h2 className="card-title">{e.fields.fname}</h2>
+    <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      <p  >{e.fields.nationality}</p>
-      <p  >{e.fields.maritalstatus}</p>
+      <p  >{e.fields["age - العمر"]}</p>
+      <p  >{e.fields["marital status - الحالة الاجتماعية"]}</p>
+      <p  >{e.fields["External office - المكتب الخارجي"]}</p>
+      <p  >{e.fields["Religion - الديانة"]}</p>
+
+      
       
       {/* <p  >If a dog chews shoes whose shoes does he choose?</p> */}
       

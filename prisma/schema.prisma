@@ -10,6 +10,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
+ 
   url      = "mongodb+srv://heshammoha231992:BozLnMORjollMgoC@cluster0.ewjihyo.mongodb.net/rawaesdashboard"
 }
 
