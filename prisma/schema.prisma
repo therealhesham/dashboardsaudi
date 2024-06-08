@@ -14,6 +14,17 @@ datasource db {
   url      = "mongodb+srv://heshammoha231992:BozLnMORjollMgoC@cluster0.ewjihyo.mongodb.net/rawaesdashboard"
 }
 
+
+model Client{
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  fullname        String
+  email           String    @unique
+  phonenumber     String
+  Cvnumber        String    
+  password        String
+
+  
+}
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   admin           Boolean    

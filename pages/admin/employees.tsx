@@ -58,7 +58,6 @@ function Employees() {
   )
 
   
-
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
@@ -83,17 +82,16 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // here you would make another server request for new data
 
   useEffect(() => {
-  try{
+try {
 
-const token = Cookies.get("token")
+    const token = Cookies.get("token")
   const decoder = jwtDecode(token);
+      if(!decoder.admin)return router.replace("/client");
   
-console.log(decoder.idnumber)
+// console.log(decoder.idnumber)
   } catch (error) {
-    router.replace("/login")
+    router.replace("/client")
   }
-
-
 
 
     

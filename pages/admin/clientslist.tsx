@@ -116,15 +116,20 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   useEffect(() => {
     
     
-    try{
+    //@ts-ignore
+//@ts-nocheck
+try {
 
-const token = Cookies.get("token")
+    const token = Cookies.get("token")
   const decoder = jwtDecode(token);
+      if(!decoder.admin)return router.replace("/client");
   
-console.log(decoder.idnumber)
+// console.log(decoder.idnumber)
   } catch (error) {
-    router.replace("/login")
+    router.replace("/client")
   }
+
+
 
 
     try {

@@ -117,16 +117,21 @@ try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-  
-console.log(decoder.idnumber)
+      if(!decoder.admin)return router.replace("/admin/login");
+// console.log(decoder.idnumber)
   } catch (error) {
-    router.replace("/login")
+    router.replace("/admin/login")
   }
     try {
     async function names( )  {
-     await fetch("./api/hello").then(response => response.json())
+    const fetcher =  await fetch("./api/hello");
+    const f = await fetcher.json()
+
   .then(json  => {
-    json?setLength(json.length):"";
+ console.log(json)
+//  if ()
+  json?setLength(json.length):"";
+
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");

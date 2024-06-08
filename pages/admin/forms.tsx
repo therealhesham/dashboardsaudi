@@ -7,6 +7,8 @@ import SectionTitle from 'example/components/Typography/SectionTitle'
 
 import Layout from 'example/containers/Layout'
 import { MailIcon } from 'icons'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 
 
 
@@ -48,7 +50,8 @@ await fetch('../api/signup',{method:"post",headers: {
       });
   };
 
-
+// Cookies
+// jwtDecode
 
   return (
     <Layout>

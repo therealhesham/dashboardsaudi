@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+//@ts-ignore
+//@ts-nocheck
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form"
 import { Input, HelperText, Label, Select, Textarea, Button, Modal, ModalHeader, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 import CTA from 'example/components/CTA'
@@ -10,11 +12,27 @@ import { MailIcon } from 'icons'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { ClipLoader } from 'react-spinners'
-
-
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
+import { useRouter } from 'next/router'
+// Cookies
+// jwtDecode
+// useRouter
+// useEffect
 
 function Waitinglist() {
+useEffect(()=>{
+try {
 
+    const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+      if(!decoder.admin)return router.replace("/client");
+  
+// console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/client")
+  }
+},[])
   const [office, setOffice] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false)

@@ -1,5 +1,5 @@
 'use client'
-
+// import "./"
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -14,13 +14,14 @@ function LoginPage() {
   const [Success,setsuccess]=useState(false)
   const [error,setError]=useState("");
   const [password,setPassword]=useState("")
+  const [email,setEmail]=useState("")
   const imgSource = mode === 'dark' ? '/assets/img/rpng.png' : '/assets/img/rpng.png'
   const router=useRouter()
-
+  
   const TurnOffOn =()=>{
-setError("خطأ في تسجيل الدخول") ;
-setsuccess(false);;
-
+    setError("خطأ في تسجيل الدخول") ;
+    setsuccess(false);;
+    
   }
   const handleSignIn = async (e: React.SyntheticEvent) => {
     
@@ -28,13 +29,13 @@ setsuccess(false);;
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch('./api/signin',{method:"POST",headers: {
+await fetch('./api/clientsignin',{method:"POST",headers: {
 'Accept': 'application/json',
 "Content-Type": "application/json",
 
 
 },body:JSON.stringify({
-idnumber,password
+email,password
 
       })}).then(async (e)=>
 {        
@@ -47,7 +48,7 @@ if(e.status == 200){
 cookies.set("token",s)
 // console.log(s)
 
-  router.replace('/admin');
+  router.replace('/client/status');
 }
 
 }
@@ -55,7 +56,6 @@ cookies.set("token",s)
        TurnOffOn()
       });
   };
-
 
   
 
@@ -106,13 +106,13 @@ aria-hidden='true'
               </h1>
           {error?<span style={{color:"red"}}>خطأ في البيانات</span>:null}
               <Label>
-                <span>ID number</span>
+                <span>Email</span>
                 <Input
-                onChange={e=>setIDnumber(e.target.value)}
+                onChange={e=>setEmail(e.target.value)}
                   className='mt-1'
-                  type='number'
-                  value={idnumber}
-                  placeholder='ID Number'
+                  type='text'
+                  value={email}
+                  placeholder='Email'
                 />
               </Label>
 
@@ -145,12 +145,12 @@ aria-hidden='true'
               </Button>
 
               <p className='mt-4' >
-                <Link href='/example/forgot-password'>
+                {/* <Link href='/example/forgot-password'> */}
                   <a style={{color:"#003749"}} className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>
                     اتصل بنا
                   </a>
-                </Link>
-              </p>
+                {/* </Link> */}
+              </p>  
               <p className='mt-1'>
                 <Link href='/example/create-account'>
                   <a style={{color:"#003749"}} className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>

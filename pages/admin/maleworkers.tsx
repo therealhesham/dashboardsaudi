@@ -112,8 +112,20 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
-    try {
-    
+//@ts-ignore
+//@ts-nocheck
+try {
+
+    const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+      if(!decoder.admin)return router.replace("/client");
+  
+// console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/client")
+  }
+try {
+ 
   
       async function names( )  {
      await fetch("../api/maleworkerslist").then(response => response.json())

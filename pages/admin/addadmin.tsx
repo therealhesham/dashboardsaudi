@@ -28,16 +28,17 @@ const [role, setrole] = useState<string>('');
 const [cloudinaryImage, setCloudinaryImage] = useState("")
 const router = useRouter()
 useEffect(()=>{
-
 try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-console.log(decoder.idnumber)
-
+      if(!decoder.admin)return router.replace("/client");
+  
+// console.log(decoder.idnumber)
   } catch (error) {
-    router.replace("/login")
+    router.replace("/client")
   }
+
   
 
 },[])
@@ -55,6 +56,7 @@ console.log(decoder.idnumber)
   function closeModal() {
     setIsModalOpen(false)
   }
+
 
   const [fetching,setFetching] = useState(false);  
 const errorfunc=()=>{

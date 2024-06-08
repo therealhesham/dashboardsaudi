@@ -22,6 +22,8 @@ import {
   Input,
   Label,
 } from '@roketid/windmill-react-ui'
+// Cookies
+// jwtDecode
 import { EditIcon, TrashIcon } from 'icons'
 import { useReactToPrint } from "react-to-print";
 import response, { ITableData } from 'utils/demo/tableData'
@@ -31,6 +33,7 @@ import Header from 'example/components/Header'
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { PrinterFilled } from '@ant-design/icons'
 import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 const options: Options = {
   filename: "advanced-example.pdf",
   method: "save",
@@ -71,7 +74,6 @@ const options: Options = {
 // import { usePDF } from 'react-to-pdf'
 // uses
 // usePDF
-
 const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
@@ -81,9 +83,10 @@ export default function Page() {
     try{
 
 const token = Cookies.get("token")
-  const decoder = jwtDecode(token);
-  
-console.log(decoder.idnumber)
+// alert(token) 
+const decoder = jwtDecode(token);
+  console.log(decoder)
+// console.log(decoder.idnumber)
   } catch (error) {
     router.replace("/login")
   }

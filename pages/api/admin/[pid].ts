@@ -3,6 +3,8 @@
 import Airtable ,{Table} from "airtable";
 
 import { Console } from "console";
+import { jwtDecode } from "jwt-decode";
+import jwt from "jsonwebtoken"
 import type { NextApiRequest, NextApiResponse } from 'next'
 var base = new Airtable({apiKey: 'patxcurNRUmoDr1fJ.38e74d9cb6cdbe1c4c46d457f3d9b4514cddb6af8fb09e0e3446ffb9da9dbdff'}).base('appkSvToN2W2ScgdW');
 type Data = {
@@ -10,10 +12,8 @@ type Data = {
 }
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
-  console.log(req.query)
-  console.log(req.query.pid)
-
-// sendSuggestion()
+ 
+  // sendSuggestion()
       //@ts-ignore 
 
 const arr=[];

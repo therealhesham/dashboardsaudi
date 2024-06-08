@@ -45,6 +45,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DeleteOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
 
 function FemaleWorkers() {
   Chart.register(
@@ -57,7 +59,6 @@ function FemaleWorkers() {
     Tooltip,
     Legend
   )
-
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
@@ -85,6 +86,19 @@ const [id,setID] = useState("")
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
+  try {
+
+    const token = Cookies.get("token")
+  const decoder = jwtDecode(token);
+      if(!decoder.admin)return router.replace("/client");
+  
+// console.log(decoder.idnumber)
+  } catch (error) {
+    router.replace("/client")
+  }
+
+  
+  
     try {
     
   

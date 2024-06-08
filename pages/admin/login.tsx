@@ -1,14 +1,15 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
-// import ""
+// import "../a"
+import cookies from "js-cookie";
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
 import { useRouter } from 'next/router'
 import { ClipLoader } from 'react-spinners'
+import Cookies from 'js-cookie';
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
   const [idnumber,setIDnumber]= useState("");
@@ -17,7 +18,10 @@ function LoginPage() {
   const [password,setPassword]=useState("")
   const imgSource = mode === 'dark' ? '/assets/img/rpng.png' : '/assets/img/rpng.png'
   const router=useRouter()
+  useEffect(()=>{
+Cookies.remove("token")
 
+  },[])
   const TurnOffOn =()=>{
 setError("خطأ في تسجيل الدخول") ;
 setsuccess(false);;
@@ -29,7 +33,7 @@ setsuccess(false);;
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch("../api/signin",{method:"POST",headers: {
+await fetch('../api/signin',{method:"POST",headers: {
 'Accept': 'application/json',
 "Content-Type": "application/json",
 
@@ -37,19 +41,23 @@ await fetch("../api/signin",{method:"POST",headers: {
 },body:JSON.stringify({
 idnumber,password
 
-      })}).then(e=>
+      })}).then(async (e)=>
 {        
-  // console.log(e);
+  console.log(e);
   
 if(e.status == 301) return TurnOffOn(); 
 if(e.status != 200) return TurnOffOn();
-if(e.status == 200){e.text();
+if(e.status == 200){
 
-  router.replace('/admin');}
+  const s= await e.text();
+cookies.set("token",s)
+  router.replace('/admin');
+}
 
 }
 ).catch((error) => {
-       TurnOffOn()
+console.log(error)
+  TurnOffOn()
       });
   };
 

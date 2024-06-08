@@ -10,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { AntCloudOutlined } from '@ant-design/icons'
 import { ClipLoader } from 'react-spinners'
+import { jwtDecode } from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 
 
@@ -96,6 +98,7 @@ setFetching(false)
   openModal();
   
 }
+
 //@ts-ignore
 const onSubmit = async (data) => {
   // console.log(errors)

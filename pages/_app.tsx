@@ -20,17 +20,21 @@ const router = useRouter()
 const queryClient =new QueryClient;
 useEffect(()=>{
   try {
-console.log(router.pathname)
+// console.log(router.pathname)
+if(router.pathname=="/client") return;
+if(router.pathname=="/client/book") return;
+if(router.pathname=="/client/book/[slug]") return;
+
     const token = Cookies.get("token")
-    console.log(token)
+    // console.log(token)
   const decoder = jwtDecode(token);
-    console.log(decoder)
 
   setUser(decoder)
-if(router.pathname=="/") router.replace("/admin");
-if(router.pathname=="/login") router.replace("/admin");
+if(router.pathname=="/admin/login") router.replace("/admin");
+if(router.pathname=="/client/login") router.replace("/client");
 
   } catch (error) {
+if(router.pathname=="/admin/login") return ;
     router.replace("/login")
   }
   
