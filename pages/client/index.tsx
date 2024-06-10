@@ -1,87 +1,20 @@
 // @ts-nocheck 
 import React, { useState, useEffect, useRef } from 'react'
-import { Doughnut, Line } from 'react-chartjs-2'
 import Style from "styles/Home.module.css"
-import CTA from 'office/components/CTA'
-import InfoCard from 'office/components/Cards/InfoCard'
-import ChartCard from 'office/components/Chart/ChartCard'
-import ChartLegend from 'office/components/Chart/ChartLegend'
-import PageTitle from 'office/components/Typography/PageTitle'
-import RoundIcon from 'office/components/RoundIcon'
-import Layout from 'office/containers/Layout'
-import country from "./countries.json"
 
-// import "../api/cv/[pid]"
-// import "./cvdetails"
-// import "../client"
-import response, { ITableData } from 'utils/demo/tableData'
-import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from 'icons'
 
-import {
-  Input,
-  TableBody,
-  TableContainer,
-  Table,
-  TableHeader,
-  TableCell,
-  TableRow,
-  TableFooter,
-  Avatar,
-  Badge,
-  Pagination,
-  Card,
-  CardBody,
-  Label,
-  Select,
-  Button,
-} from '@roketid/windmill-react-ui'
-
-import {
-  doughnutOptions,
-  lineOptions,
-  doughnutLegends,
-  lineLegends,
-} from 'utils/demo/chartsData'
-// import ""
-import {
-  Chart,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-import { apiBaseUrl } from 'next-auth/client/_utils'
-import image from 'next/image'
-import { includeKeys } from 'filter-obj'
+// import {
 import { FileOutlined, LogoutOutlined, PlusOutlined } from '@ant-design/icons'
 import link from 'next/link'
 import Link from 'next/dist/client/link'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
-
-function Dashboard({repos}) {
-  Chart.register(
-    ArcElement,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-  )
-
-  // const [page, setPage] = useState(1)
-  // const [data, setData] = useState([])
-
-  // pagination setup
-  const resultsPerPage = 10
-  const totalResults = response.length
+import { Button, Label, Select } from '@roketid/windmill-react-ui'
+function DashboardClient({repos}) {
+  // console.log(repos)
+    const resultsPerPage = 10
+  // const totalResults = response.length
 
   // pagination change control
   function onPageChange(p: number) {
@@ -90,17 +23,16 @@ function Dashboard({repos}) {
 
   
  
-// patXrez1aIa2i3whF.410e92b1b07ab85712cd0722ad462964185aecd969949bde6e36295f7a2e8fc2
   const [array,setArray]=useState([])
 const [arrayreligion,setArrayReligion]=useState([])
 const [searchData,setSearchdata]= useState([])
-const [data,setData] = useState(repos);
+const [data,setData] = useState([]);
 const [religion,setReligon]=useState("الكل")
 const [nationality,setNationality]=useState("الكل")
 const [age,setAge]=useState(0);
   const [previousNationality,setPreviousNationality]=useState("");
 const [previousreligion,setPreviousreligion]=useState("");
-const [user,setUser]=useState("")
+const [user,setUser]=useState({})
 const router=useRouter()
 useEffect(()=>{
 try {
@@ -183,8 +115,10 @@ setArrayReligion(secarray)
 
 },[religion,nationality])
 // LogoutOutlined
+
+
 return (
-<div>
+<>
   {user?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
@@ -255,22 +189,28 @@ router.reload()
 )}
   </Select>
 
+  
+
+
+  
         </Label>
 
 </div>
-  <div className={Style.divbox}>{
-data.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
+
+
+  {data.length>0?<div className={Style.divbox}>{data?.map((e,i)=><div  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
   <div className="pic"> 
-    <div  style={{width:"80px",height:"70px"}}>  <img     src={e.fields.Picture[0].url}  />
+    <div  style={{width:"80px",height:"70px"}}>  <img     src={e?.fields.Picture[0].url}  />
 </div>
 </div>
   <div className="card-body" >
     <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      <p  >{e.fields["age - العمر"]}</p>
-      <p  >{e.fields["marital status - الحالة الاجتماعية"]}</p>
-      <p  >{e.fields["External office - المكتب الخارجي"]}</p>
-      <p  >{e.fields["Religion - الديانة"]}</p>
+      {/* e?.fields["age - العمر"] */}
+      {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
+      <p  >{e?.fields["marital status - الحالة الاجتماعية"]}</p>
+      <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p>
+      <p  >{e?.fields["Religion - الديانة"]}</p>
 
       
       
@@ -280,7 +220,7 @@ data.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 
     <div className="card-actions justify-end  pointer">
 <div style={{display:"inline-flex"}}>
 <div style={{display:"inline-flex",cursor:"pointer",}}> 
-  <Link href={"../client/book/"+e.fields.Name} >
+  <Link href={"../client/book/"+e.fields["Name - الاسم"]} >
 
  <span style={{backgroundColor:"dodgerblue",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 </Link>
@@ -290,7 +230,7 @@ data.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 
 
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
-  <Link href={"../client/cvdetails/"+e.fields.Name} >
+  <Link href={"../client/cvdetails/"+e.fields["Name - الاسم"]} >
  <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>السيرة الذاتية</span>
 
 </Link>
@@ -305,13 +245,13 @@ data.map(e=><div key={e.fields.id} className="card card-compact card-side w-100 
   </div>    
 </div>
   )}
+  </div>:""}
   </div>
-  </div>
-  </div>
+  </>
   )
 }
 export async function getServerSideProps(){
-
+try {
 //  async function names( )  {
       const repo = await fetch(`https://rawaes-dashboard.vercel.app/api/hello`)
       const repos =  await repo.json()
@@ -319,6 +259,10 @@ export async function getServerSideProps(){
 // console.log(repos)
 
 return { props: { repos } }
+  
+} catch (error) {
+console.log(error)  
+}
     }
 // 
   // Fetch data from external API
@@ -327,4 +271,4 @@ return { props: { repos } }
   // const repo: Repo = await res.json()
 
 
-export default Dashboard
+export default DashboardClient

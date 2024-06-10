@@ -263,6 +263,7 @@ return (
                       src={e?.fields.Picture[0].url}
                       alt="User image"
                     />
+                    
                     <div>
                       <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
