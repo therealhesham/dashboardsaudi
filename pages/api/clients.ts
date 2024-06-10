@@ -22,7 +22,7 @@ const result =  await new Promise((resolve,reject)=>{
     base('العملاء').select({
       //  fields:{}
         // Selecting the first 3 records in Grid view:
-        view: "الاساسي"
+        view: "Grid view"
     }).eachPage(function page(records, fetchNextPage) {
     
  resolve(records)       

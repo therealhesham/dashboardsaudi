@@ -151,7 +151,7 @@ return (
             <tr>
               <TableCell>Full Name</TableCell>
               <TableCell>Phone Number</TableCell>
-              <TableCell>رقم ال CV</TableCell>
+              <TableCell>رقم الطلب</TableCell>
 
               <TableCell>Notes</TableCell>
               <TableCell>Created At</TableCell>
@@ -170,6 +170,14 @@ return (
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
+
+ <TableCell>
+                  <span className="text-md">{i+1}</span>
+
+                  {/* <Badge type={user.status}>{user.status}</Badge> */}
+                </TableCell>
+
+
                 <TableCell>
                   <span className="text-md">
                
