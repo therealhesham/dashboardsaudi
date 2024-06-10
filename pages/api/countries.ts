@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
   const result =  await new Promise((resolve,reject)=>{
 
 
-    base('السير الذاتية').select({
+    base('الدول').select({
       //  fields:{}
         // Selecting the first 3 records in Grid view:
         view: "الاساسي"
@@ -37,7 +37,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
  
 })
-
+console.log(result)
   res.status(200).json(result)
 }
 

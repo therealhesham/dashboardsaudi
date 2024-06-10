@@ -6,24 +6,23 @@ import SidebarSubmenu from './SidebarSubmenu'
 import { Button } from '@roketid/windmill-react-ui'
 import { useRouter } from 'next/router'
 import cookies from "js-cookie";
-
 function Icon({ icon, ...props }: IIcon){
   // @ts-ignore
   const Icon= Icons[icon]
   return <Icon {...props} />
 }
-
 interface ISidebarContent{
   linkClicked: () => void
-}
-
-function SidebarContent({ linkClicked }: ISidebarContent) {
+  }
+  
+  function SidebarContent({ linkClicked }: ISidebarContent) {
+  const router =useRouter()
   const { pathname } = useRouter();
    const appName = "Booking with Rawaes"
 const Signout = ()=>{
 
 cookies.remove("token")
-
+router.reload()
 }
 
 

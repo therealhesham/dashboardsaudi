@@ -16,8 +16,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { ClipLoader } from 'react-spinners'
 import { DeleteOutlined } from '@ant-design/icons'
+import dayjs from 'dayjs'
 function Addadmin() {
-
+// console.log(dayjs(new Date()).get("year"),dayjs(new Date()).get("M")+1,dayjs(new Date()).get("date"))
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [admin, setadmin] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');

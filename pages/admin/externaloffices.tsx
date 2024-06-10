@@ -106,9 +106,9 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     json?setLength(json.length):"";
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
-    json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
+    json?setPaginatedData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
     // setData(json)   
-// const arr=[];
+// const arr=[];e
   // json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
   // setofficelist(arr)
 } 
@@ -124,10 +124,11 @@ names()
 
 }, [])
 
+// patqpqm8yUGAdhSoj.56e6d82c73f5ec39152c7212d8c8a0710856aeb10ba0e268a2bb06a5cf919b06
 return (
     <Layout>
 
-      <PageTitle>ُForeign Offices</PageTitle>
+      <PageTitle>Foreign Offices</PageTitle>
       <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       </div>
 
@@ -148,11 +149,14 @@ return (
               <TableRow key={i}>
                 
                 <TableCell>
-                  <span className="text-md">{e?.fields.Name}</span>
+                  <span className="text-md">{e?.fields["External office - المكتب الخارجي"]}</span>
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-md">{e?.fields.Status}</span>
+                  <span className="text-md">{e?.fields["الدولة"]}</span>
+
+
+                  {/* <span className="text-md">{e?.fields.Status}</span> */}
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
@@ -174,8 +178,8 @@ return (
                   {/* </span> */}
                 </TableCell>
                 <TableCell>
-                 {e.fields["Assignee"] ? <span className="text-md">
-                {e.fields["Assignee"].split(",").map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
+                 {e.fields["السير الذاتية"] ? <span className="text-md">
+                 {e?.fields["السير الذاتية"].map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
                    
                   </span>:""}
                 </TableCell>

@@ -17,7 +17,7 @@ console.log(req.headers.cookie)
 
 
 const createAdmin=await prisma.client.findFirst({where:{email:req.body.email}})
-  
+  console.log("email",createAdmin)
   if(createAdmin?.password != req.body.password) return res.status(301).send("خطأ في الرقم السري");
 //@ts-ignore
 const sign =jwt.sign(createAdmin,"secret");  

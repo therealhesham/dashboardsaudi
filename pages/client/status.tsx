@@ -21,6 +21,7 @@ import {
   Avatar,
   Badge,
   Pagination,
+  Button,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -57,7 +58,6 @@ function Status() {
     Legend
   )
 
-  
   const [officelist,setofficelist]=useState([])
   function datas() {
     
@@ -75,13 +75,13 @@ function Status() {
         backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
         label: 'Dataset 1',
       },
-    ],
+      ],
     labels: officelist.length>0?[...officelist]:0,
   },
   options: {
     responsive: true,
     cutoutPercentage: 80,
-  },
+    },
   legend: {
     display: false,
   },
@@ -105,10 +105,11 @@ function Status() {
 const router = useRouter()
 
 function onPageChange(p: number) {
-    // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
+  // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
-  }
+    }
+  const [users,setUser]=useState("")
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
@@ -119,14 +120,15 @@ try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-  
+  setUser(decoder)
   } catch (error) {
     router.replace("/client/login")
   }
+
     try {
-    async function names( )  {
-     await fetch("../../api/orderlistforclient").then(response => response.json())
-  .then(json  => {
+      async function names( )  {
+        await fetch("../../api/orderlistforclient").then(response => response.json())
+        .then(json  => {
     json?setLength(json.length):"";
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
@@ -141,10 +143,42 @@ names()
 }  
 
 }, [])
-console.log(user)
 return (
-    <Layout>
-<h1 style={{fontSize:"23px"}}> Hello {user.fullname}</h1>
+  
+    <>
+    {users?
+
+<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    <li>
+      <Link href="/client/status">
+      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
+    </li>
+    <li>
+      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>تسجيل الخروج</Button>
+    </li>
+  </ul>
+</nav>
+ :<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    
+    <li>
+      <Button style={{backgroundColor:"dodgerblue"}}>Login</Button>
+    </li>
+  </ul>
+</nav> }
+
+<h1 style={{fontSize:"23px"}}> Welcome {users.fullname}</h1>
       <TableContainer>
         <Table>
           <TableHeader>
@@ -191,12 +225,23 @@ return (
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   </span>
+               
+                </TableCell>
+                
+                <TableCell>
+                  <span className="text-sm">
+                  <span className="text-sm">{e?.fields["External office - المكتب الخارجي"]}</span>
+
+                    
+                    {/* {new Date(user.date).toLocaleDateString()} */}
+                  </span>
+               
                 </TableCell>
                 <TableCell>
 
 
                    <span className="text-sm">
-                  <span className="text-sm">{e?.fields["حالة الحجز"]}</span>
+                  <span className="text-sm">{e?.fields["الحالة"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -217,7 +262,7 @@ return (
           />
         </TableFooter>
       </TableContainer>
-    </Layout>
+    </>
   )
 }
 

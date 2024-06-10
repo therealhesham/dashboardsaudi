@@ -50,7 +50,7 @@ function Forms() {
     <Layout>
       {/* <div style={{display:"inline-flex",alignContent:"center" }} > */}
       {/* <div style={{}}> */}
-      <PageTitle > <div style={{textAlign:"center"}}>اضافة عامل الى قاعدة بيانات روائس القمم</div></PageTitle>
+      <PageTitle > <div style={{textAlign:"center"}}>اضافة سيرة ذاتية الى قاعدة بيانات روائس القمم</div></PageTitle>
       {/* </div> */}
         
       

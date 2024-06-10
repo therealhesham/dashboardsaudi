@@ -23,7 +23,7 @@ try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-  alert(decoder.admin)
+  // alert(decoder.admin)
       if(!decoder.admin)return router.replace("/admin/login");
 // console.log(decoder.idnumber)
   } catch (error) {

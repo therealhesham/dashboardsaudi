@@ -86,6 +86,7 @@ function ClientsList() {
 //     display: false,
 //   },
 // }
+// import "../api/clientslistfrommongo"
 // console.log(officelist)
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
@@ -115,43 +116,19 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
 
   useEffect(() => {
     
-    
-    //@ts-ignore
-//@ts-nocheck
-try {
-
-    const token = Cookies.get("token")
-  const decoder = jwtDecode(token);
-      if(!decoder.admin)return router.replace("/client");
-  
-// console.log(decoder.idnumber)
-  } catch (error) {
-    router.replace("/client")
-  }
-
-
-
 
     try {
     
   
-      async function names( )  {
-     await fetch("../api/clients").then(response => response.json())
+      (async function data( )  {
+     await fetch("../api/clientslistfrommongo")
+     .then(response => response.json())
   .then(json  => {
+console.log(json)
     json?setLength(json.length):"";
-    // console.log('parsed json', json) // access json.body here
     setFulldata(json)
-    json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-    // setData(json)   
-// const arr=[];
-  // json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
-  // setofficelist(arr)
-} 
-  // names();
-
-)
-}
-names()
+    json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");})
+})()
 
 } catch (error) {
   console.log(error)
@@ -160,10 +137,12 @@ names()
 }, [])
 
 return (
-    <Layout>
 
-      <PageTitle>Our Clients</PageTitle>
-      <div className="grid gap-6 mb-8 md:grid-cols-2 ">
+  <Layout>
+  {paginatedData.length>0 ?
+  <>
+   <PageTitle>Our Clients</PageTitle>
+  <div className="grid gap-6 mb-8 md:grid-cols-2 ">
       </div>
 
       <TableContainer>
@@ -171,30 +150,31 @@ return (
           <TableHeader>
             <tr>
               <TableCell>Full Name</TableCell>
-              <TableCell>Assignee</TableCell>
+              <TableCell>Email</TableCell>
               <TableCell>رقم ال CV</TableCell>
+
               <TableCell>Notes</TableCell>
               <TableCell>Created At</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
-            {paginatedData?.map((e, i) => (
+            {paginatedData.map((e, i) => (
               <TableRow key={i}>
                 
                 <TableCell>
-                  <span className="text-md">{e?.fields.Name}</span>
+                  <span className="text-md">{e.fullname}</span>
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-md">{e?.fields.Assignee}</span>
+                  <span className="text-md">{e?.email}</span>
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
                 <TableCell>
                   <span className="text-md">
                
-               <Link href={"./cvdetails/"+e.fields["رقم الCV"]} >
-                  <span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{e?.fields["رقم الCV"]}</span>
+               <Link href={"/admin/cvdetails/"+e.Cvnumber} >
+                  <span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{e.Cvnumber}</span>
 </Link>
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -202,7 +182,7 @@ return (
                 </TableCell>
                 <TableCell>
                   <span className="text-md">
-                  <span className="text-md">{e?.fields.Notes}</span>
+                  <span className="text-md">{e?.Cvnumber}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -211,7 +191,7 @@ return (
                 <TableCell>
                   {/* <Link href={"/admin/officeinfo/"+e?.fields.office}  >                  */}
                   {/* <span className="text-sm"> */}
-                  <span className="text-sm">{e?.fields.Created}</span>
+                  <span className="text-sm">{e?.Created?e?.Created:""}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -232,10 +212,10 @@ return (
             onChange={onPageChange}
           />
         </TableFooter>
-      </TableContainer>
-
-                
+      </TableContainer></>:""}
     </Layout>
+
+     
   )
 }
 

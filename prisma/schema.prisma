@@ -13,16 +13,26 @@ datasource db {
  
   url      = "mongodb+srv://heshammoha231992:BozLnMORjollMgoC@cluster0.ewjihyo.mongodb.net/rawaesdashboard"
 }
+model Office{
 
+ id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  Officename        String  @unique
+  Location           String    
+  phonenumber     String
+ 
+
+
+}
 
 model Client{
+
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   fullname        String
   email           String    @unique
   phonenumber     String
   Cvnumber        String    
   password        String
-
+  createdat       DateTime? @default(now())
   
 }
 model User {
@@ -53,7 +63,7 @@ contractstatus         String
 city                   String
 orderDate           DateTime  
 
-dayDate             DateTime @default(now())
+dayDate             DateTime 
 canceled            Boolean @default(false)
 ended               Boolean @default(false)
 
@@ -109,7 +119,7 @@ nationalidnumber              String
 contacntnumber                String
 passportnumber                String
 kingdomentrydate              String
-daydate                       Int
+daydate                       DateTime @default(now())
 workduration                  String
 cost                          String
 homemaidnumber                String

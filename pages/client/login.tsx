@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import cookies from "js-cookie";
+// import "../api/c"
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
 import { GithubIcon, TwitterIcon} from 'icons'
 import { useRouter } from 'next/router'
@@ -29,7 +30,7 @@ function LoginPage() {
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch('../../api /clientsignin',{method:"POST",headers: {
+await fetch('../api/clientsignin',{method:"POST",headers: {
 'Accept': 'application/json',
 "Content-Type": "application/json",
 

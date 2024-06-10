@@ -45,6 +45,8 @@ import Cookies from 'js-cookie'
 import { useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link'
+import { jwtDecode } from 'jwt-decode'
 const options: Options = {
   filename: "advanced-example.pdf",
   method: "save",
@@ -144,7 +146,7 @@ else{errorfunc()
 }
 }
 // // console.log(data)
-
+const [user,setUser] = useState({})
 
 // const response2 = response.concat([]);
 //   // yupResolver
@@ -153,7 +155,14 @@ const Schema =yup.object({ id:yup.string(),email:yup.string() , phonenumber:yup.
   const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
   useEffect(() => {
-
+try {
+ const token =  Cookies.get("token")
+ const decoder = jwtDecode(token)
+ setUser(decoder)
+} catch (error) {
+  // console.log(error)
+  setUser(null)
+}  
   (async function name() {
      await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
      .then(json  => {
@@ -168,9 +177,43 @@ setData(json)
 
 }, [])
 
-
+// console.log(user)
 return (   
-<Layout>
+<>
+{user?
+
+<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    <li>
+      <Link href="/client/status">
+      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
+    </li>
+    <li>
+      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>تسجيل الخروج</Button>
+    </li>
+  </ul>
+</nav>
+ :<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    
+    <li>
+        <Button style={{backgroundColor:"dodgerblue"}} onClick={()=>router.replace("/client/login")}>Login</Button>
+
+    </li>
+  </ul>
+</nav> }
+  
+  
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
         <ModalHeader color='pink' style={{color:"red"}}>Error Inserting Data</ModalHeader>
         <ModalBody>
@@ -225,7 +268,7 @@ return (
   <span>البريد الالكتروني </span>
   
           <Input className="mt-1" placeholder="Email" type='text' {...register("email",{required:true})}/>
-{errorEmail?<span style={{color:"red"}}>البريد الالكتروني مسجل في قاعدة البيانات</span>:""}
+{errorEmail?<span style={{color:"red"}}>البريد الالكتروني مسجل في قاعدة البيانات لستجيل الدخول اضغط <Link href="/client/login" ><span style={{color:"black",cursor:"pointer"}}>هنا</span></Link></span>:""}
         </Label>
   
   <Label className="mt-4">
@@ -286,6 +329,6 @@ return (
 <Button  type='submit' >  حجز</Button>        </div>
         </form>:""}
   </>}
-          </Layout>
+          </>
 
 )}

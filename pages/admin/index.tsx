@@ -95,7 +95,7 @@ function Dashboard() {
   // pagination setup
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
-  const totalResults = fulldata.length
+  const totalResults = fulldata.length;
   const user =useContext(User)
 // setTimeout(() =
 // pagination change control
@@ -103,17 +103,37 @@ function Dashboard() {
   // console.log(time)
   const [listType,setTypeList] = useState("workers")
 const router = useRouter()
-
+const [list,setList]=useState([]);
 function onPageChange(p: number) {
+  // console.log(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
   }
   // on page change, load new sliced data
   // here you would make another server request for new data
-  useEffect(() => {
-        
-try {
+
+
+
+
+function FindNatioinality(namenation) {
+console.log(namenation)
+
+
+
+const filtering = list.find(e=> e.id == namenation)
+// console.log("filtering",filtering)
+console.log(filtering)
+return filtering?.fields["الدولة"];
+
+  
+}
+// console.log(list[3])
+
+
+useEffect(() => {
+  
+  try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
@@ -123,12 +143,25 @@ try {
     router.replace("/admin/login")
   }
     try {
-    async function names( )  {
+
+      (async function Nation(){
+        const fetcher =  await fetch("./api/nationslist");
+        const f = await fetcher.json()
+        setList(f)
+
+
+
+
+
+})()
+
+
+      async function names( )  {
     const fetcher =  await fetch("./api/hello");
     const f = await fetcher.json()
 
   .then(json  => {
- console.log(json)
+//  console.log(json)
 //  if ()
   json?setLength(json.length):"";
 
@@ -140,7 +173,7 @@ console.log(new Date().getSeconds())
 const arr=[];
   json?.length>0?json.map(e=>{if(!arr.includes(e.fields["External office - المكتب الخارجي"])) arr.push(e.fields["External office - المكتب الخارجي"])}):console.log(json.length)
   setofficelist(arr)
-} 
+  } 
   // names();
 
 )
@@ -152,26 +185,12 @@ names()
 }  
 
 }, [])
-console.log(user)
 return (
     <Layout>
       {/* {alert(user.username)} */}
 <h1 style={{fontSize:"23px"}}> Hello {user.name}</h1>
-      {/* <PageTitle>Charts</PageTitle>
-      <div className="grid gap-6 mb-8 md:grid-cols-2 ">
-      {/* <div  style={{scale:"40%"}}> */}
-        {/* <ChartCard title="معلومات عن العمالة" >  */}
-          {/* <Pie {...doughnutOptions} /> */}
-          {/* <ChartLegend legends={doughnutLegends} /> */}
-        {/* </ChartCard> */}
-        {/* <ChartCard title="المكاتب الاكثر ادراجا للعمالة"> */}
-          {/* <Line {...lineOptions} /> */}
-          {/* <ChartLegend legends={lineLegends} /> */}
-        {/* </ChartCard> */} 
-      {/* </div> */}
       <PageTitle>Dashboard</PageTitle>
 
-      {/* <CTA /> */}
 
       {/* <!-- Cards --> */}
       <div className="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -229,14 +248,15 @@ return (
               {listType =="workers"?<TableCell>اسم العامل</TableCell>:<TableCell>اسماء المكاتب</TableCell>}
               {listType =="workers"?<TableCell>العمر</TableCell>: null}
               {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
-              {listType =="workers"?<TableCell>الجنسيات</TableCell>:null}
-              {listType =="workers"?<TableCell>المكتب</TableCell>:null}
+              {listType =="workers"?<TableCell>المكاتب</TableCell>:null}
+              {listType =="workers"?<TableCell>Religion</TableCell>:null}
             </tr>
           </TableHeader>
           <TableBody>
             {paginatedData?.map((e, i) => (
               <TableRow key={i}>
                 <TableCell>
+                
                   <div className="flex items-center text-sm" style={{width:"200px"}}>
                     <Avatar
                       className="hidden mr-3 md:block"
@@ -262,21 +282,21 @@ return (
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                  <span className="text-sm">{e?.fields["Nationality - الجنسية"]}</span>
+                  <span className="text-sm">{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0] }</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Link href={"/admin/officeinfo/"+e?.fields["External office - المكتب الخارجي"]}  >                 
+                  {/* <Link href={"/admin/officeinfo/"+e?.fields["External office - المكتب الخارجي"]}  >                  */}
                   {/* <span className="text-sm"> */}
-                  <span className="text-sm">{e?.fields["External office - المكتب الخارجي"]}</span>
+                  <span className="text-sm">{e?.fields["Religion - الديانة"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   {/* </span> */}
-                </Link>
+                {/* </Link> */}
                 </TableCell>
 
               </TableRow>
@@ -308,3 +328,4 @@ return (
 }
 
 export default Dashboard
+

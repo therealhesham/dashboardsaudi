@@ -1,5 +1,5 @@
 // @ts-nocheck 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Doughnut, Line } from 'react-chartjs-2'
 import Style from "styles/Home.module.css"
 import CTA from 'office/components/CTA'
@@ -10,6 +10,7 @@ import PageTitle from 'office/components/Typography/PageTitle'
 import RoundIcon from 'office/components/RoundIcon'
 import Layout from 'office/containers/Layout'
 import country from "./countries.json"
+
 // import "../api/cv/[pid]"
 // import "./cvdetails"
 // import "../client"
@@ -32,6 +33,7 @@ import {
   CardBody,
   Label,
   Select,
+  Button,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -55,9 +57,12 @@ import {
 import { apiBaseUrl } from 'next-auth/client/_utils'
 import image from 'next/image'
 import { includeKeys } from 'filter-obj'
-import { FileOutlined, PlusOutlined } from '@ant-design/icons'
+import { FileOutlined, LogoutOutlined, PlusOutlined } from '@ant-design/icons'
 import link from 'next/link'
 import Link from 'next/dist/client/link'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
+import { useRouter } from 'next/router'
 
 function Dashboard({repos}) {
   Chart.register(
@@ -94,12 +99,18 @@ const [religion,setReligon]=useState("الكل")
 const [nationality,setNationality]=useState("الكل")
 const [age,setAge]=useState(0);
   const [previousNationality,setPreviousNationality]=useState("");
-
 const [previousreligion,setPreviousreligion]=useState("");
-
+const [user,setUser]=useState("")
+const router=useRouter()
 useEffect(()=>{
+try {
+ const token =  Cookies.get("token")
+ const decoder = jwtDecode(token)
+ setUser(decoder)
+} catch (error) {
+  console.log(error)
+}  
   setData(repos)
-
   function Deepsearch(){
   if (religion == "الكل" && nationality != "الكل"){
 
@@ -171,9 +182,43 @@ setArrayReligion(secarray)
 // }
 
 },[religion,nationality])
-
+// LogoutOutlined
 return (
 <div>
+  {user?
+
+<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    <li>
+      <Link href="/client/status">
+      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
+    </li>
+    <li>
+      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>تسجيل الخروج</Button>
+    </li>
+  </ul>
+</nav>
+ :<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
+  </a>
+  <ul className="flex space-x-4">
+    
+    <li>
+      <Button style={{backgroundColor:"dodgerblue"}} onClick={()=>router.replace("/client/login")}>Login</Button>
+    </li>
+  </ul>
+</nav> }
+  
+  
+  
 {/* <Layout> */}
 <div>
 <div style={{width:"250px"}}>

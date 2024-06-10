@@ -15,6 +15,7 @@ import { ClipLoader } from 'react-spinners'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
+import dayjs from 'dayjs'
 // Cookies
 // jwtDecode
 // useRouter
@@ -52,7 +53,7 @@ nationalidnumber:yup.string().required(),
 contacntnumber:yup.string().required(),
 passportnumber:yup.string(),
 kingdomentrydate:yup.string(),
-daydate:yup.number(),
+daydate:yup.date(),
 workduration:yup.string(),
 cost:yup.string(),
 homemaidnumber:yup.string(),
@@ -108,7 +109,6 @@ if(fetcher.status == 200) return truefunc();
 errorfunc()
 
 }
-
 // console.log(errors)
   return (
 
@@ -146,32 +146,32 @@ errorfunc()
 {fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
 </div>
 : <form onSubmit={handleSubmit(onSubmit)}>
-      <PageTitle>اضافة عمالة ذكور</PageTitle>
+      <PageTitle>اضافة الى قائمة الانتظار</PageTitle>
        <div dir='rtl' style={{display:"grid",gridTemplateColumns: "auto auto auto",gap:"19px"}} className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <Label>
           <span>اسم العميل</span>
-          <Input aria-invalid={errors.clientname ? "true" : "false"} {...register("clientname", { required: true })} className="mt-1" placeholder="اسم العميل"  type='text' onChange={(e=>setOffice(e.target.value))}/>
+          <Input aria-invalid={errors.clientname ? "true" : "false"} {...register("clientname", { required: true })} className="mt-1" placeholder="اسم العميل"  type='text' />
         {errors.clientname?<span style={{backgroundColor:"pink"}}>{errors.clientname.message}</span>:""}
         
         </Label>
         <Label>
 
           <span>Client Name in English</span>
-          <Input   aria-invalid={errors.internalmusanedContract ? "true" : "false"} {...register("clientnameinenglishlanguage", { required: true })}    className="mt-1" placeholder="التأمين"  type='text' onChange={(e=>setOffice(e.target.value))}/>
+          <Input   aria-invalid={errors.internalmusanedContract ? "true" : "false"} {...register("clientnameinenglishlanguage", { required: true })}    className="mt-1" placeholder="التأمين"  type='text' />
         {errors.clientnameinenglishlanguage?<span style={{backgroundColor:"pink"}}>{errors.clientnameinenglishlanguage.message}</span>:""}
         
         </Label>
         <Label>
           
           <span>عقد مساند داخلي</span>
-          <Input   aria-invalid={errors.internalmusanedContract ? "true" : "false"} {...register("clientnameinenglishlanguage", { required: true })}    className="mt-1" placeholder="التأمين"  type='text' onChange={(e=>setOffice(e.target.value))}/>
+          <Input   aria-invalid={errors.internalmusanedContract ? "true" : "false"} {...register("internalmusanedContract", { required: true })}    className="mt-1" placeholder="عقد مساند الداخلي"  type='text' />
         {errors.internalmusanedContract?<span style={{backgroundColor:"pink"}}>{errors.internalmusanedContract.message}</span>:""}
         
         </Label>
         <Label>
 
           <span>رقم الهوية</span>
-          <Input className="mt-1" aria-invalid={errors.nationalidnumber ? "true" : "false"} {...register("nationalidnumber", { required: true })}  placeholder="عقد مساند" type='text'/>
+          <Input className="mt-1" aria-invalid={errors.nationalidnumber ? "true" : "false"} {...register("nationalidnumber", { required: true })}  placeholder="رقم الهوية" type='text'/>
         {errors.nationalidnumber?<span style={{backgroundColor:"pink"}}>{errors.nationalidnumber.message}</span>:""}
       
         
@@ -201,23 +201,6 @@ errorfunc()
 
 
 
-
-<Label className="mt-4">
-          <span>تاريخ دخول المملكة</span>
-          <Input aria-invalid={errors.kingdomentrydate ? "true" : "false"} {...register("kingdomentrydate", { required: true })} className="mt-1" placeholder="رقم التأشيرة" />
-        {errors.kingdomentrydate?<span style={{backgroundColor:"pink"}}>{errors.kingdomentrydate.message}</span>:""}
-       
-        </Label>
-
-
-
-
-<Label className="mt-4">
-          <span>تاريخ اليوم</span>
-          <Input aria-invalid={errors.daydate ? "true" : "false"} {...register("daydate", { required: true })} className="mt-1" placeholder="رقم التأشيرة" />
-        {errors.daydate?<span style={{backgroundColor:"pink"}}>{errors.daydate.message}</span>:""}
-       
-        </Label>
 
 
 
