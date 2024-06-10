@@ -121,7 +121,7 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     
   
       (async function data( )  {
-     await fetch("../api/clientslistfrommongo")
+     await fetch("../api/clients")
      .then(response => response.json())
   .then(json  => {
 console.log(json)
@@ -150,7 +150,7 @@ return (
           <TableHeader>
             <tr>
               <TableCell>Full Name</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Phone Number</TableCell>
               <TableCell>رقم ال CV</TableCell>
 
               <TableCell>Notes</TableCell>
@@ -162,11 +162,11 @@ return (
               <TableRow key={i}>
                 
                 <TableCell>
-                  <span className="text-md">{e.fullname}</span>
+                  <span className="text-md">{e.fields["اسم العميل"]}</span>
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-md">{e?.email}</span>
+                  <span className="text-md">{e.fields["رقم العميل"]}</span>
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
