@@ -32,7 +32,7 @@ const [nationality,setNationality]=useState("الكل")
 const [age,setAge]=useState(0);
   const [previousNationality,setPreviousNationality]=useState("");
 const [previousreligion,setPreviousreligion]=useState("");
-const [user,setUser]=useState({})
+const [user,setUser]=useState(null)
 const router=useRouter()
 useEffect(()=>{
 try {
@@ -220,7 +220,7 @@ router.reload()
     <div className="card-actions justify-end  pointer">
 <div style={{display:"inline-flex"}}>
 <div style={{display:"inline-flex",cursor:"pointer",}}> 
-  <Link href={"../client/book/"+e.fields["Name - الاسم"]} >
+  <Link href={"../client/book/"+e.fields["م"]} >
 
  <span style={{backgroundColor:"dodgerblue",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 </Link>
@@ -230,7 +230,7 @@ router.reload()
 
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
-  <Link href={"../client/cvdetails/"+e.fields["Name - الاسم"]} >
+  <Link href={"../client/cvdetails/"+e.fields["م"]} >
  <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>السيرة الذاتية</span>
 
 </Link>
