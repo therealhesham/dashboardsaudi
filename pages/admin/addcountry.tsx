@@ -19,6 +19,9 @@ import { DeleteOutlined } from '@ant-design/icons'
 function Addadmin() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  
+
+
   const [admin, setadmin] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [pictureurl, setpictureurl] = useState<string>('');

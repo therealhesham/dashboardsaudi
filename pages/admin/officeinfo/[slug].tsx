@@ -28,6 +28,7 @@ import { ClipLoader, ClockLoader } from 'react-spinners'
 import { usePDF } from 'react-to-pdf'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
+import Link from 'next/dist/client/link'
 
 
 export default function Page() {
@@ -60,10 +61,6 @@ export default function Page() {
 //@ts-ignore
 // ClockLoader
 
-// alert(router.query)
-// console.log(router.query.slug)
-// if(data.length>0)return <ClockLoader color="#003749" />;
-// ClipLoader
 return (   <Layout>
       {/* <PageTitle>Tables</PageTitle> */}
 
@@ -76,25 +73,28 @@ return (   <Layout>
           <TableHeader>
             <tr>
               <TableCell>العامل</TableCell>
-              <TableCell>العمر</TableCell>
+              <TableCell>السير الذاتية</TableCell>
               <TableCell>الجنسية</TableCell>
               <TableCell>الحالة الاجتماعية</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
-            {data?.map((user, i) => (
-              <TableRow key={i}>
+            {data?.map((user) => (
+              <TableRow >
                 <TableCell>
                   <div className="flex items-center text-sm">
                     <Avatar className="hidden mr-3 md:block" src={user?.fields["العلم"][0].url} alt="User avatar" />
                     <div>
-                      <p className="font-semibold">{user?.fields.fname}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">{user?.fields.age}</p>
+                  <span className="text-sm"> {user.fields["الدولة copy"]}</span>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm"> {user.fields["الدولة copy"]}</span>
+                      {user?.fields["السير الذاتية copy"]?<p className="font-semibold">{user?.fields["السير الذاتية copy"].split(",").map(e=>
+                        <Link href={"/client/cvdetails/"+e}>
+                        <span>{e}</span>
+                        </Link>
+                        )}</p>:""}
                 </TableCell>
                
                 {/* <TableCell>

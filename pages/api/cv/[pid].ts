@@ -28,8 +28,9 @@ const arr=[];
 }).eachPage(function page(records, fetchNextPage) {
     // This function (`page`) will get called for each page of records.
 
+
     records.forEach(function(record) {
-      console.log(req.query.pid)
+      // console.log(req.query.pid)
       if(req.query.pid == record.get("م") ) arr.push(record);
       
     });
@@ -43,8 +44,9 @@ const arr=[];
     if (err) { console.error(err); return; }
 });
 })
-
-  res.json(result)
+// console.log(arr)
+      //@ts-ignore 
+  res.status(200).json(arr)
 }
 
   // export base;

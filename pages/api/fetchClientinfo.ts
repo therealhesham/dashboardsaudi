@@ -15,42 +15,34 @@ type Data = {
 const prisma =new PrismaClient()
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 // sendSuggestion()
-try {
-
-  const resultone =  await new Promise((resolve,reject)=>{
-const create = base('العملاء').create([
-  {
-    "fields": {
-      "رقم العميل": req.body.phonenumber,
-      "اسم العميل": req.body.fullname,
-      "مصدر العميل": [
-        req.body.source
-
-      ]
-    }
-  }])
- resolve(create)
-
-   
-  })
-
+try{
+  //@ts-ignore
+const arr =[];
   const result =  await new Promise((resolve,reject)=>{
-const update = base('السيرة الذاتية').update([
-  {
-    "id": req.body.id,
-    "fields": {
-      "العملاء":req.body.fullname,
-      "حالة الحجز":"محجوز"
-    }}])
+const update = base('السير الذاتية').select({
+    // Selecting the first 3 records in الاساسي:
+    view: "الاساسي"
+}).eachPage(function page(records, fetchNextPage) {
+    // This function (`page`) will get called for each page of records.
 
-   resolve(update)
+    records.forEach(function(record) {
+       //@ts-ignore
+      if(record.get("م") == req.body.fullname) arr.push(record)
+      // console.log('Retrieved', record.get('م'));
+    });
 
- 
 
-   
-  })
-  res.status(200).json("sign")  
-} catch (error) {
+}, function done(err) {
+    if (err) { console.error(err); return; }
+})
+    // Cookies.set("token",sign);
+    // console.log(Cookies.get("token"))
+
+// console.log(result)
+  //@ts-ignore
+
+  res.status(200).json(arr)  
+})} catch (error) {
   console.log(error)
   res.status(302).json({error:"connectivity error"})  
 

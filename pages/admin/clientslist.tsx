@@ -22,6 +22,10 @@ import {
   Avatar,
   Badge,
   Pagination,
+  Modal,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -70,13 +74,13 @@ const router = useRouter()
 
 
 function onPageChange(p: number) {
-setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
+  setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   }
-
-
+  
+  
+  const [isModalOpen, setIsModalOpen] = useState(false)
   useEffect(() => {
     
-
     try {
     
   
@@ -95,11 +99,55 @@ console.log(json)
 }  
 
 }, [])
+    function openModal() {
+    setIsModalOpen(true)
+  }
+  function closeModal() {
+    setIsModalOpen(false)
+  }
 
-return (
+// const [fullname,setFullname]=useState("")
+const [clientlistOrders,setClientOrderslist]= useState([])
+const fetchClientinfo=async (fullname)=>{
+
+  const fetcher = await fetch('../api/fetchClientinfo',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify({fullname})})
+
+      const e= await fetcher.json()
+      
+      // console.log(fetcher.status)
+console.log(e)
+setClientOrderslist(e)
+openModal()
+
+
+    }
+    
+ 
+    return (
 
   <Layout>
-  {paginatedData.length>0 ?
+    {clientlistOrders.length>0?
+<>
+       <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalHeader>Data Inserted Successfully</ModalHeader>
+        <ModalBody>
+          السير الذاتية الخاصة بالعميل {clientlistOrders[0].fields["العملاء"]}
+{clientlistOrders.map(e=>e.fields["م"])}
+للاطلاع عليها اضغط هنا او قم بزيارة قاعدة البيانات الخاصة بالشركة 
+
+
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
+            Close
+          </Button>
+         
+        </ModalFooter>
+      </Modal>
+</>:""}
+
   <>
    <PageTitle>Our Clients</PageTitle>
   <div className="grid gap-6 mb-8 md:grid-cols-2 ">
@@ -119,12 +167,16 @@ return (
           </TableHeader>
           <TableBody>
             {paginatedData.map((e, i) => (
-              <TableRow key={i}>
+              <TableRow >
                 
-                <TableCell>
+{/* <Li */}
+                <TableCell onClick={()=>fetchClientinfo(e.fields["اسم العميل"])}>
                   <span className="text-md">{e.fields["اسم العميل"]}</span>
 
                 </TableCell>
+      
+      {/* </Link> */}
+
                 <TableCell>
                   <span className="text-md">{e.fields["رقم العميل"]}</span>
 
@@ -180,7 +232,7 @@ return (
             onChange={onPageChange}
           />
         </TableFooter>
-      </TableContainer></>:""}
+      </TableContainer></>
     </Layout>
 
      

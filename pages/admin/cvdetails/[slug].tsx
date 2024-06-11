@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from "next/router"
-
+// import "../../"
 import PageTitle from 'example/components/Typography/PageTitle'
 import SectionTitle from 'example/components/Typography/SectionTitle'
 import CTA from 'example/components/CTA'
@@ -22,8 +22,6 @@ import {
   Input,
   Label,
 } from '@roketid/windmill-react-ui'
-// Cookies
-// jwtDecode
 import { EditIcon, TrashIcon } from 'icons'
 import { useReactToPrint } from "react-to-print";
 import response, { ITableData } from 'utils/demo/tableData'
@@ -33,7 +31,7 @@ import Header from 'example/components/Header'
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { PrinterFilled } from '@ant-design/icons'
 import Cookies from 'js-cookie'
-import { jwtDecode } from 'jwt-decode'
+// import "../../api/admin"
 const options: Options = {
   filename: "advanced-example.pdf",
   method: "save",
@@ -74,32 +72,28 @@ const options: Options = {
 // import { usePDF } from 'react-to-pdf'
 // uses
 // usePDF
+
 const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
-  console.log(router.query.slug)
+  // console.log(router.query.slug)
   const [data,setData]=useState([]);
   useEffect(() => {
-    try{
+//     try{
 
-const token = Cookies.get("token")
-// alert(token) 
-const decoder = jwtDecode(token);
-  console.log(decoder)
+// const token = Cookies.get("token")
+//   const decoder = jwtDecode(token);
+  
 // console.log(decoder.idnumber)
-  } catch (error) {
-    router.replace("/login")
-  }
+//   } catch (error) {
+//     router.replace("/login")
+//   }
 
 
   (async function name() {
      await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
      .then(json  => {
-   setData(json)
-  } 
-  // names();
-  
-)
+setData(json)})
   })()
     
 
@@ -117,7 +111,9 @@ const downloadPdf = () => generatePDF(getTargetElement, options);
 // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 // Label
 
-return (   <Layout>
+return (   
+
+<Layout>
 
 {data.length>0? <div  id='cv' ref={componentRef}> <header>
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
