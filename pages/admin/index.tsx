@@ -144,10 +144,10 @@ useEffect(() => {
   }
     try {
 
-      (async function Nation(){
-        const fetcher =  await fetch("./api/nationslist");
+      (async function External(){
+        const fetcher =  await fetch("./api/externaloffices");
         const f = await fetcher.json()
-        setList(f)
+        setofficelist(f)
 
 
 
@@ -170,9 +170,7 @@ useEffect(() => {
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
 console.log(new Date().getSeconds())
     // setData(json)   
-const arr=[];
-  json?.length>0?json.map(e=>{if(!arr.includes(e.fields["External office - المكتب الخارجي"])) arr.push(e.fields["External office - المكتب الخارجي"])}):console.log(json.length)
-  setofficelist(arr)
+
   } 
   // names();
 
@@ -318,7 +316,7 @@ return (
 <TableBody>
 <ul >
 {officelist.map((e, i) => (
-                <li style={{height:"150px"}} key={i}>{e}</li>
+                <li  style={{height:"150px"}} key={i}>{e?.fields["External office - المكتب الخارجي"]}</li>
      
               ))
 }          </ul>

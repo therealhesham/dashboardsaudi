@@ -5,8 +5,10 @@ import Airtable ,{Table} from "airtable";
 import { Console } from "console";
 import { jwtDecode } from "jwt-decode";
 import jwt from "jsonwebtoken"
+
 import type { NextApiRequest, NextApiResponse } from 'next'
-var base = new Airtable({apiKey: 'patxcurNRUmoDr1fJ.38e74d9cb6cdbe1c4c46d457f3d9b4514cddb6af8fb09e0e3446ffb9da9dbdff'}).base('appkSvToN2W2ScgdW');
+var base = new Airtable({apiKey: 'patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d'}).base('app1mph1VMncBBJid');
+
 type Data = {
   name: string
 }
@@ -20,11 +22,11 @@ const arr=[];
   const result =  await new Promise((resolve,reject)=>{
       //@ts-ignore 
 
-    base('كل البيانات').select({
+    base('المكاتب الخارجية').select({
       //@ts-ignore
       // fields:["office"],
         // Selecting the first 3 records in Grid view:
-        view: "Grid view"
+        view: "الاساسي"
     }).eachPage(function page(records, fetchNextPage) {
         // This function (`page`) will get called for each page of records.
         records.forEach(function(record,s) {
@@ -32,7 +34,7 @@ const arr=[];
             // console.log('Retrieved', record.get("office"));
     // console.log(req.query.pid == record.get("office"))
     //@ts-ignore
-    if(req.query.pid == record.get("office") ) arr.push(record);
+    if(req.query.pid == record.get("External office") ) arr.push(record);
           });
       //@ts-ignore 
     // console.log(arr)

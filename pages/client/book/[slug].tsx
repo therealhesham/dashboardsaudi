@@ -309,7 +309,7 @@ router.reload()
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0].fields["Nationality - الجنسية"]} />
+          <Input className="mt-1" value={data[0].fields["Nationality copy"]} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
@@ -402,7 +402,7 @@ router.reload()
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0]?data[0].fields["Nationality - الجنسية"]:""} />
+          <Input className="mt-1" value={data[0]?data[0].fields["Nationality copy"]:""} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>

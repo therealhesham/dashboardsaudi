@@ -147,23 +147,20 @@ return (
               <TableRow key={i}>
                 
                 <TableCell>
-                  <span className="text-md">{e?.fields.Name}</span>
+                  <span className="text-md">{e?.fields["اسم الموظف"]}</span>
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-md">{e?.fields.Status}</span>
+                  <span className="text-md">{e?.fields["ايميل"]}</span>
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
-                <TableCell>
-                  <span className="text-md">
-               
-               <a href={e?.fields["رابط الدخول"]}>تحميل السيرة الذاتية</a>
-                  {/* <span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}></span> */}
-                    
-                    {/* {new Date(user.date).toLocaleDateString()} */}
-                  </span>
+                  <TableCell>
+                  <span className="text-md">{e?.fields["رابط الدخول"]}</span>
+
+                  {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
+                
                 <TableCell>
                   <span className="text-md">
                   <span className="text-md">{e?.fields["الطلبات"]}</span>

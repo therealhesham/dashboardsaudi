@@ -6,7 +6,8 @@ import { Console } from "console";
 import Cookies from "js-cookie";
 import jwt from "jwt-decode";
 import type { NextApiRequest, NextApiResponse } from 'next'
-var base = new Airtable({apiKey: 'patXrez1aIa2i3whF.410e92b1b07ab85712cd0722ad462964185aecd969949bde6e36295f7a2e8fc2'}).base('appUGFHsf0FQduyTw');
+var base = new Airtable({apiKey: 'patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d'}).base('app1mph1VMncBBJid');
+
 type Data = {
   name: string
 }
@@ -20,9 +21,7 @@ const result =  await new Promise((resolve,reject)=>{
 
 
 
-base('الموظفين').select({
-    // Selecting the first 3 records in Grid view:
-    maxRecords: 3,
+base('موظفي المكتب').select({
     view: "Grid view"
 }).eachPage(function page(records, fetchNextPage) {
     // This function (`page`) will get called for each page of records.
