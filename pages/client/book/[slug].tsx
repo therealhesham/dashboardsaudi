@@ -31,6 +31,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Select,
 } from '@roketid/windmill-react-ui';
 // yupResolver
 import { EditIcon, TrashIcon } from 'icons'
@@ -129,6 +130,24 @@ setFetching(false)
 setErrorEmail(true)
 }
 //@ts-ignore
+const onSubmitNewclient = async (sata) => {
+setFetching(true)
+  const fetcher = await fetch('../../api/orderforexistingclient',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name+""})})
+
+      const e= await fetcher.text()
+      
+      // console.log(fetcher.status)
+if(fetcher.status == 200) {
+  Cookies.set("token",e)
+    truefunc();}
+else if (fetcher.status == 301 ) return erroremailfunc();
+else{errorfunc()
+  }
+  }
+
+//@ts-ignore
 const onSubmit = async (sata) => {
 setFetching(true)
   const fetcher = await fetch('../../api/newclient',{method:"post",headers: {'Accept':'application/json',
@@ -143,14 +162,13 @@ if(fetcher.status == 200) {
     truefunc();}
 else if (fetcher.status == 301 ) return erroremailfunc();
 else{errorfunc()
-}
-}
-// // console.log(data)
-const [user,setUser] = useState({})
+  }
+  }
+  // // console.log(data)
+  const [user,setUser] = useState({})
+  const [list,setSourceList] = useState([]);
 
-// const response2 = response.concat([]);
-//   // yupResolver
-const Schema =yup.object({ id:yup.string(),email:yup.string() , phonenumber:yup.string(),password:yup.string(),fullname:yup.string().typeError("الرجاء كتابة الاسم ثلاثي")
+const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),email:yup.string().notRequired() , phonenumber:yup.string(),password:yup.string().notRequired(),fullname:yup.string().typeError("الرجاء كتابة الاسم ثلاثي")
 })
   const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
@@ -162,29 +180,44 @@ try {
 } catch (error) {
   // console.log(error)
   setUser(null)
-}  
-  (async function name() {
-     await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
-     .then(json  => {
-      console.log(json)
-setData(json)
-  } 
-  
-)
-  })()
+} 
+
+
+
+
+try {
+  name()
+} catch (error) {
+  console.log(error)
+}
     
 
 
 }, [])
 
-// console.log(user)
+  async function name() {
+     await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
+     .then(json  => {
+      // console.log(json)
+setData(json)
+  } 
+  
+)
+ const fetcher = await fetch(`../../api/sourcelist`);
+ const f = fetcher.json()
+     .then(json  => {
+setSourceList(json)
+  } 
+  
+)
+  }
+console.log(list)
 return (   
 <>
-{user?
+{user.user?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
   <a className="text-gray-700 dark:text-gray-400" href="#">
-    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
   </a>
   <ul className="flex space-x-4">
     <li>
@@ -247,9 +280,67 @@ router.reload()
 {fetching?
 <div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
 </div>
-:<>{data.length > 0?  
+:<>{user.user & data.length>0?  
   
-<form onSubmit={handleSubmit(onSubmit)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
+<form onSubmit={handleSubmit(onSubmitNewclient)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
+  <Label className="mt-4">
+  
+
+  
+  <span>اسم العميل</span>
+
+          <Input className="mt-1" placeholder="Full Name" type='text' {...register("fullname",{required:true})}/>
+            {errors.fullname?<span>{errors.fullname.message}</span>:""}
+          {/* <h1 className="mt-1"  >{data[0].fields["Name - الاسم"]}</h1> */}
+        </Label>
+
+
+
+
+
+  <Label className="mt-4">
+  
+  
+  
+  <span>الاسم</span>
+          <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />
+
+        </Label>
+
+<Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
+          <span>الجنسية</span>
+          <Input className="mt-1" value={data[0].fields["Nationality - الجنسية"]} />
+        </Label>
+<Label className="mt-4">
+          <span>تاريخ الميلاد</span>
+          <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />
+        </Label>
+<Label className="mt-4">
+          <span>العمر</span>
+          <Input className="mt-1" value={data[0].fields["age - العمر"]} />
+        </Label>
+<Label className="mt-4">
+          <span>الديانة</span>
+               <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />
+        </Label>
+<Label className="mt-4">
+          <span>كيف تعرفت علينا</span>
+
+<Select >
+  {list.map(e=><option>{e?.fields["المصدر"]}</option>
+)}
+
+</Select>
+
+        </Label>
+
+
+
+
+        <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
+<Button  type='submit' >  حجز</Button>        </div>
+        </form>:<>
+  <form onSubmit={handleSubmit(onSubmit)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
   <Label className="mt-4">
   
 
@@ -305,29 +396,44 @@ router.reload()
   
   
   <span>الاسم</span>
-          <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />
+          <Input className="mt-1" value={data[0]?data[0].fields["Name - الاسم"]:""} />
 
         </Label>
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0].fields["Nationality - الجنسية"]} />
+          <Input className="mt-1" value={data[0]?data[0].fields["Nationality - الجنسية"]:""} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
-          <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />
+          <Input className="mt-1" value={data[0]?data[0].fields["date of birth - تاريخ الميلاد"]:""} />
         </Label>
 <Label className="mt-4">
           <span>العمر</span>
-          <Input className="mt-1" value={data[0].fields["age - العمر"]} />
+          <Input className="mt-1" value={data[0]?data[0].fields["age - العمر"]:""} />
         </Label>
 <Label className="mt-4">
           <span>الديانة</span>
-               <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />
+               <Input className="mt-1" value={data[0]?data[0].fields["Religion - الديانة"]:""} />
         </Label>
+<Label className="mt-4">
+          <span>كيف تعرفت علينا</span>
+
+<Select>
+  {list.map(e=><option>{e?.fields["المصدر"]}</option>
+)}
+
+</Select>
+
+        </Label>
+
+
+
+
         <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
 <Button  type='submit' >  حجز</Button>        </div>
-        </form>:""}
+        </form>      
+        </>}
   </>}
           </>
 

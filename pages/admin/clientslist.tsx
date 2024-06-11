@@ -56,62 +56,22 @@ function ClientsList() {
     Tooltip,
     Legend
   )
-
-  
-//   const [officelist,setofficelist]=useState([])
-//   function datas() {
-    
-//   }
-  
-//   const doughnutOptions={
-//   data: {
-//     datasets: [
-//       {
-//         data: [67, 33],
-//         /**
-//          * These colors come from Tailwind CSS palette
-//          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-//          */
-//         backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
-//         label: 'Dataset 1',
-//       },
-//     ],
-//     labels: officelist.length>0?[...officelist]:0,
-//   },
-//   options: {
-//     responsive: true,
-//     cutoutPercentage: 80,
-//   },
-//   legend: {
-//     display: false,
-//   },
-// }
-// import "../api/clientslistfrommongo"
-// console.log(officelist)
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
   const [time,setTime]=useState(0)
   const [office,setOffice]=useState([])
-  // pagination setup
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
   const totalResults = fulldata.length
 const router = useRouter()  
-// setTimeout(() =
-// pagination change control
   const [paginatedData,setPaginatedData]=useState([])
-  // console.log(time)
   const [listType,setTypeList] = useState("workers")
 
 
 function onPageChange(p: number) {
-    // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
-    // setPage(p)
   }
-  // on page change, load new sliced data
-  // here you would make another server request for new data
 
 
   useEffect(() => {

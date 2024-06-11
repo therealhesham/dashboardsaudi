@@ -31,7 +31,7 @@ model Client{
   email           String    @unique
   phonenumber     String
   Cvnumber        String    
-  password        String
+  password        String    
   createdat       DateTime? @default(now())
   
 }

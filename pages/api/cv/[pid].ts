@@ -24,8 +24,6 @@ const arr=[];
      base('السير الذاتية').select({
       //@ts-nocheck
       //@ts-ignore
-    // Selecting the first 3 records in كل البيانات:
-    // maxRecords: 3,
     view: "الاساسي"
 }).eachPage(function page(records, fetchNextPage) {
     // This function (`page`) will get called for each page of records.
