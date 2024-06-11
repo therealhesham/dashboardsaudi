@@ -1,10 +1,12 @@
 // @ts-nocheck 
 import React, { useState, useEffect, useContext } from 'react'
 import { Doughnut, Line, Pie } from 'react-chartjs-2'
+// import "./officeinfo/[slug]"
 import CTA from 'example/components/CTA'
 import InfoCard from 'example/components/Cards/InfoCard'
 import ChartCard from 'example/components/Chart/ChartCard'
 import ChartLegend from 'example/components/Chart/ChartLegend'
+// import "./officeinfo/"
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'example/containers/Layout'
@@ -40,11 +42,14 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import Link from 'next/link'
+import Link from 'next/dist/client/link'
+
+// import""
 import { User } from 'utils/usercontext'
 import { useRouter } from 'next/router'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
+// import link from 'next/link'
 function Dashboard() {
   Chart.register(
     ArcElement,
@@ -315,9 +320,14 @@ return (
 : 
 <TableBody>
 <ul >
-{officelist.map((e, i) => (
-                <li  style={{height:"150px"}} key={i}>{e?.fields["External office - المكتب الخارجي"]}</li>
-     
+{officelist.map((e) => (
+             
+  <Link href={"./admin/officeinfo/"+ e.fields["External office - المكتب الخارجي"]}>
+  <li  style={{height:"150px"}}  > 
+                  {e?.fields["External office - المكتب الخارجي"]}   
+              </li>
+                    </Link>
+
               ))
 }          </ul>
                </TableBody>

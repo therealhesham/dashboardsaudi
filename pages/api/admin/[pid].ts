@@ -34,7 +34,7 @@ const arr=[];
             // console.log('Retrieved', record.get("office"));
     // console.log(req.query.pid == record.get("office"))
     //@ts-ignore
-    if(req.query.pid == record.get("External office") ) arr.push(record);
+    if(req.query.pid == record.get("External office - المكتب الخارجي") ) arr.push(record);
           });
       //@ts-ignore 
     // console.log(arr)
@@ -47,8 +47,9 @@ const arr=[];
 
  
 })
+// console.log(result)
 
-  res.json(result)
+  res.send(result)
 }
 
   // export base;

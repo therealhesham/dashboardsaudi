@@ -32,18 +32,18 @@ import { jwtDecode } from 'jwt-decode'
 
 export default function Page() {
   const router = useRouter()
-  console.log(router.query.slug)
+  // console.log(router.query.slug)
   const [data,setData]=useState([]);
   
   useEffect(() => {
       try {
         const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-console.log(decoder.idnumber)
 (async function name() {
      await fetch(`../../api/admin/${router.query.slug}`).then(response => response.json())
      .then(json  => {
-   setData(json)
+// console.log(json)
+      setData(json)
   } 
   // names();
   
@@ -52,11 +52,11 @@ console.log(decoder.idnumber)
     
 
   } catch (error) {
-    router.replace("/login")
+    // router.replace("/login")
   }
   
 
-}, [new Date().getMilliseconds()])
+}, [])
 //@ts-ignore
 // ClockLoader
 
@@ -86,7 +86,7 @@ return (   <Layout>
               <TableRow key={i}>
                 <TableCell>
                   <div className="flex items-center text-sm">
-                    <Avatar className="hidden mr-3 md:block" src={user?.fields.Picture[0].url} alt="User avatar" />
+                    <Avatar className="hidden mr-3 md:block" src={user?.fields["العلم"][0].url} alt="User avatar" />
                     <div>
                       <p className="font-semibold">{user?.fields.fname}</p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">{user?.fields.age}</p>
@@ -94,13 +94,13 @@ return (   <Layout>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm"> {user.fields.nationality}</span>
+                  <span className="text-sm"> {user.fields["الدولة copy"]}</span>
                 </TableCell>
                
-                <TableCell>
+                {/* <TableCell>
                   <span className="text-sm"> {user.fields.maritalstatus}</span>
                 </TableCell>
-               
+                */}
               </TableRow>
             ))}
           </TableBody>
