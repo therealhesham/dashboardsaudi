@@ -46,7 +46,7 @@ try {
   function Deepsearch(){
   if (religion == "الكل" && nationality != "الكل"){
 
-const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
 
 
 // const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
@@ -58,7 +58,10 @@ const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == n
   }
 
 if (religion != "الكل" && nationality == "الكل"){
-// const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+// const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
+
+
+
 
 
 const sec = repos.filter(e=>e.fields["Religion - الديانة"] == religion); 
@@ -77,7 +80,7 @@ if (religion == "الكل" && nationality == "الكل"){
 }
 if (religion != "الكل" && nationality != "الكل"){
 
-const searchdata = repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality );
+const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
 
 
 const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
@@ -94,7 +97,7 @@ nationality.length > 5 ?Deepsearch():"";
 
 console.log(religion,nationality)
   const arr=[];
-  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality - الجنسية"])) arr.push(e.fields["Nationality - الجنسية"])}):console.log("json.length")
+  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationaity copy"])) arr.push(e.fields["Nationaity copy"])}):console.log("json.length")
 setArray(arr)
 const secarray=[]
   repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields["Religion - الديانة"])) secarray.push(e.fields["Religion - الديانة"])}):console.log("json.length")
@@ -105,7 +108,7 @@ setArrayReligion(secarray)
 // if(nationality != previousNationality){  
 //   console.log("sss")
 //   // setData(repos)
-//  setData([...repos.filter(e=>e.fields["Nationality - الجنسية"] == nationality)]) ;
+//  setData([...repos.filter(e=>e.fields["Nationaity copy"] == nationality)]) ;
 // }
 
 // if(religion != previousreligion)
