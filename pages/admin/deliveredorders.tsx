@@ -92,14 +92,14 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
   } catch (error) {
     router.replace("/client")
   }
-const fetcher = await fetch('../api/deliveredorder',{method:"post",headers: {'Accept':'application/json',
-        "Content-Type": "application/json",
-      },body:JSON.stringify({deliveredorders})})
+// fetch('../api/deliveredorder',{method:"post",headers: {'Accept':'application/json',
+//         "Content-Type": "application/json",
+//       },body:JSON.stringify({deliveredorders})})
 
-      const e= await fetcher.text()
-      console.log(fetcher.status)
-if(fetcher.status == 200) return console.log("error");
-// errorfunc()
+//       const e= await fetcher.text()
+//       console.log(fetcher.status)
+// if(fetcher.status == 200) return console.log("error");
+// // errorfunc()
 
 
 
