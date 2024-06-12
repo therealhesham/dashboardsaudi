@@ -13,6 +13,7 @@ import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from 'icons'
 // import"
 import {
   TableBody,
+  Button,
   TableContainer,
   Table,
   TableHeader,
@@ -48,6 +49,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
+import axios from 'axios'
 
 function ClientsList() {
   Chart.register(
@@ -106,21 +108,30 @@ console.log(json)
     setIsModalOpen(false)
   }
 
-// const [fullname,setFullname]=useState("")
-const [clientlistOrders,setClientOrderslist]= useState([])
-const fetchClientinfo=async (fullname)=>{
+const confirm=async (fullname)=>{
 
-  const fetcher = await fetch('../api/fetchClientinfo',{method:"post",headers: {'Accept':'application/json',
+  const fetcher = await fetch('../api/adminconfirmation',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({fullname})})
+      },body:JSON.stringify({fullname,id:clientlistOrders[0].id,status:"تم"})})
 
       const e= await fetcher.json()
       
       // console.log(fetcher.status)
-console.log(e)
-setClientOrderslist(e)
-openModal()
+closeModal()
 
+    }
+// const [fullname,setFullname]=useState("")
+const [clientlistOrders,setClientOrderslist]= useState([])
+const fetchClientinfo=async (fullname)=>{
+  // axios.post
+await axios.post('../api/fetchClientinfo',{fullname:"celina hesham"},{ headers: {
+    'Content-Type': 'application/json'
+  }}).then((e)=>{
+setClientOrderslist(e.data)
+    openModal() 
+// console.log( e.data)
+})
+  
 
     }
     
@@ -143,7 +154,12 @@ openModal()
           <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
             Close
           </Button>
-         
+         <Button onClick={()=>confirm(
+          
+          
+          clientlistOrders[0].fields["العملاء"])}>
+          استلام الطلب
+         </Button>
         </ModalFooter>
       </Modal>
 </>:""}

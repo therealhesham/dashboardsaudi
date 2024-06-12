@@ -134,7 +134,7 @@ const onSubmitNewclient = async (sata) => {
 setFetching(true)
   const fetcher = await fetch('../../api/orderforexistingclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name+""})})
+      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name})})
 
       const e= await fetcher.text()
       
@@ -179,7 +179,7 @@ try {
  setUser(decoder)
 } catch (error) {
   // console.log(error)
-  setUser(null)
+  setUser({user:false})
 } 
 
 
@@ -214,7 +214,7 @@ setSourceList(json)
 console.log(list)
 return (   
 <>
-{user.isUser?
+{user?.isUser?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
   <a className="text-gray-700 dark:text-gray-400" href="#">
