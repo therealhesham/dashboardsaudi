@@ -124,7 +124,7 @@ closeModal()
 const [clientlistOrders,setClientOrderslist]= useState([])
 const fetchClientinfo=async (fullname)=>{
   // axios.post
-await axios.post('../api/fetchClientinfo',{fullname:"celina hesham"},{ headers: {
+await axios.post('../api/fetchClientinfo',{fullname},{ headers: {
     'Content-Type': 'application/json'
   }}).then((e)=>{
 setClientOrderslist(e.data)
