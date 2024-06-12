@@ -30,6 +30,13 @@ const routes: IRoute[] = [
     name: 'Dashboard', 
     exact: true,
   },
+
+{
+    path: '/admin/addcountry', 
+    icon: 'FormsIcon', 
+    name: 'Add Country', 
+    // exact: true,
+  },
 {
     path: '/admin/clientslist', 
     icon: 'HomeIcon', 
@@ -67,21 +74,11 @@ const routes: IRoute[] = [
     name: 'Foreign offices', 
     // exact: true,
   },
-  
-  {
-    path: '/admin/forms',
-    icon: 'FormsIcon',
-    name: 'Forms',
-  },
+ 
   {
     path: '/admin/addadmin',
     icon: 'CardsIcon',
     name: 'Add New Admin',
-  },
-  {
-    path: '/admin/resetpassword',
-    icon: 'ChartsIcon',
-    name: 'Reset Admin Password',
   }
 ]
 

@@ -46,7 +46,7 @@ try {
   function Deepsearch(){
   if (religion == "الكل" && nationality != "الكل"){
 
-const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
+const searchdata = repos.filter(e=>e.fields["Nationality copy"] == nationality );
 
 
 // const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
@@ -80,7 +80,7 @@ if (religion == "الكل" && nationality == "الكل"){
 }
 if (religion != "الكل" && nationality != "الكل"){
 
-const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
+const searchdata = repos.filter(e=>e.fields["Nationality copy"] == nationality );
 
 
 const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
@@ -97,7 +97,7 @@ nationality.length > 5 ?Deepsearch():"";
 
 console.log(religion,nationality)
   const arr=[];
-  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationaity copy"])) arr.push(e.fields["Nationaity copy"])}):console.log("json.length")
+  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality copy"])) arr.push(e.fields["Nationality copy"])}):console.log("json.length")
 setArray(arr)
 const secarray=[]
   repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields["Religion - الديانة"])) secarray.push(e.fields["Religion - الديانة"])}):console.log("json.length")
@@ -158,6 +158,7 @@ router.reload()
   
 {/* <Layout> */}
 <div>
+  
 <div style={{width:"250px"}}>
 <Label >
 
@@ -197,6 +198,7 @@ router.reload()
 
   
         </Label>
+  {/* <input type="range" min={0} max="100" value="40" className="range range-warning" />  */}
 
 </div>
 
@@ -209,7 +211,7 @@ router.reload()
   <div className="card-body" >
     <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      {/* e?.fields["age - العمر"] */}
+      {/* e?.fields["age - العمر"] }
       {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
       <p  >{e?.fields["marital status - الحالة الاجتماعية"]}</p>
       <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p>

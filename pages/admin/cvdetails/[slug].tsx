@@ -31,6 +31,7 @@ import Header from 'example/components/Header'
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { PrinterFilled } from '@ant-design/icons'
 import Cookies from 'js-cookie'
+import axios from 'axios'
 // import "../../api/admin"
 const options: Options = {
   filename: "advanced-example.pdf",
@@ -89,17 +90,17 @@ export default function Page() {
 //     router.replace("/login")
 //   }
 
-
   (async function name() {
-     await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
-     .then(json  => {
-setData(json)})
+await axios.get(`../../api/cv/${router.query.slug}`).then(e=>setData(e.data))    
+
+//      await fetch().then(response => response.json())
+//      .then(json  => {
+// setData(json)})
   })()
     
 
 
 }, [])
-console.log(data)
 const getTargetElement = () => document.getElementById("cv");
 
 const downloadPdf = () => generatePDF(getTargetElement, options);
@@ -108,16 +109,13 @@ const downloadPdf = () => generatePDF(getTargetElement, options);
     content: () => componentRef.current,
   });
 
-// const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
-// Label
-
 return (   
 
 <Layout>
 
-{data.length>0? <div  id='cv' ref={componentRef}> <header>
-<img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
-
+{data.length>0? <div  id='cv' ref={componentRef}> <header >
+<div style={{zIndex:-1}}><img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/></div>
+  <div style={{marginTop:2}}>{data[0].fields["م"]} رقم السيرة الذاتية</div>
    </header>
 <a ><button onClick={handlePrint}>Print PDF <PrinterFilled/></button></a>
 
@@ -132,16 +130,6 @@ src={data.length>0?data[0].fields.Picture[0].url:null}
 </div>
    <div  style={{direction:"rtl",display: "grid" ,gridTemplateColumns: "repeat(5, auto)"}}>
 
-    {/* <div style={{gridColumnStart:4,gridColumnEnd:6}}> */}
-{/* <Image 
-src=
-      width={500}
-      height={500}
-      alt="Picture of the author"
-/> */}
-
-
-    {/* </div> */}
 <div style={{direction:"rtl", display: "grid" ,gridTemplateColumns: "repeat(3, auto)",gridRowGap: "1px",gridColumnGap: "9px",alignItems:"center",width:"100%"}}>
 
         <Label className="mt-4">

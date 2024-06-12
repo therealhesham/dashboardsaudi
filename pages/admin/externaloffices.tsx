@@ -104,15 +104,9 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
      await fetch("../api/externaloffices").then(response => response.json())
   .then(json  => {
     json?setLength(json.length):"";
-    // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
-    // setData(json)   
-// const arr=[];e
-  // json?.length>0?json.map(e=>{if(!arr.includes(e.fields.office)) arr.push(e.fields.office)}):console.log(json.length)
-  // setofficelist(arr)
 } 
-  // names();
 
 )
 }
@@ -124,7 +118,6 @@ names()
 
 }, [])
 
-// patqpqm8yUGAdhSoj.56e6d82c73f5ec39152c7212d8c8a0710856aeb10ba0e268a2bb06a5cf919b06
 return (
     <Layout>
 
@@ -153,7 +146,7 @@ return (
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-md">{e?.fields["الدولة"]}</span>
+                  <span className="text-md">{e?.fields["الدولة copy"]}</span>
 
 
                   {/* <span className="text-md">{e?.fields.Status}</span> */}
@@ -179,7 +172,7 @@ return (
                 </TableCell>
                 <TableCell>
                  {e.fields["السير الذاتية"] ? <span className="text-md">
-                 {e?.fields["السير الذاتية"].map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
+                 {e?.fields["السير الذاتية copy"].split(",").map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
                    
                   </span>:""}
                 </TableCell>
