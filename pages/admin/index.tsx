@@ -263,11 +263,6 @@ return (
                 <TableCell>
                 
                   <div className="flex items-center text-sm" style={{width:"200px"}}>
-                    <Avatar
-                      className="hidden mr-3 md:block"
-                      src={e?.fields.Picture[0].url}
-                      alt="User image"
-                    />
                     
                     <div>
                      {e?.fields["Name - الاسم"] ? <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>:""}
