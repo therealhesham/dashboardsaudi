@@ -251,7 +251,7 @@ return (
           <TableHeader>
             <tr>
               {listType =="workers"?<TableCell>اسم العامل</TableCell>:<TableCell>اسماء المكاتب</TableCell>}
-              {listType =="workers"?<TableCell>العمر</TableCell>: null}
+              {/* {listType =="workers"?<TableCell>العمر</TableCell>: null} */}
               {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
               {listType =="workers"?<TableCell>المكاتب</TableCell>:null}
               {listType =="workers"?<TableCell>Religion</TableCell>:null}
@@ -278,7 +278,7 @@ return (
                   </div>
                 </TableCell>
                 <TableCell>
-                {e?.fields["age - العمر"]?  <span className="text-sm">{e?.fields["age - العمر"]}</span>:""}
+                {/* {e?.fields["age - العمر"]?  <span className="text-sm">{e?.fields["age - العمر"]}</span>:""} */}
 
                 </TableCell>
                 <TableCell>
@@ -297,7 +297,7 @@ return (
                 <TableCell>
                   {/* <Link href={"/admin/officeinfo/"+e?.fields["External office - المكتب الخارجي"]}  >                  */}
                   {/* <span className="text-sm"> */}
-                  <span className="text-sm">{e?.fields["Religion - الديانة"]}</span>
+                  <span className="text-sm">{e?.fields["Religion - الديانة"]?e?.fields["Religion - الديانة"]:""}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
