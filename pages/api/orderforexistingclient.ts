@@ -16,31 +16,17 @@ const prisma =new PrismaClient()
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 // sendSuggestion()
 try {
+  console.log(req.body.id)
 
-  const resultone =  await new Promise((resolve,reject)=>{
-const create = base('العملاء').create([
-  {
-    "fields": {
-      "رقم العميل": req.body.phonenumber,
-      "اسم العميل": req.body.fullname,
-      "مصدر العميل": [
-        req.body.source
 
-      ]
-    }
-  }])
- resolve(create)
-
-   
-  })
 
   const result =  await new Promise((resolve,reject)=>{
-const update = base('السيرة الذاتية').update([
+const update = base('السير الذاتية').update([
   {
-    "id": req.body.id,
+    id: req.body.id,
     "fields": {
       "العملاء":req.body.fullname,
-      "حالة الحجز":"محجوز"
+      "حالة الحجز":"محتمل"
     }}])
 
    resolve(update)

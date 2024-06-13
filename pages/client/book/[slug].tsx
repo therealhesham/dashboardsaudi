@@ -48,6 +48,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { jwtDecode } from 'jwt-decode'
+import dayjs from 'dayjs'
 const options: Options = {
   filename: "advanced-example.pdf",
   method: "save",
@@ -130,17 +131,20 @@ setFetching(false)
 setErrorEmail(true)
 }
 //@ts-ignore
-const onSubmitNewclient = async (sata) => {
+const onSubmit = async (sata) => {
+  // console.log(sata)
+  // return
 setFetching(true)
   const fetcher = await fetch('../../api/orderforexistingclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name})})
+      },body:JSON.stringify({fullname:user.fullname,phonenumber:user.phonenumber,email:user.email,id:data[0].id,cvnumber:data[0].fields.Name})})
+
 
       const e= await fetcher.text()
       
       // console.log(fetcher.status)
 if(fetcher.status == 200) {
-  Cookies.set("token",e)
+  // Cookies.set("token",e)
     truefunc();}
 else if (fetcher.status == 301 ) return erroremailfunc();
 else{errorfunc()
@@ -148,11 +152,12 @@ else{errorfunc()
   }
 
 //@ts-ignore
-const onSubmit = async (sata) => {
+const onSubmitNewclient = async (sata) => {
+  console.log(sata)
 setFetching(true)
   const fetcher = await fetch('../../api/newclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name+""})})
+      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name})})
 
       const e= await fetcher.text()
       
@@ -184,21 +189,17 @@ try {
 
 
 
-
 try {
   name()
 } catch (error) {
   console.log(error)
 }
     
-
-
 }, [])
-
   async function name() {
      await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
      .then(json  => {
-      // console.log(json)
+      console.log(json)
 setData(json)
   } 
   
@@ -211,7 +212,6 @@ setSourceList(json)
   
 )
   }
-console.log(list)
 return (   
 <>
 {user?.isUser?
@@ -280,20 +280,10 @@ router.reload()
 {fetching?
 <div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
 </div>
-:<>{user.user & data.length>0?  
+:<>{user.isUser  ?  
   
-<form onSubmit={handleSubmit(onSubmitNewclient)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
-  <Label className="mt-4">
+<form onSubmit={onSubmit} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
   
-
-  
-  <span>اسم العميل</span>
-
-          <Input className="mt-1" placeholder="Full Name" type='text' {...register("fullname",{required:true})}/>
-            {errors.fullname?<span>{errors.fullname.message}</span>:""}
-          {/* <h1 className="mt-1"  >{data[0].fields["Name - الاسم"]}</h1> */}
-        </Label>
-
 
 
 
@@ -303,26 +293,30 @@ router.reload()
   
   
   <span>الاسم</span>
-          <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />
+        {data.length>0?  <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />:""}
 
         </Label>
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0].fields["Nationality copy"]} />
+        {data.length>0?  <Input className="mt-1" value={data[0].fields["Nationality copy"]} />:""}
+
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
-          <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />
+        {data.length>0?  <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />:""}
+
         </Label>
 <Label className="mt-4">
           <span>العمر</span>
-          <Input className="mt-1" value={data[0].fields["age - العمر"]} />
+        {data.length>0?  <Input className="mt-1" value={data[0].fields["age - العمر"]} />:""}
+
         </Label>
 <Label className="mt-4">
           <span>الديانة</span>
-               <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />
-        </Label>
+        {data.length>0?  <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />:""}
+
+          </Label>
 <Label className="mt-4">
           <span>كيف تعرفت علينا</span>
 
@@ -340,7 +334,7 @@ router.reload()
         <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
 <Button  type='submit' >  حجز</Button>        </div>
         </form>:<>
-  <form onSubmit={handleSubmit(onSubmit)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
+  <form onSubmit={handleSubmit(onSubmitNewclient)} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}>
   <Label className="mt-4">
   
 

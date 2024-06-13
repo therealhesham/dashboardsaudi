@@ -220,7 +220,7 @@ router.reload()
                 </TableCell>
                 <TableCell>
                   <span className="text-sm">
-                  <span className="text-sm">{e?.fields["Nationality - الجنسية"]}</span>
+                  <span className="text-sm">{e?.fields["Nationality copy"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -230,7 +230,7 @@ router.reload()
                 
                 <TableCell>
                   <span className="text-sm">
-                  <span className="text-sm">{e?.fields["External office - المكتب الخارجي"]}</span>
+                  <span className="text-sm">{e?.fields["External office copy"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
@@ -241,7 +241,7 @@ router.reload()
 
 
                    <span className="text-sm">
-                  <span className="text-sm">{e?.fields["الحالة"]}</span>
+                  <span className="text-sm">{e?.fields["حالة الحجز"]}</span>
 
                     
                     {/* {new Date(user.date).toLocaleDateString()} */}
