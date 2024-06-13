@@ -1,3 +1,4 @@
+//@ts-nocheck
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import Airtable ,{Table} from "airtable";
@@ -14,30 +15,19 @@ type Data = {
 
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 // sendSuggestion()
- 
-  const result =  await new Promise((resolve,reject)=>{
+let arr = []
+const result =  await new Promise((resolve,reject)=>{
 
 
-    base('السير الذاتية').select({
-      //  fields:{}
-        // Selecting the first 3 records in Grid view:
+const results=    base('السير الذاتية').select({
+   
         view: "الاساسي"
-    }).eachPage(function page(records, fetchNextPage) {
-        // This function (`page`) will get called for each page of records.
-    
-        records.forEach(function(record,s) {
-            // console.log(s)
-            // console.log('Retrieved', record.get('Name'));
-        });
-    
- resolve(records)       
-    }, function done(err) {
-        if (err) { console.error(err); return; }
-    });
+    }).all()
 
- 
+ resolve(results)
 })
 
+// console.log(arr.length)
   res.status(200).json(result)
 }
 

@@ -95,7 +95,7 @@ const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religi
 religion.length > 5 ? Deepsearch(): "";
 nationality.length > 5 ?Deepsearch():"";
 
-console.log(religion,nationality)
+// console.log(religion,nationality)
   const arr=[];
   repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality copy"])) arr.push(e.fields["Nationality copy"])}):console.log("json.length")
 setArray(arr)

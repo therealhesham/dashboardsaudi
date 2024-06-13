@@ -110,8 +110,10 @@ function Dashboard() {
 const router = useRouter()
 const [list,setList]=useState([]);
 function onPageChange(p: number) {
+  console.log(p)
   // console.log(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // json?setData(json?.slice((page - 1) * resultsPerPage, page * resultsPerPage)):console.log("e");
+
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
   }
@@ -128,7 +130,7 @@ console.log(namenation)
 
 const filtering = list.find(e=> e.id == namenation)
 // console.log("filtering",filtering)
-console.log(filtering)
+// console.log(filtering)
 return filtering?.fields["الدولة"];
 
   
@@ -173,7 +175,7 @@ useEffect(() => {
     // console.log('parsed json', json) // access json.body here
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-console.log(new Date().getSeconds())
+// console.log(new Date().getSeconds())
     // setData(json)   
 
   } 
@@ -268,7 +270,7 @@ return (
                     />
                     
                     <div>
-                      <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>
+                     {e?.fields["Name - الاسم"] ? <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>:""}
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         
                       </p>
@@ -276,11 +278,11 @@ return (
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{e?.fields["age - العمر"]}</span>
+                {e?.fields["age - العمر"]?  <span className="text-sm">{e?.fields["age - العمر"]}</span>:""}
 
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm">{e?.fields["marital status - الحالة الاجتماعية"]}</span>
+                 {e?.fields["marital status - الحالة الاجتماعية"]? <span className="text-sm">{e?.fields["marital status - الحالة الاجتماعية"]}</span>:""}
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
