@@ -29,6 +29,11 @@ const routes: IRoute[] = [
     icon: 'HomeIcon', 
     name: 'Dashboard', 
     exact: true,
+  },  {
+    path: '/admin/dashboardadmins', 
+    icon: 'HomeIcon', 
+    name: 'Admins', 
+    exact: true,
   },
 
 {

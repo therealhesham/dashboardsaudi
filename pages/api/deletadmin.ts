@@ -11,8 +11,19 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
+
 try {
-   const result =  await prisma.user.delete({where:{id:req.body.id}})
+ const token = req.cookies.token
+
+
+const decoder = jwt.decode(token)
+const finder = await prisma.user.findFirst({where:{idnumber:decoder.idnumber}})
+if(finder.role != "adminstrator"  ) return   res.status(301).json("error");
+
+
+ 
+ 
+  const result =  await prisma.user.delete({where:{id:req.body.id}})
   res.status(200).json(result)
 } catch (error) {
   console.log(error)

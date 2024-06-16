@@ -44,6 +44,7 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { DeleteOutlined } from '@ant-design/icons'
+import dayjs from 'dayjs'
 
 function FemaleWorkers() {
   Chart.register(
@@ -118,11 +119,11 @@ try {
 
     const token = Cookies.get("token")
   const decoder = jwtDecode(token);
-      if(!decoder.admin)return router.replace("/client");
   
 // console.log(decoder.idnumber)
   } catch (error) {
-    router.replace("/client")
+    console.log(error)
+    // router.replace("/client")
   }
 try {
  
@@ -154,12 +155,19 @@ names()
 
 
 const cancelRecord=async(e)=>{
-await fetch("../api/cancelmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
-console.log(id)
+  const canceled = await fetch("../api/cancelmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ 'Accept':'application/json',
+        "Content-Type": "application/json"}})
+const c = await canceled.text()
+setID(c)
+
 }
 const endRecord=async(e)=>{
-await fetch("../api/endmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ "Content-Type": "application/json"}}).then(response => response.json()).then(e=>setID(e)).catch(error=>console.log(error))
-console.log(id)
+
+    const canceled = await fetch("../api/endmaleworker",{method:"POST",body:JSON.stringify({id:e}),headers:{ 'Accept':'application/json',
+        "Content-Type": "application/json"}})
+const c = await canceled.text()
+setID(c)
+
 }
 
 
@@ -207,20 +215,19 @@ return (
               <TableCell>رقم الجواز</TableCell>
               <TableCell>اسم العاملة</TableCell>
               <TableCell>العمر</TableCell>
-              <TableCell>الديانة</TableCell>
               <TableCell>الخبرة العملية</TableCell>
               <TableCell>حالة العقد</TableCell>
 <TableCell>المدينة</TableCell>
 
 
-              <TableCell>تاريخ تقديم الطلب</TableCell>
 <TableCell>رقم طلب التأشيرة</TableCell>
 <TableCell>ملاحظات</TableCell>
 <TableCell>عقد مساند الخارجي
 </TableCell>
 <TableCell>الجنسية</TableCell>
 <TableCell>المكتب الخارجي</TableCell>
-<TableCell>مدة التقديم</TableCell>
+               <TableCell>تاريخ تقديم الطلب</TableCell>
+               <TableCell>مدة الطلب</TableCell>
 
 <TableCell>الغاء العقد</TableCell>
 <TableCell>انهاء العقد</TableCell>
@@ -234,116 +241,99 @@ return (
             {paginatedData?.map((e, i) => (
               <TableRow key={i}>
 
-
+              <TableCell>
                 
-                <TableCell>
                   <span className="text-md">{e.clientname}</span>
-
+                
                 </TableCell>
-                 <TableCell>
+              <TableCell>
+
                   <span className="text-md">{e.insurance}</span>
 
-                </TableCell>
-
-                 <TableCell>
+              </TableCell>
+              <TableCell>
+                
                   <span className="text-md">{e.musanedContract}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
+                
                   <span className="text-md">{e.visanumber}</span>
-
+                
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
+                
+                
                   <span className="text-md">{e.idnumber}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
+                
                   <span className="text-md">{e.mobilenumber}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
                   <span className="text-md">{e.passportnumber}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
+                
                   <span className="text-md">{e.workername}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
                   <span className="text-md">{e.age}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
                   <span className="text-md">{e.experience}</span>
-
+                
                 </TableCell>
-
-                 <TableCell>
+              <TableCell>
                   <span className="text-md">{e.contractstatus}</span>
-
+                
                 </TableCell>
-
-
-                 <TableCell>
+<TableCell>
+  
                   <span className="text-md">{e.city}</span>
 
-                </TableCell>
+
+</TableCell>
 
 
-                 <TableCell>
-                  <span className="text-md">{e.orderDate}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
-                  <span className="text-md">{e.dayDate}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
-                  <span className="text-md">{e.duration}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
-                  <span className="text-md">{e.externaloffice}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
-                  <span className="text-md">{e.nationality}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
-                  <span className="text-md">{e.externalmusanedcontract}</span>
-
-                </TableCell>
-
-
-                 <TableCell>
+<TableCell>
                   <span className="text-md">{e.visaordernumber}</span>
+  
 
-                </TableCell>
-
-
-                 <TableCell>
+</TableCell>
+<TableCell>
                   <span className="text-md">{e.notes}</span>
+  
+  
+  </TableCell>
+<TableCell>
+                  <span className="text-md">{e.externalmusanedcontract}</span>
+  
+</TableCell>
+<TableCell>
+                  <span className="text-md">{e.nationality}</span>
+  
+  
+  </TableCell>
+<TableCell>
+  
+                  <span className="text-md">{e.externaloffice}</span>
+  </TableCell>
+  <TableCell>
+                  <span className="text-md">{e.orderDate}</span>
+    
+    </TableCell>
 
-                </TableCell>
+<TableCell>
+{((dayjs(new Date()).diff(e.orderDate))/100000000).toFixed()}
 
+</TableCell>
 
                 <TableCell>
                  

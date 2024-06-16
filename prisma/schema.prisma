@@ -65,11 +65,9 @@ contractstatus         String
 city                   String
 orderDate           DateTime  
 
-dayDate             DateTime 
 canceled            Boolean @default(false)
 ended               Boolean @default(false)
 
-duration            String
 externaloffice      String
 nationality         String
 externalmusanedcontract String
@@ -100,8 +98,6 @@ experience            String
 contractstatus         String  
 city                   String
 orderDate           DateTime
-dayDate             DateTime @default(now())
-duration            String
 externaloffice      String
 nationality         String
 externalmusanedcontract String

@@ -11,10 +11,9 @@ export default async function handler(
 try {
   //  console.log("deleter",)
   const deletefemaleworker=await prisma.femalWorker.update({where:{id:req.body.id},data:{canceled:true}})
-  res.status(200).send(req.body.id)
+  res.status(200).json(deletefemaleworker.id)
 
 } catch (error) {
-  console.log(error)
   res.status(301).send("failedcanceling")
 
 // res.send("error")  

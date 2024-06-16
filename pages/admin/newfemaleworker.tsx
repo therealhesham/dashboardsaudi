@@ -66,7 +66,6 @@ experience:yup.string(),
 contractstatus:yup.string(),
 city:yup.string(),
 orderDate:yup.date().typeError("order date is required value"),
-dayDate:yup.date().typeError("day date is required value"),
 duration:yup.string(),
 externaloffice:yup.string(),
 nationality:yup.string(),
@@ -78,10 +77,10 @@ notes:yup.string()
   })
   .required()
 
-
   const { register,formState: { errors }, handleSubmit } = useForm({
     resolver: yupResolver(schema),
-  })
+    })
+  console.log(errors)
 
   const handleSignUp = async (e: React.SyntheticEvent) => {
     
@@ -235,12 +234,7 @@ return (
           {errors.orderDate?<span style={{color:"red"}}>{errors.orderDate.message}</span>:null}  
         
         </Label>
-  <Label className="mt-4">
-          <span>تاريخ اليوم</span>
-          <Input className="mt-1"     aria-invalid={errors.dayDate ? "true" : "false"} {...register("dayDate", { required: true })}  placeholder="تاريخ اليوم"  type="date" />
-          {errors.dayDate?<span style={{color:"red"}}>{errors.dayDate.message}</span>:null}  
-        
-        </Label>  
+  
         {/* <Label className="mt-4">
           <span>مدة التقديم</span>
           <Input className="mt-1" placeholder="مدة التقديم" aria-invalid={errors.duration ? "true" : "false"} {...register("duration", { required: true })} type="number" />

@@ -198,8 +198,8 @@ return (
           {errors.passportnumber?<span style={{color:"red"}}>{errors.passportnumber.message}</span>:null}  
        
         </Label><Label className="mt-4">
-          <span>اسم العاملة</span>
-          <Input className="mt-1" placeholder="رقم اسم العاملة" aria-invalid={errors.workername ? "true" : "false"} {...register("workername", { required: true })}/>
+          <span>اسم العامل</span>
+          <Input className="mt-1" placeholder=" اسم العامل" aria-invalid={errors.workername ? "true" : "false"} {...register("workername", { required: true })}/>
           {errors.workername?<span style={{color:"red"}}>{errors.workername.message}</span>:null}  
        
         </Label>
@@ -233,18 +233,7 @@ return (
           {errors.orderDate?<span style={{color:"red"}}>{errors.orderDate.message}</span>:null}  
         
         </Label>
-  <Label className="mt-4">
-          <span>تاريخ اليوم</span>
-          <Input className="mt-1"     aria-invalid={errors.dayDate ? "true" : "false"} {...register("dayDate", { required: true })}  placeholder="تاريخ اليوم"  type="date" />
-          {errors.dayDate?<span style={{color:"red"}}>{errors.dayDate.message}</span>:null}  
-        
-        </Label>  
-        {/* <Label className="mt-4">
-          <span>مدة التقديم</span>
-          <Input className="mt-1" placeholder="مدة التقديم" aria-invalid={errors.duration ? "true" : "false"} {...register("duration", { required: true })} type="number" />
-          {errors.duration?<span style={{color:"red"}}>{errors.duration.message}</span>:null}  
-       
-        </Label>   */}
+ 
 <Label className="mt-4">
           <span>المكتب الخارجي</span>
           <Input className="mt-1"   aria-invalid={errors.externaloffice ? "true" : "false"} {...register("externaloffice", { required: true })} placeholder="المكتب الخارجي"  type="text" />

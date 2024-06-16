@@ -9,7 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
 try {
-    const femaleworkerlist=await prisma.femalWorker.findMany();
+    const femaleworkerlist=await prisma.femalWorker.findMany({where:{canceled:false,ended:false}});
   res.status(200).send(femaleworkerlist)
 
 } catch (error) {

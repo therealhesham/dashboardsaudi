@@ -106,6 +106,7 @@ const errorfunc=()=>{
 openErrorModal()
 }
 const truefunc=(id)=>{
+  setUpdater(id+new Date())
   setDeleter(id)
   openModal();
   
@@ -167,6 +168,22 @@ errorfunc()
 
 }
 
+const update =async (id)=>{
+
+  
+  const fetcher = await fetch('../api/updateadmin',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify({id,username,idnumber,role})})
+
+      const e= await fetcher.text()
+if(fetcher.status == 200) return truefunc(id);
+errorfunc()
+
+
+}
+
+
+
 
 return (
     <Layout>
@@ -224,10 +241,10 @@ return (
               <TableRow key={i}>
                 
                 <TableCell>
-                 { updater == e.id ?<Input  value={e.username} onChange={(e)=>setusername(e.target.value)}/>:<span className="text-md">{e.username}</span> }
+                 { updater == e.id ?<Input  value={username} onChange={(e)=>setusername(e.target.value)}/>:<span className="text-md">{e.username}</span> }
                 </TableCell>
                 <TableCell>
-                 { updater == e.id ?<Input  value={e.role} onChange={(e)=>setrole(e.target.value)}/>:<span className="text-md">{e.role}</span> }
+                 { updater == e.id ?<Input  value={role} onChange={(e)=>setrole(e.target.value)}/>:<span className="text-md">{e.role}</span> }
 
 
                   {/* <span className="text-md">{e?.fields.Status}</span> */}
@@ -244,12 +261,20 @@ return (
                 </TableCell>
 
                 <TableCell>
-                 {updater==e.id? <Button style={{backgroundColor:'yellowgreen'}} onClick={()=>setUpdater(e.id + new Date())}>الغاء التعديل </Button>:<Button style={{backgroundColor:'red'}} onClick={()=>Delete(e.id)}>حذف </Button>}
+                 {updater==e.id? <Button  style={{backgroundColor:'yellowgreen'}} onClick={()=>setUpdater(e.id + new Date())}>الغاء التعديل </Button>:<Button style={{backgroundColor:'red'}} onClick={()=>Delete(e.id)}>حذف </Button>}
                 </TableCell>
 
 
   <TableCell>
-                 <Button onClick={()=>setUpdater(e.id)}>تعديل </Button>
+                 
+                 
+                 {updater==e.id? <Button  style={{backgroundColor:'yellowgreen'}} onClick={()=>update(e.id)}>ارسال التعديل </Button>:<Button  onClick={()=>{
+                  setusername(e.username)
+                  setidnumber(e.idnumber)
+                  setrole(e.role)
+                  
+                  setUpdater(e.id)}}>تعديل </Button>}
+                 
                 </TableCell>
 
 
