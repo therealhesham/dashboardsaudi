@@ -10,8 +10,7 @@ import CTA from 'example/components/CTA'
 import {
   Table,
   TableHeader,
-  TableCell,
-  TableBody,
+  TableCell,  TableBody,
   TableRow,
   TableFooter,
   TableContainer,
@@ -78,6 +77,7 @@ export default function Page() {
   // console.log(router.query.slug)
   const [data,setData]=useState([]);
   useEffect(() => {
+    if(!router.isReady )return;
 //     try{
 
 // const token = Cookies.get("token")
@@ -103,7 +103,7 @@ setData(json)
     
 
 
-}, [])
+}, [router.isReady])
 console.log(data)
 const getTargetElement = () => document.getElementById("cv");
 

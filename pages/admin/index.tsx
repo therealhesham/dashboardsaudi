@@ -76,8 +76,8 @@ function Dashboard() {
         /**
          * These colors come from Tailwind CSS palette
          * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-         */
-        backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
+        */
+       backgroundColor: ['#0694a2', '#1c64f2',"#3cb44b"],
         label: 'Dataset 1',
       },
     ],
@@ -92,6 +92,7 @@ function Dashboard() {
   },
 }
 // console.log(officelist)
+       const [admins,setAdmins] = useState(null)
   const [page, setPage] = useState(1)
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
@@ -183,7 +184,24 @@ useEffect(() => {
 
 )
 }
+
 names()
+
+async function Admins() {
+   const fetcher =  await fetch("./api/admins");
+    const f = await fetcher.json()
+setAdmins(f.length)
+  }
+
+Admins()
+
+
+
+
+
+
+
+
 
 } catch (error) {
   console.log(error)
@@ -224,18 +242,17 @@ return (
             />
         </InfoCard>
             </div>
-
-        <InfoCard title="المشرفين" value="1">
+<div onClick={()=>router.push("/admin/dashboardadmins") }>
+        <InfoCard title="المشرفين" value={admins} >
           {/* @ts-ignore */}
           <RoundIcon
-            icon={CartIcon}
             iconColorClass="text-blue-500 dark:text-blue-100"
             bgColorClass="bg-blue-100 dark:bg-blue-500"
             className="mr-4"
           />
         </InfoCard>
-
-        <InfoCard title="استقدامات" value="35">
+</div>
+        <InfoCard title="استقدامات" value={0}>
           {/* @ts-ignore */}
           <RoundIcon
             icon={ChatIcon}
@@ -271,10 +288,6 @@ return (
                       </p>
                     </div>
                   </div>
-                </TableCell>
-                <TableCell>
-                {/* {e?.fields["age - العمر"]?  <span className="text-sm">{e?.fields["age - العمر"]}</span>:""} */}
-
                 </TableCell>
                 <TableCell>
                  {e?.fields["marital status - الحالة الاجتماعية"]? <span className="text-sm">{e?.fields["marital status - الحالة الاجتماعية"]}</span>:""}

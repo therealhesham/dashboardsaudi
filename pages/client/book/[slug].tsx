@@ -178,6 +178,8 @@ const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),ema
   const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
   useEffect(() => {
+    if(!router.isReady )return;
+
 try {
  const token =  Cookies.get("token")
  const decoder = jwtDecode(token)
@@ -195,7 +197,7 @@ try {
   console.log(error)
 }
     
-}, [])
+}, [router.isReady])
   async function name() {
      await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
      .then(json  => {

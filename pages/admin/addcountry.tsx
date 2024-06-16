@@ -46,6 +46,7 @@ try {
 
 },[])
 // DeleteOutlined
+const [fetching,setFetching] = useState(false);  
  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false)
    function openErrorModal() {
     setIsErrorModalOpen(true)
@@ -61,7 +62,6 @@ try {
   }
 
 
-  const [fetching,setFetching] = useState(false);  
 const errorfunc=()=>{
 setFetching(false)
 openErrorModal()
