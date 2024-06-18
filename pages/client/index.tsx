@@ -1,5 +1,5 @@
 // @ts-nocheck 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Style from "styles/Home.module.css"
 
 // import {
@@ -20,6 +20,18 @@ function DashboardClient({repos}) {
     setPage(p)
   }
 
+
+const post=async()=>{
+console.log("religon",religion)
+const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify({religion:religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
+const waiter = await fetcher.json()
+setData(waiter)
+
+
+
+}
   
  
   const [array,setArray]=useState([])
@@ -51,7 +63,11 @@ const [previousreligion,setPreviousreligion]=useState("");
 const [user,setUser]=useState(null)
 const router=useRouter()
 const [dataTopages,setDatepages]=useState(repos.length)
-console.log(religion)
+
+useEffect(()=>{
+  
+  
+  post()},[religion,ironing,laundry,cleaning,english,arabic])
 // useEffect(()=>{
 //   // console.log(dataTopages)
 //   // console.log(encodeURIComponent(english))
@@ -65,24 +81,13 @@ console.log(religion)
 // },[])
 // LogoutOutlined
 
-const post=async()=>{
-
-const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
-        "Content-Type": "application/json",
-      },body:JSON.stringify({religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
-const waiter = await fetcher.json()
-console.log(waiter)
-
-
-
-}
 return (
 <>
+ 
   {user?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
   <a className="text-gray-700 dark:text-gray-400" href="#">
-    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
   </a>
   <ul className="flex space-x-4">
     <li>
@@ -110,21 +115,35 @@ router.reload()
   </ul>
 </nav> }
   
+ 
+ <div>
   
-  
-{/* <Layout> */}
-<div>
-  
-<div style={{width:"250px",margin:"5px"}}>
+  <div style={{display:'grid',gridTemplateColumns:"20% 80%"}}>
+ 
+<div style={{margin:"5px" ,gridColumnStart:"1",gridColumnEnd:"2"}}>
         
 <Label >
-          <span>Religion</span>
-            <Select className="mt-1" onChange={e=>post()}>
+          <span>Arabic</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setArabic(e.target.value);
+              
+// post();
+}}>
 
-<option placeholder='الكل'>الكل</option>
 
-<option value="Islam - الإسلام">الاسلام</option>
-<option value="Christianity - المسيحية">المسيحية</option>
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
 
   </Select>
 
@@ -134,11 +153,209 @@ router.reload()
   
         </Label>
 
+<Label >
+          <span>English</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setEnglish(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+<Label >
+          <span>Religion</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setReligon(e.target.value);
+              
+// post();
+}}>
+
+
+
+<option placeholder='الكل'>الكل</option>
+
+<option value="Islam - الإسلام">الاسلام</option>
+<option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option>
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+<Label >
+          <span>Old Care</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setOldCare(e.target.value);
+              
+// post();
+}}>
+
+
+
+<option placeholder='الكل'>الكل</option>
+
+<option value="Non-Muslim - غير مسلم"></option>
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+
         
+<Label >
+          <span>Ironing</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setIroning(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+
+
+
+
+
+
+
+
+
+        
+<Label >
+          <span>Cleaning</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setCleaning(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Label >
+          <span>Laundry</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setLaundry(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
 
 </div>
 
-
+ <div>
+  
   {data.length>0?<div className={Style.divbox}>{data?.map((e,i)=><div  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}>  <img     src={e?.fields.Picture[0].url}  />
@@ -190,6 +407,15 @@ router.reload()
 
 )}
   </div>:""}
+  
+  </div></div>
+ </div>
+  
+  
+<div>
+ 
+
+  
   <Pagination
             totalResults={dataTopages}
             resultsPerPage={100}
