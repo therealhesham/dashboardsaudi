@@ -13,7 +13,7 @@ try {
   res.status(200).send(femaleworkerlist)
 
 } catch (error) {
-  console.log(error)
+  // console.log(error)
   res.status(301).send("femaleworkerlist")
 
 // res.send("error")  
