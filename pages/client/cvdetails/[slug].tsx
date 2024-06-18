@@ -118,7 +118,7 @@ const downloadPdf = () => generatePDF(getTargetElement, options);
 
 return (   
 
-<Layout>
+<>
 
 {data.length>0? <div  id='cv' ref={componentRef}> <header>
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
@@ -299,6 +299,6 @@ src=
   
   </footer>   </div>  :<GridLoader color='black'/>}
    
-       </Layout>
+       </>
 )
 }

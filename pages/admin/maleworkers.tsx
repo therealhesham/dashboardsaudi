@@ -96,6 +96,7 @@ function FemaleWorkers() {
   // pagination setup
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
+  const [id,setID]=useState("")
   const totalResults = fulldata.length
 const router = useRouter()  
 // setTimeout(() =
@@ -150,8 +151,7 @@ names()
   console.log(error)
 }  
 
-}, [])
-
+}, [id])
 
 
 const cancelRecord=async(e)=>{

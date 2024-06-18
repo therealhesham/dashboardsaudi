@@ -137,7 +137,9 @@ return (
               <TableCell>رقم الهوية الوطنية</TableCell>
               <TableCell>رقم التواصل</TableCell>
               <TableCell>رقم جواز السفر</TableCell>
-              <TableCell>تاريخ اليوم</TableCell>
+              <TableCell>تاريخ الوصول </TableCell>
+              <TableCell>المتبقى على دخول المملكة </TableCell>
+
               <TableCell>مدة العمل</TableCell>
               <TableCell>التكلفة</TableCell>
               <TableCell>ؤقم هاتف العاملة</TableCell>
@@ -191,7 +193,8 @@ return (
                 </TableCell>
 
                  <TableCell>
-                  <span className="text-md">{dayjs().get("year")+"-"+(dayjs().get("month")+1) +"-"+dayjs().get("D")}</span>
+{((dayjs(e.kingdomentrydate).diff(new Date()))/100000000).toFixed()}
+
 
                 </TableCell>
 

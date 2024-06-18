@@ -80,7 +80,9 @@ export default function Page() {
   // console.log(router.query.slug)
   const [data,setData]=useState([]);
   useEffect(() => {
-//     try{
+if(!router.isReady) return;
+
+    //     try{
 
 // const token = Cookies.get("token")
 //   const decoder = jwtDecode(token);
@@ -100,7 +102,7 @@ await axios.get(`../../api/cv/${router.query.slug}`).then(e=>setData(e.data))
     
 
 
-}, [])
+}, [router.isReady])
 const getTargetElement = () => document.getElementById("cv");
 
 const downloadPdf = () => generatePDF(getTargetElement, options);

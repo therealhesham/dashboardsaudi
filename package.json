@@ -40,6 +40,7 @@
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
     "sort-es": "^1.7.9",
+    "url-encode-decode": "^1.0.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {

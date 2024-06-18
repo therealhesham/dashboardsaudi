@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Style from "styles/Home.module.css"
 
-
 // import {
 import { FileOutlined, LogoutOutlined, PlusOutlined } from '@ant-design/icons'
 import link from 'next/link'
@@ -10,7 +9,7 @@ import Link from 'next/dist/client/link'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
-import { Button, Label, Select } from '@roketid/windmill-react-ui'
+import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
 function DashboardClient({repos}) {
   // console.log(repos)
     const resultsPerPage = 10
@@ -24,102 +23,59 @@ function DashboardClient({repos}) {
   
  
   const [array,setArray]=useState([])
-const [arrayreligion,setArrayReligion]=useState([])
-const [searchData,setSearchdata]= useState([])
-const [data,setData] = useState([]);
-const [religion,setReligon]=useState("الكل")
-const [nationality,setNationality]=useState("الكل")
+
+  // And(REGEX_MATCH({fldUXlZQMZR89xcot} , experience),REGEX_MATCH({fldtal17RtxfMGKFb} , education),REGEX_MATCH({Ironing - كوي} , ironing),REGEX_MATCH({Experience - الخبرة} , experiecetype),REGEX_MATCH({fldJvA6tYkfWokgkC} , arabic),REGEX_MATCH({fldW0JTWrXNBJgll9} , english),REGEX_MATCH({Old people care - رعاية كبار السن} , old),REGEX_MATCH({Experience - الخبرة} , 'Intermediate | مدربة بخبرة متوسطة'),REGEX_MATCH({Babysitting - العناية بالأطفال} , 'Expert - ممتاز'),REGEX_MATCH({sewing - الخياطة} , 'Expert - ممتاز'),REGEX_MATCH({cleaning - التنظيف} , 'Expert - ممتاز'),REGEX_MATCH({laundry - الغسيل} , 'Expert - ممتاز'),REGEX_MATCH({Cooking - الطبخ} ,'Expert - ممتاز' ),REGEX_MATCH({fldEYaSy8nlV1btk6} ,'Islam - الإسلام' ),REGEX_MATCH({fldVp4gvVPuUJnbyR} ,'Married - متزوجة' ))
+const [data,setData] = useState(repos);
+const [religion,setReligon]=useState("(.*)")
+const [nationality,setNationality]=useState("(.*)")
+const [maritalstatus,setMaritalStatus]=useState("(.*)")
+const [education,setEducation]=useState("(.*)")
+const [experience,setExperience]=useState("(.*)")
+const [oldCare,setOldCare]=useState("(.*)")
+const [arabic,setArabic]=useState("(.*)")
+const[experiencetype,setExperienceType]=useState("(.*)")
+const [english,setEnglish]=useState("(.*)")
+const [laundry,setLaundry]=useState("(.*)")
+const [ironing,setIroning]=useState("(.*)")
+const [cleaning,setCleaning]=useState("(.*)")
+const [cooking,setCooking]=useState("(.*)")
+const [babysitting,setBabySetting]=useState("(.*)")
+const [sewing,setSewing]=useState("(.*)")
 const [age,setAge]=useState(0);
+
+const [time,setTime]=useState()
+
+const [offset,setOffset] = useState("")
   const [previousNationality,setPreviousNationality]=useState("");
 const [previousreligion,setPreviousreligion]=useState("");
 const [user,setUser]=useState(null)
 const router=useRouter()
-useEffect(()=>{
-try {
- const token =  Cookies.get("token")
- const decoder = jwtDecode(token)
- setUser(decoder)
-} catch (error) {
-  console.log(error)
-}  
-  setData(repos)
-  function Deepsearch(){
-  if (religion == "الكل" && nationality != "الكل"){
-
-const searchdata = repos.filter(e=>e.fields["Nationality copy"] == nationality );
-
-
-// const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
-  setData(searchdata)
-
-
-
-
-  }
-
-if (religion != "الكل" && nationality == "الكل"){
-// const searchdata = repos.filter(e=>e.fields["Nationaity copy"] == nationality );
-
-
-
-
-
-const sec = repos.filter(e=>e.fields["Religion - الديانة"] == religion); 
-  setData(sec)
-
-
-
-}
-
-if (religion == "الكل" && nationality == "الكل"){
-//
-  setData(repos)
-
-
-
-}
-if (religion != "الكل" && nationality != "الكل"){
-
-const searchdata = repos.filter(e=>e.fields["Nationality copy"] == nationality );
-
-
-const sec = searchdata.filter(e=>e.fields["Religion - الديانة"] == religion); 
-  setData(sec)
-
-}
-
-
-}
-// )( )
-
-religion.length > 5 ? Deepsearch(): "";
-nationality.length > 5 ?Deepsearch():"";
-
-// console.log(religion,nationality)
-  const arr=[];
-  repos.length>0?repos.map(e=>{if(!arr.includes(e.fields["Nationality copy"])) arr.push(e.fields["Nationality copy"])}):console.log("json.length")
-setArray(arr)
-const secarray=[]
-  repos.length>0?repos.map(e=>{if(!secarray.includes(e.fields["Religion - الديانة"])) secarray.push(e.fields["Religion - الديانة"])}):console.log("json.length")
-setArrayReligion(secarray)
-  // console.log(nationality != previousNationality)
-
-
-// if(nationality != previousNationality){  
-//   console.log("sss")
-//   // setData(repos)
-//  setData([...repos.filter(e=>e.fields["Nationaity copy"] == nationality)]) ;
-// }
-
-// if(religion != previousreligion)
-// { 
-//   setData([...data.filter(e=>e.fields["Religion - الديانة"] == religion)]);
-// }
-
-},[religion,nationality])
+const [dataTopages,setDatepages]=useState(repos.length)
+console.log(religion)
+// useEffect(()=>{
+//   // console.log(dataTopages)
+//   // console.log(encodeURIComponent(english))
+// (async function get() {
+//  const waiter = await  fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9?filterByFormula=%22And(REGEX_MATCH(%7BfldUXlZQMZR89xcot%7D+%2C+"+encodeURIComponent(experience)+")%2CREGEX_MATCH(%7Bfldtal17RtxfMGKFb%7D+%2C+"+encodeURIComponent(education)+")%2CREGEX_MATCH(%7BIroning+-+%D9%83%D9%88%D9%8A%7D+%2C"+encodeURIComponent(ironing)+")%2CREGEX_MATCH(%7BExperience+-+%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A9%7D+%2C"+encodeURIComponent(experiecetype)+")%2CREGEX_MATCH(%7BfldJvA6tYkfWokgkC%7D+%2C"+encodeURIComponent(arabic)+")%2CREGEX_MATCH(%7BfldW0JTWrXNBJgll9%7D+%2C"+encodeURIComponent(english)+")%2CREGEX_MATCH(%7BOld+people+care+-+%D8%B1%D8%B9%D8%A7%D9%8A%D8%A9+%D9%83%D8%A8%D8%A7%D8%B1+%D8%A7%D9%84%D8%B3%D9%86%7D+%2C+"+encodeURIComponent(oldCare)+")%2CREGEX_MATCH(%7BBabysitting+-+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9+%D8%A8%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84%7D+%2C+"+encodeURIComponent(babysitting)+")%2CREGEX_MATCH(%7Bsewing+-+%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B7%D8%A9%7D+%2C+"+encodeURIComponent(sewing)+")%2CREGEX_MATCH(%7Bcleaning+-+%D8%A7%D9%84%D8%AA%D9%86%D8%B8%D9%8A%D9%81%7D+%2C"+encodeURIComponent(cleaning)+"+)%2CREGEX_MATCH(%7Blaundry+-+%D8%A7%D9%84%D8%BA%D8%B3%D9%8A%D9%84%7D+%2C+"+encodeURIComponent(laundry)+")%2CREGEX_MATCH(%7BCooking+-+%D8%A7%D9%84%D8%B7%D8%A8%D8%AE%7D+%2C"+encodeURIComponent(cooking)+"+)%2CREGEX_MATCH(%7BfldEYaSy8nlV1btk6%7D+%2C"+encodeURIComponent(religion)+")%2CREGEX_MATCH(%7BfldVp4gvVPuUJnbyR%7D+%2C"+encodeURIComponent(maritalstatus)+"))%22&pageSize=100&offset="+offset+"&view=%D8%A7%D9%84%D8%A7%D8%B3%D8%A7%D8%B3%D9%8A",{method:"get",headers: {'Authorization':'Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d'}})
+//  const dataextracted = await waiter.json()
+//  {dataextracted.offset?setOffset(dataextracted.offset):setOffset("")}
+//  setData(dataextracted.records)
+  
+// })()
+// },[])
 // LogoutOutlined
 
+const post=async()=>{
 
+const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify({religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
+const waiter = await fetcher.json()
+console.log(waiter)
+
+
+
+}
 return (
 <>
   {user?
@@ -159,38 +115,17 @@ router.reload()
 {/* <Layout> */}
 <div>
   
-<div style={{width:"250px"}}>
-<Label >
-
-  
-          <span>Nationality</span>
-            <Select className="mt-1" onChange={e=>{
-              setPreviousNationality(nationality)
-              setNationality(e.target.value)}}>
-
-<option placeholder='الكل'>الكل</option>
-
-{array.map((e,i)=>
-    <option key={i} >{e} </option>
-
-
-)}
-  </Select>
-
-        </Label>
-
+<div style={{width:"250px",margin:"5px"}}>
+        
 <Label >
           <span>Religion</span>
-            <Select className="mt-1" onChange={e=>{
-              setPreviousreligion(religion)
-              setReligon(e.target.value)}}>
+            <Select className="mt-1" onChange={e=>post()}>
 
 <option placeholder='الكل'>الكل</option>
-{arrayreligion.map((e,i)=>
-    <option key={i} >{e} </option>
 
+<option value="Islam - الإسلام">الاسلام</option>
+<option value="Christianity - المسيحية">المسيحية</option>
 
-)}
   </Select>
 
   
@@ -198,7 +133,8 @@ router.reload()
 
   
         </Label>
-  {/* <input type="range" min={0} max="100" value="40" className="range range-warning" />  */}
+
+        
 
 </div>
 
@@ -240,17 +176,27 @@ router.reload()
 
 </Link>
   <FileOutlined />
-</div>
-
 
 </div>
-    
+
+ 
+</div>
+   
 </div>
     
   </div>    
 </div>
-  )}
+
+
+)}
   </div>:""}
+  <Pagination
+            totalResults={dataTopages}
+            resultsPerPage={100}
+            label="Table navigation"
+            onChange={()=>setTime(Date.now())}
+          />
+
   </div>
   </>
   )

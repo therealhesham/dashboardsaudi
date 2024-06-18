@@ -37,6 +37,7 @@ export default function Page() {
   const [data,setData]=useState([]);
   
   useEffect(() => {
+    if(!router.isReady)return;
       try {
         const token = Cookies.get("token")
   const decoder = jwtDecode(token);
@@ -57,7 +58,7 @@ export default function Page() {
   }
   
 
-}, [])
+}, [router.isReady])
 //@ts-ignore
 // ClockLoader
 

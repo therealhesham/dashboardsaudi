@@ -20,14 +20,13 @@ const result =  await new Promise((resolve,reject)=>{
 
 
 const results=    base('السير الذاتية').select({
-   
-        view: "الاساسي"
+  view: "الاساسي"
     }).all()
 
  resolve(results)
 })
 
-// console.log(arr.length)
+// console.log(result.length)
   res.status(200).json(result)
 }
 

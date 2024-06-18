@@ -1,4 +1,5 @@
-
+ //@ts-nocheck
+//@ts-ignore
 import Airtable ,{Table} from "airtable";
 
 import { Console } from "console";
@@ -17,11 +18,11 @@ type Data = {
 //@ts-ignore
 const arr = [];
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
-
-const token = req.cookies.token;
-//@ts-nocheck
-//@ts-ignore
-const verify= jwt.verify(token,'secret');
+  const token = req.cookies.token;
+  //@ts-nocheck
+  //@ts-ignore
+  const verify= jwt.verify(token,'secret');
+  if (verify.fullname == undefined) return  res.status(301).json("error")
 console.log(verify)
   const result =  await new Promise((resolve,reject)=>{
 
@@ -33,11 +34,12 @@ console.log(verify)
 
 records.forEach(function(record,s) {
 // console.log(record)
-  //@ts-nocheck
-//@ts-ignore
+ 
 // console.log(s)
 
-  if (record.fields["العملاء"] == verify.fullname) arr.push(record)
+
+  if (record.fields["العملاء"] == verify.fullname) arr.push(record);
+            
             
         });
      //@ts-nocheck
