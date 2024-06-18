@@ -67,7 +67,7 @@ const [dataTopages,setDatepages]=useState(repos.length)
 useEffect(()=>{
   
   
-  post()},[religion,ironing,laundry,cleaning,english,arabic])
+  post()},[religion,ironing,laundry,cleaning,english,arabic,sewing,education,cooking,oldCare,babysitting])
 // useEffect(()=>{
 //   // console.log(dataTopages)
 //   // console.log(encodeURIComponent(english))
@@ -120,7 +120,7 @@ router.reload()
   
   <div style={{display:'grid',gridTemplateColumns:"20% 80%"}}>
  
-<div style={{margin:"5px" ,gridColumnStart:"1",gridColumnEnd:"2"}}>
+<div style={{margin:"5px" ,gridColumnStart:"1",gridColumnEnd:"2",overflow:"scroll"}}>
         
 <Label >
           <span>Arabic</span>
@@ -195,7 +195,7 @@ router.reload()
 
 
 
-<option placeholder='الكل'>الكل</option>
+<option placeholder='(.*)' value="(.*)">الكل</option>
 
 <option value="Islam - الإسلام">الاسلام</option>
 <option value="Christianity - المسيحية">المسيحية</option>
@@ -220,9 +220,74 @@ router.reload()
 
 
 
-<option placeholder='الكل'>الكل</option>
+<option placeholder='(.*)'>الكل</option>
 
-<option value="Non-Muslim - غير مسلم"></option>
+<option value="Yes - نعم">نعم</option>
+<option value="No - لا">لا</option>
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+<Label >
+          <span>Education</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setEducation(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+
+<option value="University level - جامعي">جامعي</option>
+<option value="High school - ثانوي">ثانوي</option>
+<option value="Diploma - دبلوم">دبلوم</option>
+<option value="Primary school - ابتدائي">ابتدائي</option>
+
+
+
+
+
+
+
+
+
+
+
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+<Label >
+          <span>Cooking</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setCooking(e.target.value);
+              
+// post();
+}}>
+
+
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
 
   </Select>
 
@@ -352,6 +417,71 @@ router.reload()
         </Label>
 
 
+<Label >
+          <span>Sewing</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setSewing(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+{/* <option value="Beginner - مبتدأ">مبتدأ</option> */}
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+
+
+
+<Label >
+          <span>Babysetting</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setBabySetting(e.target.value);
+              
+// post();
+}}>
+
+
+
+{/* <option placeholder='الكل'>الكل</option> */}
+
+<option value="(.*)">الكل</option>
+<option value="Expert - ممتاز">ممتاز</option>
+<option value="Advanced - جيد جداً">جيد جدا</option>
+<option value="Intermediate - جيد">جيد</option>
+<option value="Beginner - مبتدأ">مبتدأ</option>
+{/* <option value="Beginner - مبتدأ">مبتدأ</option> */}
+
+
+{/* <option value="Christianity - المسيحية">المسيحية</option>
+<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+
+  </Select>
+
+  
+
+
+  
+        </Label>
 </div>
 
  <div>
@@ -378,7 +508,7 @@ router.reload()
     <div className="card-actions justify-end  pointer">
 <div style={{display:"inline-flex"}}>
 <div style={{display:"inline-flex",cursor:"pointer",}}> 
-  <Link href={"../client/book/"+e.fields["م"]} >
+  <Link href={"../client/book/"+e.id} >
 
  <span style={{backgroundColor:"dodgerblue",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 </Link>
@@ -388,7 +518,7 @@ router.reload()
 
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
-  <Link href={"../client/cvdetails/"+e.fields["م"]} >
+  <Link href={"../client/cvdetails/"+e.id} >
  <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>السيرة الذاتية</span>
 
 </Link>

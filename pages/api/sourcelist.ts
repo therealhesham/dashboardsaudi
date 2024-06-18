@@ -17,21 +17,15 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 try {
 
   
-  // const resultone =  await new Promise((resolve,reject)=>{
 const create= base('مصدر العميل').select({
-    // Selecting the first 3 records in Grid view:
     view: "Grid view"
 }).eachPage(function page(records, fetchNextPage) {
-    // This function (`page`) will get called for each page of records.
 
     
      res.status(200).json(records);
     
     
     })
-  // resolve(create)
-  // })
-// console.log(result)ؤ
   
 } catch (error) {
   console.log(error)

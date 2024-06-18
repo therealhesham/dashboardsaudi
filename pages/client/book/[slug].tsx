@@ -93,7 +93,8 @@ const options: Options = {
 export default function Page() {
   const router = useRouter()
 const [errorEmail,setErrorEmail]=useState(false);
-const [data,setData]=useState([]);
+  const [data,setData]=useState({fields:{"Name - الاسم":null}});
+
 const [isModalOpen, setIsModalOpen] = useState(false)
   function openModal() {
     setIsModalOpen(true)
@@ -137,7 +138,7 @@ const onSubmit = async (sata) => {
 setFetching(true)
   const fetcher = await fetch('../../api/orderforexistingclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({fullname:user.fullname,phonenumber:user.phonenumber,email:user.email,id:data[0].id,cvnumber:data[0].fields.Name})})
+      },body:JSON.stringify({fullname:user.fullname,phonenumber:user.phonenumber,email:user.email,id:data.id,cvnumber:data.fields.Name})})
 
 
       const e= await fetcher.text()
@@ -157,7 +158,7 @@ const onSubmitNewclient = async (sata) => {
 setFetching(true)
   const fetcher = await fetch('../../api/newclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({...sata,id:data[0].id,cvnumber:data[0].fields.Name})})
+      },body:JSON.stringify({...sata,id:data.id,cvnumber:data.fields.Name})})
 
       const e= await fetcher.text()
       
@@ -178,8 +179,8 @@ const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),ema
   const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
   useEffect(() => {
+    // if(data.fields["Name - الاسم"] == null)return;
     if(!router.isReady )return;
-
 try {
  const token =  Cookies.get("token")
  const decoder = jwtDecode(token)
@@ -192,20 +193,14 @@ try {
 
 
 try {
-  name()
-} catch (error) {
-  console.log(error)
-}
-    
-}, [router.isReady])
-  async function name() {
-     await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
-     .then(json  => {
-      console.log(json)
-setData(json)
-  } 
+ (async function fecher() {
   
-)
+  const sss =await fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9/"+router.query.slug,{method:"get",headers:{"Authorization":"Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d"}})
+          const waiter = await sss.json()
+          setData(waiter)
+
+
+          
  const fetcher = await fetch(`../../api/sourcelist`);
  const f = fetcher.json()
      .then(json  => {
@@ -213,6 +208,15 @@ setSourceList(json)
   } 
   
 )
+})()
+// name()
+} catch (error) {
+  console.log(error)
+}
+    
+}, [router.isReady])
+  async function name() {
+     
   }
 return (   
 <>
@@ -295,28 +299,28 @@ router.reload()
   
   
   <span>الاسم</span>
-        {data.length>0?  <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />:""}
+        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Name - الاسم"]} />:""}
 
         </Label>
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-        {data.length>0?  <Input className="mt-1" value={data[0].fields["Nationality copy"]} />:""}
+        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Nationality copy"]} />:""}
 
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
-        {data.length>0?  <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />:""}
+        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["date of birth - تاريخ الميلاد"]} />:""}
 
         </Label>
 <Label className="mt-4">
           <span>العمر</span>
-        {data.length>0?  <Input className="mt-1" value={data[0].fields["age - العمر"]} />:""}
+        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["age - العمر"]} />:""}
 
         </Label>
 <Label className="mt-4">
           <span>الديانة</span>
-        {data.length>0?  <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />:""}
+        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Religion - الديانة"]} />:""}
 
           </Label>
 <Label className="mt-4">
@@ -345,7 +349,7 @@ router.reload()
 
           <Input className="mt-1" placeholder="Full Name" type='text' {...register("fullname",{required:true})}/>
             {errors.fullname?<span>{errors.fullname.message}</span>:""}
-          {/* <h1 className="mt-1"  >{data[0].fields["Name - الاسم"]}</h1> */}
+          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
         </Label>
 
   <Label className="mt-4">
@@ -366,7 +370,7 @@ router.reload()
   
           <Input className="mt-1" placeholder="phonenumber" {...register("phonenumber",{required:true})}/>
 {/* <span>رقم الجوال سيتم استخدامه كرقم سري لمتابعة الطلب</span> */}
-          {/* <h1 className="mt-1"  >{data[0].fields["Name - الاسم"]}</h1> */}
+          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
         </Label>
   
 
@@ -378,7 +382,7 @@ router.reload()
   
           <Input className="mt-1" placeholder="password" {...register("password",{required:true})}/>
 {/* <span>رقم الجوال سيتم استخدامه كرقم سري لمتابعة الطلب</span> */}
-          {/* <h1 className="mt-1"  >{data[0].fields["Name - الاسم"]}</h1> */}
+          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
         </Label>
   
 
@@ -392,25 +396,25 @@ router.reload()
   
   
   <span>الاسم</span>
-          <Input className="mt-1" value={data[0]?data[0].fields["Name - الاسم"]:""} />
+          <Input className="mt-1" value={data?data.fields["Name - الاسم"]:""} />
 
         </Label>
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0]?data[0].fields["Nationality copy"]:""} />
+          <Input className="mt-1" value={data?data.fields["Nationality copy"]:""} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
-          <Input className="mt-1" value={data[0]?data[0].fields["date of birth - تاريخ الميلاد"]:""} />
+          <Input className="mt-1" value={data?data.fields["date of birth - تاريخ الميلاد"]:""} />
         </Label>
 <Label className="mt-4">
           <span>العمر</span>
-          <Input className="mt-1" value={data[0]?data[0].fields["age - العمر"]:""} />
+          <Input className="mt-1" value={data?data.fields["age - العمر"]:""} />
         </Label>
 <Label className="mt-4">
           <span>الديانة</span>
-               <Input className="mt-1" value={data[0]?data[0].fields["Religion - الديانة"]:""} />
+               <Input className="mt-1" value={data?data.fields["Religion - الديانة"]:""} />
         </Label>
 <Label className="mt-4">
           <span>كيف تعرفت علينا</span>

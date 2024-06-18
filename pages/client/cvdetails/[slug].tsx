@@ -75,31 +75,19 @@ const response2 = response.concat([]);
 export default function Page() {
   const router = useRouter()
   // console.log(router.query.slug)
-  const [data,setData]=useState([]);
+  const [data,setData]=useState({fields:{"Name - الاسم":null}});
   useEffect(() => {
-    if(!router.isReady )return;
-//     try{
+    if(!router.isReady )return; 
+    // if(!data) return;
 
-// const token = Cookies.get("token")
-//   const decoder = jwtDecode(token);
+(async function fecher() {
   
-// console.log(decoder.idnumber)
-//   } catch (error) {
-//     router.replace("/login")
-//   }
+  const sss =await fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9/"+router.query.slug,{method:"get",headers:{"Authorization":"Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d"}})
+          const waiter = await sss.json()
+          setData(waiter)
 
+})()
 
-  (async function name() {
-    console.log(router.query.slug)
-     await fetch(`../../api/cv/${router.query.slug}`).then(response => response.json())
-     .then(json  => {
-setData(json)
-      //  setData(json)
-  } 
-  // names();
-  
-)
-  })()
     
 
 
@@ -115,12 +103,12 @@ const downloadPdf = () => generatePDF(getTargetElement, options);
 
 // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 // Label
-
+// console.log(data.fields["Name - الاسم"])
 return (   
 
 <>
 
-{data.length>0? <div  id='cv' ref={componentRef}> <header>
+{data.fields["Name - الاسم"] != null? <div  id='cv' ref={componentRef}> <header>
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 
    </header>
@@ -129,7 +117,7 @@ return (
    <div style={{display:"flex",flexDirection:"row",flexWrap: "nowrap"}}>
 <div style={{flexBasis: "50%"}}>
 <img 
-src={data.length>0?data[0].fields.Picture[0].url:null}
+src={data.fields?data.fields.Picture[0].url:null}
       width={500}
       height={500}
       alt=""
@@ -151,28 +139,28 @@ src=
 
         <Label className="mt-4">
           <span>الاسم</span>
-          <Input className="mt-1" value={data[0].fields["Name - الاسم"]} />
+          {data.fields["Name - الاسم"]?<Input className="mt-1" value={data.fields["Name - الاسم"]} />:null}
         </Label>
 
 <Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
           <span>الجنسية</span>
-          <Input className="mt-1" value={data[0].fields["Nationality copy"]} />
+          <Input className="mt-1" value={data.fields["Nationality copy"]} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الميلاد</span>
-          <Input className="mt-1" value={data[0].fields["date of birth - تاريخ الميلاد"]} />
+          <Input className="mt-1" value={data.fields["date of birth - تاريخ الميلاد"]} />
         </Label>
 <Label className="mt-4">
           <span>العمر</span>
-          <Input className="mt-1" value={data[0].fields["age - العمر"]} />
+          <Input className="mt-1" value={data.fields["age - العمر"]} />
         </Label>
 <Label className="mt-4">
           <span>الديانة</span>
-               <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />
+               <Input className="mt-1" value={data.fields["Religion - الديانة"]} />
         </Label>
 <Label className="mt-4">
           <span>جواز السفر</span>
-          <Input className="mt-1" value={data[0].fields["Religion - الديانة"]} />
+          <Input className="mt-1" value={data.fields["Religion - الديانة"]} />
         </Label>
 <Label className="mt-4">
           <span>تاريخ الاصدار</span>
@@ -188,7 +176,7 @@ src=
           <span>الحالة الاجتماعية</span>
           
 
-          <Input className="mt-1" value={data[0].fields["marital status - الحالة الاجتماعية"]} />
+          <Input className="mt-1" value={data.fields["marital status - الحالة الاجتماعية"]} />
         </Label>
 
 
@@ -203,7 +191,7 @@ src=
           
 
           <span>الراتب</span>
-          <Input className="mt-1"  value={data[0].fields["Salary - الراتب"]} />
+          <Input className="mt-1"  value={data.fields["Salary - الراتب"]} />
         </Label>
 
 
@@ -231,7 +219,7 @@ src=
 
 <Label className="mt-4" style={{gridColumnStart:1,gridColumnEnd:3}}>
           <span>   سنوات وأماكن الخبرات</span>
-          <Input className="mt-1" value={data[0].fields["Experience - الخبرة"]} />
+          <Input className="mt-1" value={data.fields["Experience - الخبرة"]} />
         </Label>
 
 
@@ -239,26 +227,26 @@ src=
 
 <Label className="mt-4" >
           <span>   الغسيل</span>
-          <Input className="mt-1" value={data[0].fields["laundry - الغسيل"]} />
+          <Input className="mt-1" value={data.fields["laundry - الغسيل"]} />
         </Label>
 
 <Label className="mt-4" >
           <span>   الكوي</span>
           
-          <Input className="mt-1" value={data[0].fields["Ironing - كوي"]} />
+          <Input className="mt-1" value={data.fields["Ironing - كوي"]} />
         </Label>
 
 <Label className="mt-4" >
   
           <span>التنظيف</span>
-          <Input className="mt-1" value={data[0].fields["cleaning - التنظيف"]} />
+          <Input className="mt-1" value={data.fields["cleaning - التنظيف"]} />
         </Label>
 
 <Label className="mt-4" >
           <span>العناية بالأطفال</span>
           
 
-          <Input className="mt-1" value={data[0].fields["Babysitting - العناية بالأطفال"]}  />
+          <Input className="mt-1" value={data.fields["Babysitting - العناية بالأطفال"]}  />
         </Label>
 
 <Label className="mt-4" >
@@ -270,7 +258,7 @@ src=
 
 <Label className="mt-4" >
           <span>الطبخ</span>
-          <Input className="mt-1" value={data[0].fields["Cooking - الطبخ"]} />
+          <Input className="mt-1" value={data.fields["Cooking - الطبخ"]} />
         </Label>
 
 
