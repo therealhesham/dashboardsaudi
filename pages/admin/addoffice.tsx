@@ -86,12 +86,15 @@ setFetching(false)
   
 }
 //@ts-ignore
-const handleSignUp = async (data) => {
+const [officename,setOfficeName]=useState("")
+const [location,setLocation]= useState('')
+const [phone,setPhone]=useState("")
+const handleSignUp = async () => {
   
 setFetching(true)
   const fetcher = await fetch('../api/addoffice',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify(data)})
+      },body:JSON.stringify({officename:officename,country:location})})
 
       const e= await fetcher.text()
       console.log(fetcher.status)
@@ -140,23 +143,23 @@ const{register,handleSubmit,formState:{errors},setValue} = useForm({resolver:yup
       <PageTitle>اضافة مكتب </PageTitle>
       
 {fetching?<div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  </div>:
- <form onSubmit={handleSubmit(handleSignUp)}>
+ <form onSubmit={()=>handleSignUp()}>
       <div className="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
         <Label>
           <span>اسم المكتب</span>
           
-<Input  className="mt-1"   {...register("name",{required:true})} placeholder="اسم المكتب"  type='text' />
-       {errors.officename ?<span style={{color:"red"}}>{errors.officename.message}</span>:null }
+<Input  className="mt-1"   onChange={(e)=>setOfficeName(e.target.valye)} placeholder="اسم المكتب"  type='text' />
+       {/* {errors.officename ?<span style={{color:"red"}}>{errors.officename.message}</span>:null } */}
        
         </Label>
         <Label>
 
           <span>الموقع</span>
-<Select>
+<Select onChange={(e)=>setLocation(e.target.value)}>
 
 {offices.map(e=>
-<option>
+<option value={e.id}>
 {e?.fields["الدولة"]}
 </option>)}
 
@@ -168,8 +171,8 @@ const{register,handleSubmit,formState:{errors},setValue} = useForm({resolver:yup
         <Label>
 
           <span>رقم الهاتف</span>
-          <Input className="mt-1" {...register("phonenumber",{required:false})} placeholder="جوال المكتب" type='text' />
-        {errors.location?<span style={{color:"red"}}>{errors.location.message}</span>:null}
+          <Input className="mt-1" onChange={e=>setPhone(e.target.value)} placeholder="جوال المكتب" type='text' />
+        {/* {errors.location?<span style={{color:"red"}}>{errors.location.message}</span>:null} */}
         </Label>
 
 <Button type='submit'>ِAdd Office</Button>

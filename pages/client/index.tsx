@@ -360,9 +360,6 @@ router.reload()
 <option value="Beginner - مبتدأ">مبتدأ</option>
 
 
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
-
   </Select>
 
   
@@ -462,18 +459,12 @@ router.reload()
 
 
 
-{/* <option placeholder='الكل'>الكل</option> */}
 
 <option value="(.*)">الكل</option>
 <option value="Expert - ممتاز">ممتاز</option>
 <option value="Advanced - جيد جداً">جيد جدا</option>
 <option value="Intermediate - جيد">جيد</option>
 <option value="Beginner - مبتدأ">مبتدأ</option>
-{/* <option value="Beginner - مبتدأ">مبتدأ</option> */}
-
-
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
 
   </Select>
 
