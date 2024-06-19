@@ -134,18 +134,18 @@ const body = [{
           router.query.slug
         ],
         "Name - الاسم": fullname,
-         "Nationality copy": "Kenya - كينيا",
+        //  "Nationality copy": data.fields["الدولة copy"],
         "Religion - الديانة": religion,
         "marital status - الحالة الاجتماعية": maritalStatus,
         "weight - الوزن": weight,
         "height - الطول": height,
-        "Education -  التعليم": "High school - ثانوي",
-        "Experience - الخبرة": "Intermediate | مدربة بخبرة متوسطة",
+        "Education -  التعليم": education,
+        "Experience - الخبرة":"Intermediate - جيد",
         "Passport number - رقم الجواز": passport,
         "Arabic -  العربية": arabic,
         "English - الانجليزية": english,
         "Salary - الراتب": salary,
-        "laundry - الغسيل": "Expert - ممتاز",
+        "laundry - الغسيل": laundry,
         "Ironing - كوي": ironing,
         "cleaning - التنظيف": cleaning,
         "Cooking - الطبخ": cooking,
@@ -205,7 +205,7 @@ const handleUpload = async (e) => {
 
 // const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
 // Label
-// console.log(data.fields["Name - الاسم"])
+
 return (   
 
 <>
@@ -276,7 +276,7 @@ src=
           <span>الديانة</span>
             <Select className="mt-1" onChange={e=>{
               
-              setReligon(e.target.value);
+              setReligion(e.target.value);
               
 // post();
 }}>
@@ -566,7 +566,7 @@ src=
           <span>رعاية كبار السن</span>
            <Select className="mt-1" onChange={e=>{
               
-              setOldCare(e.target.value);
+              setoldCare(e.target.value);
               
 // post();
 }}>
