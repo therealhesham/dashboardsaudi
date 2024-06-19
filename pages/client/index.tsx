@@ -66,6 +66,8 @@ const [dataTopages,setDatepages]=useState(repos.length)
 
 useEffect(()=>{
   
+
+
   
   post()},[religion,ironing,laundry,cleaning,english,arabic,sewing,education,cooking,oldCare,babysitting])
 // useEffect(()=>{
@@ -479,7 +481,8 @@ router.reload()
   
   {data.length>0?<div className={Style.divbox}>{data?.map((e,i)=><div  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
   <div className="pic"> 
-    <div  style={{width:"80px",height:"70px"}}>  <img     src={e?.fields.Picture[0].url}  />
+    <div  style={{width:"80px",height:"70px"}}> 
+      {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}
 </div>
 </div>
   <div className="card-body" >
