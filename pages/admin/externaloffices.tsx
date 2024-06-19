@@ -8,6 +8,7 @@ import ChartLegend from 'example/components/Chart/ChartLegend'
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'example/containers/Layout'
+// import '../'
 import response, { ITableData } from 'utils/demo/tableData'
 import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from 'icons'
 // import"
@@ -153,15 +154,6 @@ return (
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
-                
-                <TableCell>
-                  <span className="text-md">
-                  <span className="text-md">{e?.fields["المالية"]}</span>
-
-                    
-                    {/* {new Date(user.date).toLocaleDateString()} */}
-                  </span>
-                </TableCell>
 
                 <TableCell>
                   {/* <span className="text-md"> */}
@@ -170,8 +162,10 @@ return (
                   {/* </span> */}
                 </TableCell>
                 <TableCell>
-                 {e.fields["السير الذاتية copy"] ? <span className="text-md">
-                 {e?.fields["السير الذاتية copy"].split(",").map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
+                 {e.fields["السير الذاتية"] ? <span className="text-md">
+                 {e?.fields["السير الذاتية"].map(s=>
+                 
+                 <li><Link href={"../client/cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link></li>)}  
                    
                   </span>:""}
                 </TableCell>

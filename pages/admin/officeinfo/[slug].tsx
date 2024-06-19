@@ -58,7 +58,17 @@ export default function Page() {
   }
   
 
+
 }, [router.isReady])
+
+async function fecher(id) {
+  
+  const sss =await fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9/"+id,{method:"get",headers:{"Authorization":"Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d"}})
+          const waiter = await sss.json()
+          return waiter.field["Name - الاسم"]
+
+
+}
 //@ts-ignore
 // ClockLoader
 
@@ -73,10 +83,10 @@ return (   <Layout>
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>العامل</TableCell>
-              <TableCell>السير الذاتية</TableCell>
+              {/* <TableCell>العامل</TableCell> */}
               <TableCell>الجنسية</TableCell>
-              <TableCell>الحالة الاجتماعية</TableCell>
+              <TableCell>السير الذاتية</TableCell>
+              {/* <TableCell>الحالة الاجتماعية</TableCell> */}
             </tr>
           </TableHeader>
           <TableBody>
@@ -91,10 +101,12 @@ return (   <Layout>
                   </div>
                 </TableCell>
                 <TableCell>
-                      {user?.fields["السير الذاتية copy"]?<p className="font-semibold">{user?.fields["السير الذاتية copy"].split(",").map(e=>
-                        <Link href={"/client/cvdetails/"+e}>
+                      {user?.fields["السير الذاتية"]?<p className="font-semibold">{user?.fields["السير الذاتية"].map(e=>
+                        
+                    <li>                        <Link href={"/client/cvdetails/"+e}>
                         <span>{e}</span>
                         </Link>
+</li>    
                         )}</p>:""}
                 </TableCell>
                

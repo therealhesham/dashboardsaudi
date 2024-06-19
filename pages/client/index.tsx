@@ -539,13 +539,7 @@ router.reload()
 <div>
  
 
-  
-  <Pagination
-            totalResults={dataTopages}
-            resultsPerPage={100}
-            label="Table navigation"
-            onChange={()=>setTime(Date.now())}
-          />
+
 
   </div>
   </>
