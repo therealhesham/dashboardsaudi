@@ -132,13 +132,13 @@ return (
               <TableCell>Office Name</TableCell>
               <TableCell>Location</TableCell>
               
-              <TableCell>Fiscal</TableCell>
+              {/* <TableCell>Fiscal</TableCell> */}
               <TableCell>Flag</TableCell>
               <TableCell>Registered CV</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
-            {paginatedData?.map((e, i) => (
+            {fulldata?.map((e, i) => (
               <TableRow key={i}>
                 
                 <TableCell>
@@ -165,13 +165,12 @@ return (
 
                 <TableCell>
                   {/* <span className="text-md"> */}
-                  <img className="text-md" src={e?.fields["العلم"][0].url} width="30px" height="20px"/>
-                    
+                 {e?.fields["العلم"] ?<img className="text-md" src={e?.fields["العلم"][0].url} width="30px" height="20px"/>:""}            
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   {/* </span> */}
                 </TableCell>
                 <TableCell>
-                 {e.fields["السير الذاتية"] ? <span className="text-md">
+                 {e.fields["السير الذاتية copy"] ? <span className="text-md">
                  {e?.fields["السير الذاتية copy"].split(",").map(s=><Link href={"./cvdetails/"+s}><span className="text-md" style={{textDecorationLine:"underline",textDecorationColor:"blueviolet"}}>{s}</span></Link>)}  
                    
                   </span>:""}
@@ -182,12 +181,7 @@ return (
         </Table>
 
         <TableFooter>
-          <Pagination
-            totalResults={totalResults}
-            resultsPerPage={resultsPerPage}
-            label="Table navigation"
-            onChange={onPageChange}
-          />
+        
         </TableFooter>
       </TableContainer>
 
