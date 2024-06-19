@@ -82,6 +82,11 @@ const routes: IRoute[] = [
     icon: 'HomeIcon', 
     name: 'Homemaid Arrival List', 
   },{
+    path: '/admin/addoffice', 
+    icon: 'CardsIcon', 
+    name: 'Add office', 
+    // exact: true,
+  },{
     path: '/admin/externaloffices', 
     icon: 'HomeIcon', 
     name: 'Foreign offices', 
