@@ -63,13 +63,12 @@ const [previousreligion,setPreviousreligion]=useState("");
 const [user,setUser]=useState({})
 const router=useRouter()
 const [dataTopages,setDatepages]=useState(repos.length)
-
 useEffect(()=>{
   
 try {
  const token =  Cookies.get("token")
  const decoder = jwtDecode(token)
- console.log(user.isUser)
+ console.log(decoder.isUser)
  setUser(decoder)
 } catch (error) {
   // console.log(error)
