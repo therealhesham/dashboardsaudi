@@ -16,12 +16,15 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 try {
 
 const result =  await new Promise((resolve,reject)=>{
-const create = base('السير الذاتية').create(req.body)
 
-   resolve(create)
-
- 
-
+const delet = base('السير الذاتية').destroy(['recx5JJbWvg5eycat', 'recsd7LIaZwfnZ8Jn'], function(err, deletedRecords) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log('Deleted', deletedRecords.length, 'records');
+});
+resolve(delet)
    
   })
 

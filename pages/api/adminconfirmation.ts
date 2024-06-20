@@ -22,7 +22,7 @@ const update = base('السير الذاتية').update([
   {
     "id": req.body.id,
     "fields": {
-      "العملاء":req.body.fullname,
+      // "العملاء":req.body.fullname,
       "حالة الحجز":req.body.status
     }}])
 

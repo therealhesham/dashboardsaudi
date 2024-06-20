@@ -108,16 +108,16 @@ console.log(json)
     setIsModalOpen(false)
   }
 
-const confirm=async (fullname)=>{
+const confirm=async (id)=>{
 
   const fetcher = await fetch('../api/adminconfirmation',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({fullname,id:clientlistOrders[0].id,status:"تم"})})
+      },body:JSON.stringify({id,status:"Done"})})
 
       const e= await fetcher.json()
-      
+      if(fetcher.status == 200) return alert("Changed to Done in Airtable Database")
       // console.log(fetcher.status)
-closeModal()
+// closeModal()
 
     }
 // const [fullname,setFullname]=useState("")
@@ -142,24 +142,32 @@ setClientOrderslist(e.data)
     {clientlistOrders.length>0?
 <>
        <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalHeader>Data Inserted Successfully</ModalHeader>
+        <ModalHeader>Check orders</ModalHeader>
         <ModalBody>
-          السير الذاتية الخاصة بالعميل {clientlistOrders[0].fields["العملاء"]}
-{clientlistOrders.map(e=>e.fields["م"])}
-للاطلاع عليها اضغط هنا او قم بزيارة قاعدة البيانات الخاصة بالشركة 
-
-
+          Cv List for Client <strong>{clientlistOrders[0].fields["العملاء"]}</strong>
+          <ul >
+{clientlistOrders.map((e,i)=>
+  <div style={{display:"flex",flexWrap:"nowrap" ,justifyContent:"space-around",marginBottom:"15px",rowGap:"15px"}}>
+  <li>{e.fields["م"]} </li>
+  
+  <li>{e.fields["Name - الاسم"]} </li>
+  <li><Button onClick={()=>confirm(clientlistOrders[i].id)} >Confirm</Button> </li>
+  {/* <li><Button onClick={()=>router.push()} >Check Cv</Button></li> */}
+  </div>
+)
+}
+</ul>
         </ModalBody>
         <ModalFooter>
           <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
             Close
           </Button>
-         <Button onClick={()=>confirm(
+         {/* <Button onClick={()=>confirm(
           
           
           clientlistOrders[0].fields["العملاء"])}>
           استلام الطلب
-         </Button>
+         </Button> */}
         </ModalFooter>
       </Modal>
 </>:""}

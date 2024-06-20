@@ -23,6 +23,7 @@ import {
   Avatar,
   Badge,
   Pagination,
+  Button,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -137,7 +138,6 @@ return filtering?.fields["الدولة"];
   
 }
 // console.log(list[3])
-
 
 useEffect(() => {
   
@@ -272,6 +272,7 @@ return (
               {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
               {listType =="workers"?<TableCell>المكاتب</TableCell>:null}
               {listType =="workers"?<TableCell>Religion</TableCell>:null}
+              {listType =="workers"?<TableCell>Delete</TableCell>:null}
             </tr>
           </TableHeader>
           <TableBody>
@@ -312,6 +313,17 @@ return (
                   {/* </span> */}
                 {/* </Link> */}
                 </TableCell>
+
+
+
+
+                <TableCell>
+                
+
+                <Button onClick={()=>{console.log(e.id)  }}  style={{backgroundColor:"red"}}>Delete CV </Button>
+                </TableCell>
+
+
 
               </TableRow>
             ))}

@@ -35,7 +35,6 @@ console.log(verify)
 records.forEach(function(record,s) {
 // console.log(record)
  
-// console.log(s)
 
 
   if (record.fields["العملاء"] == verify.fullname) arr.push(record);

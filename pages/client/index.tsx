@@ -10,6 +10,7 @@ import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
 import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
+import { GridLoader } from 'react-spinners'
 function DashboardClient() {
   // console.log(repos)
     const resultsPerPage = 10
@@ -92,7 +93,7 @@ try {
 
 return (
 <>
- 
+
   {user.isUser == true?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
@@ -537,7 +538,7 @@ router.reload()
 
 
 )}
-  </div>:""}
+  </div>:<div style={{display:"flex",justifyContent:"center"}}><GridLoader style={{width:"800px",height:"600px"}}/></div>}
   
   </div></div>
  </div>

@@ -132,7 +132,8 @@ try {
     json?setLength(json.length):"";
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-} 
+console.log(json[0])
+  } 
 
 )
 }
@@ -154,8 +155,8 @@ return (
   </a>
   <ul className="flex space-x-4">
     <li>
-      <Link href="/client/status">
-      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
+      <Link href="/client">
+      <Button style={{backgroundColor:"dodgerblue"}}>الرئيسية</Button></Link>
     </li>
     <li>
       <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
@@ -198,7 +199,7 @@ router.reload()
                   <div className="flex items-center text-sm" style={{width:"200px"}}>
                     <Avatar
                       className="hidden mr-3 md:block"
-                      src={e?.fields.Picture[0].url}
+                      src={('fields.Picture[0].url' in e )?e.fields.Picture[0]?.url:""}
                       alt="User image"
                     />
                     <div>
