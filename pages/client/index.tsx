@@ -60,7 +60,7 @@ const [time,setTime]=useState()
 const [offset,setOffset] = useState("")
   const [previousNationality,setPreviousNationality]=useState("");
 const [previousreligion,setPreviousreligion]=useState("");
-const [user,setUser]=useState(null)
+const [user,setUser]=useState({})
 const router=useRouter()
 const [dataTopages,setDatepages]=useState(repos.length)
 
