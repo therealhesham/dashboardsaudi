@@ -24,7 +24,8 @@ useEffect(()=>{
 if(router.pathname=="/client") return;
 if(router.pathname=="/client/book") return;
 if(router.pathname=="/client/book/[slug]") return;
-
+if(router.pathname=="/client/cvdetails") return;
+if(router.pathname=="/client/cvdetails/[slug]") return;
     const token = Cookies.get("token")
     // console.log(token)
   const decoder = jwtDecode(token);

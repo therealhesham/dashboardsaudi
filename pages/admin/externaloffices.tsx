@@ -23,6 +23,7 @@ import {
   Avatar,
   Badge,
   Pagination,
+  Button,
 } from '@roketid/windmill-react-ui'
 // jwtDecode
 
@@ -135,6 +136,8 @@ return (
               
               {/* <TableCell>Fiscal</TableCell> */}
               <TableCell>Flag</TableCell>
+
+              <TableCell>Generate Form</TableCell>
               <TableCell>Registered CV</TableCell>
             </tr>
           </TableHeader>
@@ -161,6 +164,11 @@ return (
                     {/* {new Date(user.date).toLocaleDateString()} */}
                   {/* </span> */}
                 </TableCell>
+<TableCell><Button  onClick={()=>{navigator.clipboard.writeText(window.location.origin +"/newcv/"+e.id) 
+  alert("Link Copied")}}>Generate Form for office </Button></TableCell>
+{/* <span ></span> */}
+
+
                 <TableCell>
                  {e.fields["السير الذاتية"] ? <span className="text-md">
                  {e?.fields["السير الذاتية"].map(s=>
