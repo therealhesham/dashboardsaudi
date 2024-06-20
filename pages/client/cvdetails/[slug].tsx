@@ -81,17 +81,22 @@ export default function Page() {
     // if(!data) return;
 
 (async function fecher() {
-  
+  try {
+    
   const sss =await fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9/"+router.query.slug,{method:"get",headers:{"Authorization":"Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d"}})
           const waiter = await sss.json()
           setData(waiter)
 
+  } catch (error) {
+   alert("Error Fetching Data ") 
+  }
 })()
 
     
 
 
 }, [router.isReady])
+console.log(router.isReady)
 console.log(data)
 const getTargetElement = () => document.getElementById("cv");
 
@@ -285,7 +290,7 @@ src=
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924374/40a3153b-1b92-43c1-a1d9-d0476d37a0df.png'/>
   
   
-  </footer>   </div>  :<GridLoader color='black'/>}
+  </footer>   </div>  :<div style={{display:'flex',justifyContent:"center"}}><GridLoader color='black'/></div>}
    
        </>
 )
