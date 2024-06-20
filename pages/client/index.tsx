@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
 import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
-function DashboardClient({repos}) {
+function DashboardClient() {
   // console.log(repos)
     const resultsPerPage = 10
   // const totalResults = response.length
@@ -62,7 +62,7 @@ const [offset,setOffset] = useState("")
 const [previousreligion,setPreviousreligion]=useState("");
 const [user,setUser]=useState({})
 const router=useRouter()
-const [dataTopages,setDatepages]=useState(repos.length)
+const [dataTopages,setDatepages]=useState(0)
 useEffect(()=>{
   
 try {
@@ -552,20 +552,6 @@ router.reload()
   </>
   )
 }
-export async function getServerSideProps(){
-try {
-//  async function names( )  {
-      const repo = await fetch(`https://rawaes-dashboard.vercel.app/api/hello`)
-      const repos =  await repo.json()
-  
-// console.log(repos)
-
-return { props: { repos } }
-  
-} catch (error) {
-console.log(error)  
-}
-    }
 // 
   // Fetch data from external API
   // const res = await fetch('https://api.github.com/repos/vercel/next.js')
