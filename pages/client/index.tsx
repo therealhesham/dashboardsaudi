@@ -66,6 +66,15 @@ const [dataTopages,setDatepages]=useState(repos.length)
 
 useEffect(()=>{
   
+try {
+ const token =  Cookies.get("token")
+ const decoder = jwtDecode(token)
+ console.log(user.isUser)
+ setUser(decoder)
+} catch (error) {
+  // console.log(error)
+  setUser({isUser:false})
+} 
 
 
   
@@ -86,7 +95,7 @@ useEffect(()=>{
 return (
 <>
  
-  {user?
+  {user.isUser?
 
 <nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
   <a className="text-gray-700 dark:text-gray-400" href="#">
@@ -112,7 +121,7 @@ router.reload()
   <ul className="flex space-x-4">
     
     <li>
-      <Button style={{backgroundColor:"dodgerblue"}} onClick={()=>router.replace("/client/login")}>Login</Button>
+      <Button style={{backgroundColor:"dodgerblue"}} onClick={()=>router.push("/client/login")}>Login</Button>
     </li>
   </ul>
 </nav> }

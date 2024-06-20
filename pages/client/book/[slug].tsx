@@ -184,10 +184,11 @@ const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),ema
 try {
  const token =  Cookies.get("token")
  const decoder = jwtDecode(token)
+ console.log(user.isUser)
  setUser(decoder)
 } catch (error) {
   // console.log(error)
-  setUser({user:false})
+  setUser({isUser:false})
 } 
 
 
