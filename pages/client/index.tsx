@@ -501,21 +501,21 @@ router.reload()
       </div>
     <div className="card-actions justify-end  pointer">
 <div style={{display:"inline-flex"}}>
-<div style={{display:"inline-flex",cursor:"pointer",}}> 
-  <Link href={"../client/book/"+e.id} >
+<div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer",}}> 
+  {/* <Link href={"../client/book/"+e.id} > */}
 
  <span style={{backgroundColor:"dodgerblue",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
-</Link>
+{/* </Link> */}
  
   <PlusOutlined  />
 
 
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
-  <Link href={"../client/cvdetails/"+e.id} >
- <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>السيرة الذاتية</span>
+  {/* <Link href={"../client/cvdetails/"+e.id} > */}
+ <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
 
-</Link>
+{/* </Link> */}
   <FileOutlined />
 
 </div>
