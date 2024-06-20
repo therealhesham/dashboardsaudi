@@ -27,7 +27,7 @@ try {
   return res.status(301).json({error:"خطأ في الرقم السري"});
 }
 
-const newclient = await prisma.client.create({data:{isUser:true,fullname:req.body.fullname,password:req.body.password,Cvnumber:req.body.cvnumber,email:req.body.email,
+const newclient = await prisma.client.create({data:{isUser:true,fullname:req.body.fullname,password:req.body.password,email:req.body.email,
     phonenumber:req.body.phonenumber
   }})
 
