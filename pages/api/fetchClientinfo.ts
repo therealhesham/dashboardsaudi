@@ -19,36 +19,30 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 try{
   //@ts-ignore
 const arr =[];
-  const result =  await new Promise((resolve,reject)=>{
+  // const result =  await new Promise((resolve,reject)=>{
 const update = base('السير الذاتية').select({
     // Selecting the first 3 records in الاساسي:
     view: "الاساسي"
-}).eachPage(function page(records, fetchNextPage) {
-    // This function (`page`) will get called for each page of records.
+    }).all().then(e=>
+      {
+        //@ts-ignore
+        for (let index = 0; index < e.length; index++) {
+          if(e[index].get("العملاء") == req.body.fullname)   arr.push(e[index]);   
+          }
+          if(arr.length == 0) return res.status(201).json("Not Found") ;
+        //@ts-ignore
+          res.status(200).json(arr)  
+          
+          }
+          
+          //@ts-ignore
+);
 
-    records.forEach(function(record) {
-       //@ts-ignore
-      //  console.log(record)
-      if(record.get("العملاء") == req.body.fullname) arr.push(record)
-      // console.log('Retrieved', record.get('م'));
-    });
-     //@ts-ignore
-    //@ts-nochecks
-resolve(arr)
 
-}, function done(err) {
-    if (err) { console.error(err); return; }
-})
-    // Cookies.set("token",sign);
-    // console.log(Cookies.get("token"))
-    
-    // console.log(result)
-    //@ts-ignore
-    //@ts-nochecks
 
-})
+// })
 
-    res.status(200).json(result)  
+//@ts-ignore
 
 } catch (error) {
   console.log(error)

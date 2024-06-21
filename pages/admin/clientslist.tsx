@@ -127,6 +127,7 @@ const fetchClientinfo=async (fullname)=>{
 await axios.post('../api/fetchClientinfo',{fullname},{ headers: {
     'Content-Type': 'application/json'
   }}).then((e)=>{
+    if(e.status == 201) return alert("not found data related to this client");
 setClientOrderslist(e.data)
     openModal() 
 // console.log( e.data)
