@@ -32,6 +32,11 @@ grid-template-rows: repeat(3, auto);
   }
 
     }
+
+    .DivPosition{
+position: sticky !important;
+
+    }
 .divbox{
 
 

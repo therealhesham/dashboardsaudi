@@ -41,6 +41,7 @@ setData(waiter)
   
  
   const [array,setArray]=useState([])
+  const [times,setTimes]=useState(Date.now())
 
   // And(REGEX_MATCH({fldUXlZQMZR89xcot} , experience),REGEX_MATCH({fldtal17RtxfMGKFb} , education),REGEX_MATCH({Ironing - كوي} , ironing),REGEX_MATCH({Experience - الخبرة} , experiecetype),REGEX_MATCH({fldJvA6tYkfWokgkC} , arabic),REGEX_MATCH({fldW0JTWrXNBJgll9} , english),REGEX_MATCH({Old people care - رعاية كبار السن} , old),REGEX_MATCH({Experience - الخبرة} , 'Intermediate | مدربة بخبرة متوسطة'),REGEX_MATCH({Babysitting - العناية بالأطفال} , 'Expert - ممتاز'),REGEX_MATCH({sewing - الخياطة} , 'Expert - ممتاز'),REGEX_MATCH({cleaning - التنظيف} , 'Expert - ممتاز'),REGEX_MATCH({laundry - الغسيل} , 'Expert - ممتاز'),REGEX_MATCH({Cooking - الطبخ} ,'Expert - ممتاز' ),REGEX_MATCH({fldEYaSy8nlV1btk6} ,'Islam - الإسلام' ),REGEX_MATCH({fldVp4gvVPuUJnbyR} ,'Married - متزوجة' ))
 const [data,setData] = useState([]);
@@ -61,7 +62,7 @@ const [babysitting,setBabySetting]=useState("(.*)")
 const [sewing,setSewing]=useState("(.*)")
 const [age,setAge]=useState(0);
 const [time,setTime]=useState()
-const media = useMediaQuery('(max-width:600px)',{noSsr:false})
+const media = useMediaQuery('(max-width:820px)',{noSsr:false})
 
 
 const [offset,setOffset] = useState("")
@@ -96,12 +97,16 @@ try {
 // })()
 // },[])
 // LogoutOutlined
+// console.log()
+// document.addEventListener("change",()=>{
 
+// })
+// console.log()
 return (
   // {media?}
-<div >
-  
-<nav   className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+<div  style={{backgroundColor:"rgba(204, 204, 204, 0.1882352941)"}}>
+<nav  style={{position:"sticky",zIndex:+1}} className={"flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+  <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">
@@ -130,7 +135,7 @@ router.reload()
   
   <div style={{display:'grid',gridTemplateColumns:media?"100%":"20% 80%"}}>
  
-<div style={{margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
+<div style={{marginTop:"60px",margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
         
 <Label >
           <span>Arabic</span>
@@ -247,7 +252,7 @@ router.reload()
 
  <div>
   
-  {data.length>0?<div className={Style.divbox} style={{ gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)",backgroundColor:"rgba(204, 204, 204, 0.1882352941)"}}>{data?.map((e,i)=>
+  {data.length>0?<div  className={Style.divbox} style={{marginTop:"60px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"400px",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
