@@ -215,7 +215,7 @@ const  deleterecord = async (id)=>{
 
 const fetcher = await fetch('../api/deletecv',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify(id)})
+      },body:JSON.stringify({id:id})})
 
       const e= await fetcher.text()
 if(fetcher.status == 200) setDeletedid(id)
