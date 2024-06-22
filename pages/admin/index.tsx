@@ -98,6 +98,7 @@ function Dashboard() {
   const [length,setLength]=useState(0)
   const [data, setData] = useState([])
   const [time,setTime]=useState(0)
+  const [deletedid,setDeletedid]=useState("")
   const [office,setOffice]=useState([])
   // pagination setup
   const [fulldata,setFulldata]=useState([])
@@ -138,7 +139,6 @@ return filtering?.fields["الدولة"];
   
 }
 // console.log(list[3])
-
 useEffect(() => {
   
   try {
@@ -207,7 +207,21 @@ Admins()
   console.log(error)
 }  
 
-}, [])
+}, [deletedid])
+
+
+
+const  deleterecord = async (id)=>{
+
+const fetcher = await fetch('../api/deletecv',{method:"post",headers: {'Accept':'application/json',
+        "Content-Type": "application/json",
+      },body:JSON.stringify(id)})
+
+      const e= await fetcher.text()
+if(fetcher.status == 200) setDeletedid(id)
+      console.log(fetcher.status)
+
+}
 return (
     <Layout>
       {/* {alert(user.username)} */}
@@ -320,7 +334,7 @@ return (
                 <TableCell>
                 
 
-                <Button onClick={()=>{console.log(e.id)  }}  style={{backgroundColor:"red"}}>Delete CV </Button>
+                <Button onClick={()=>{deleterecord(e.id)  }}  style={{backgroundColor:"red"}}>Delete CV </Button>
                 </TableCell>
 
 

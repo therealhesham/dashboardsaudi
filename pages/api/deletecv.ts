@@ -17,7 +17,7 @@ try {
 
 const result =  await new Promise((resolve,reject)=>{
 
-const delet = base('السير الذاتية').destroy(['recx5JJbWvg5eycat', 'recsd7LIaZwfnZ8Jn'], function(err, deletedRecords) {
+const delet = base('السير الذاتية').destroy([req.body.id], function(err, deletedRecords) {
   if (err) {
     console.error(err);
     return;
@@ -29,7 +29,7 @@ resolve(delet)
   })
 
 // console.log(result)
-  res.status(200).json(result)  
+  res.status(200).json("deleted")  
 } catch (error) {
   console.log(error)
   res.status(302).json({error:"connectivity error"})  
