@@ -11,6 +11,7 @@ import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
 import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
 import { GridLoader } from 'react-spinners'
+import { useMediaQuery } from '@mui/material'
 function DashboardClient() {
   // console.log(repos)
     const resultsPerPage = 10
@@ -55,8 +56,9 @@ const [cooking,setCooking]=useState("(.*)")
 const [babysitting,setBabySetting]=useState("(.*)")
 const [sewing,setSewing]=useState("(.*)")
 const [age,setAge]=useState(0);
-
 const [time,setTime]=useState()
+const media = useMediaQuery('(max-width:600px)',{noSsr:true})
+
 
 const [offset,setOffset] = useState("")
   const [previousNationality,setPreviousNationality]=useState("");
@@ -92,14 +94,13 @@ try {
 // LogoutOutlined
 
 return (
-<>
-
-  {user.isUser == true?
-
-<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
+  // {media?}
+<div >
+  
+<nav   className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
-  <ul className="flex space-x-4">
+  {user.isUser == true?<ul className="flex space-x-4">
     <li>
       <Link href="/client/status">
       <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
@@ -111,26 +112,21 @@ return (
 router.reload()
       }}>تسجيل الخروج</Button>
     </li>
-  </ul>
-</nav>
- :<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
-  <a className="text-gray-700 dark:text-gray-400" href="#">
-    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
-  </a>
-  <ul className="flex space-x-4">
+  </ul>:<ul className="flex space-x-4">
     
     <li>
       <Button style={{backgroundColor:"dodgerblue"}} onClick={()=>router.push("/client/login")}>Login</Button>
     </li>
   </ul>
-</nav> }
+}
+</nav>
   
  
  <div>
   
-  <div style={{display:'grid',gridTemplateColumns:"20% 80%"}}>
+  <div style={{display:'grid',gridTemplateColumns:media?"100%":"20% 80%"}}>
  
-<div style={{margin:"5px" ,gridColumnStart:"1",gridColumnEnd:"2",overflow:"scroll"}}>
+<div style={{margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
         
 <Label >
           <span>Arabic</span>
@@ -243,251 +239,12 @@ router.reload()
   
         </Label>
 
-<Label >
-          <span>Education</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setEducation(e.target.value);
-              
-// post();
-}}>
-
-
-
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-
-<option value="University level - جامعي">جامعي</option>
-<option value="High school - ثانوي">ثانوي</option>
-<option value="Diploma - دبلوم">دبلوم</option>
-<option value="Primary school - ابتدائي">ابتدائي</option>
-
-
-
-
-
-
-
-
-
-
-
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-<Label >
-          <span>Cooking</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setCooking(e.target.value);
-              
-// post();
-}}>
-
-
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-
-        
-<Label >
-          <span>Ironing</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setIroning(e.target.value);
-              
-// post();
-}}>
-
-
-
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-
-
-
-
-
-
-
-
-
-        
-<Label >
-          <span>Cleaning</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setCleaning(e.target.value);
-              
-// post();
-}}>
-
-
-
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<Label >
-          <span>Laundry</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setLaundry(e.target.value);
-              
-// post();
-}}>
-
-
-
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-
-<Label >
-          <span>Sewing</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setSewing(e.target.value);
-              
-// post();
-}}>
-
-
-
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-{/* <option value="Beginner - مبتدأ">مبتدأ</option> */}
-
-
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-
-
-<Label >
-          <span>Babysetting</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setBabySetting(e.target.value);
-              
-// post();
-}}>
-
-
-
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-  </Select>
-
-  
-
-
-  
-        </Label>
 </div>
 
  <div>
   
-  {data.length>0?<div className={Style.divbox}>{data?.map((e,i)=><div  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl" onClick={()=>console.log(e)}>
+  {data.length>0?<div className={Style.divbox} style={{ gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)",backgroundColor:"rgba(204, 204, 204, 0.1882352941)"}}>{data?.map((e,i)=>
+  <div style={{width:"400px",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
       {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}
@@ -496,7 +253,7 @@ router.reload()
   <div className="card-body" >
     <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      {/* e?.fields["age - العمر"] }
+      {/* e?.fields[ksd["age - العمر"] }
       {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
       <p  >{e?.fields["marital status - الحالة الاجتماعية"]}</p>
       <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p>
@@ -550,7 +307,7 @@ router.reload()
 
 
   </div>
-  </>
+  </div>
   )
 }
 // 
