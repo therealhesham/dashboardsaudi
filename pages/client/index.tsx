@@ -1,3 +1,4 @@
+
 // @ts-nocheck 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Style from "styles/Home.module.css"
@@ -12,6 +13,9 @@ import { useRouter } from 'next/router'
 import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
 import { GridLoader } from 'react-spinners'
 import { useMediaQuery } from '@mui/material'
+
+
+
 function DashboardClient() {
   // console.log(repos)
     const resultsPerPage = 10
@@ -57,7 +61,7 @@ const [babysitting,setBabySetting]=useState("(.*)")
 const [sewing,setSewing]=useState("(.*)")
 const [age,setAge]=useState(0);
 const [time,setTime]=useState()
-const media = useMediaQuery('(max-width:600px)',{noSsr:true})
+const media = useMediaQuery('(max-width:600px)',{noSsr:false})
 
 
 const [offset,setOffset] = useState("")
