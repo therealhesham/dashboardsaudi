@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Style from "styles/Home.module.css"
 
 // import {
-import { FileOutlined, LogoutOutlined, PlusOutlined } from '@ant-design/icons'
+import { FileOutlined, LogoutOutlined, PlusOutlined, ShareAltOutlined, WhatsAppOutlined } from '@ant-design/icons'
 import link from 'next/link'
 import Link from 'next/dist/client/link'
 import Cookies from 'js-cookie'
@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
 import { GridLoader } from 'react-spinners'
 import { useMediaQuery } from '@mui/material'
+import { WhatsappIcon, WhatsappShareButton } from 'next-share'
 
 
 
@@ -267,6 +268,17 @@ router.reload()
   <div style={{width:"90%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
+    <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
+    
+    >
+    <WhatsappShareButton
+  url={window.location.origin+"/cvdetails/"+e.id}
+>
+
+    <ShareAltOutlined  />
+
+</WhatsappShareButton>
+    </div>
       {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}
 </div>
 </div>
@@ -286,10 +298,10 @@ router.reload()
       </div>
     <div className="card-actions justify-end  pointer">
 <div style={{display:"inline-flex"}}>
-<div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer",}}> 
+<div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/book/"+e.id} > */}
 
- <span style={{backgroundColor:"dodgerblue",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
+ <span style={{backgroundColor:"#656038",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 {/* </Link> */}
  
   <PlusOutlined  />
@@ -298,7 +310,7 @@ router.reload()
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"darkcyan",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
+ <span style={{backgroundColor:"#473C3A",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
 
 {/* </Link> */}
   <FileOutlined />
