@@ -136,7 +136,7 @@ router.reload()
   </ul>:<ul className="flex space-x-4">
     
     <li>
-      <Button style={{backgroundColor:"#848274"}} onClick={()=>router.push("/client/login")}>Login</Button>
+      <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button>
     </li>
   </ul>
 }
@@ -235,7 +235,7 @@ router.reload()
 
   
         </Label>
-<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#2C4C46"}} onClick={()=>post()}>Filter</Button></div>
+<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#74949c"}} onClick={()=>post()}>Filter</Button></div>
 </div>
 
  <div>
@@ -249,6 +249,8 @@ router.reload()
     >
     <WhatsappShareButton
   url={window.location.origin+"/client/cvdetails/"+e.id}
+
+
 >
 
     <ShareAltOutlined  />
@@ -269,7 +271,6 @@ router.reload()
 
       
       
-      {/* <p  >If a dog chews shoes whose shoes does he choose?</p> */}
       
       </div>
     <div className="card-actions justify-end  pointer">
@@ -277,7 +278,7 @@ router.reload()
 <div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/book/"+e.id} > */}
 
- <span style={{backgroundColor:"#656038",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
+ <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 {/* </Link> */}
  
   <PlusOutlined  />
@@ -286,7 +287,7 @@ router.reload()
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"#473C3A",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
+ <span style={{backgroundColor:"#E8981a",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
 
 {/* </Link> */}
   <FileOutlined />
