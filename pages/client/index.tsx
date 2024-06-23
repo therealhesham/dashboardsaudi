@@ -235,36 +235,12 @@ router.reload()
 
   
         </Label>
-
-<Label >
-          <span>Old Care</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setOldCare(e.target.value);
-              
-// post();
-}}>
-
-
-
-<option placeholder='(.*)'>الكل</option>
-
-<option value="Yes - نعم">نعم</option>
-<option value="No - لا">لا</option>
-
-  </Select>
-
-  
-
-
-  
-        </Label>
 <div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#2C4C46"}} onClick={()=>post()}>Filter</Button></div>
 </div>
 
  <div>
   
-  {data.length>0?<div  className={Style.divbox} style={{marginTop:"60px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)"}}>{data?.map((e,i)=>
+  {data.length>0?<div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"90%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
