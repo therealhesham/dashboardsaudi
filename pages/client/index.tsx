@@ -32,7 +32,9 @@ const post=async()=>{
 const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
       },body:JSON.stringify({religion:religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
-const waiter = await fetcher.json()
+if(fetcher.status == 300) return console.log("no data")
+
+      const waiter = await fetcher.json()
 setData(waiter)
 
 
@@ -81,10 +83,19 @@ try {
 } catch (error) {
   setUser({isUser:false})
 } 
+(async function getname(){
+
+const fetcher = await fetch('../api/listfifty',{method:"get"})
+const waiter = await fetcher.json()
+setData(waiter)
 
 
+
+
+}
+)()
   
-  post()},[religion,ironing,laundry,cleaning,english,arabic,sewing,education,cooking,oldCare,babysitting])
+  },[])
 // useEffect(()=>{
 //   // console.log(dataTopages)
 //   // console.log(encodeURIComponent(english))
@@ -247,13 +258,13 @@ router.reload()
 
   
         </Label>
-
+<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#2C4C46"}} onClick={()=>post()}>Filter</Button></div>
 </div>
 
  <div>
   
   {data.length>0?<div  className={Style.divbox} style={{marginTop:"60px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)"}}>{data?.map((e,i)=>
-  <div style={{width:"400px",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
+  <div style={{width:"90%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
       {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}

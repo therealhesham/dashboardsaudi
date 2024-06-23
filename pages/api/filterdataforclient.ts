@@ -33,8 +33,10 @@ const results=    base('السير الذاتية').select({
 //fldUXlZQMZR89xcot experience years id
  resolve(results)
 })
-
+if(result.length == 0) return  res.status(300).json("data 0")
   res.status(200).json(result)
+
+
 }
 
   // export base;
