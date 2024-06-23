@@ -272,7 +272,7 @@ router.reload()
     
     >
     <WhatsappShareButton
-  url={window.location.origin+"/cvdetails/"+e.id}
+  url={window.location.origin+"/client/cvdetails/"+e.id}
 >
 
     <ShareAltOutlined  />
