@@ -229,7 +229,7 @@ setSourceList(json)
   }
 
 return (   
-<div style={{backgroundColor:"Eff7f9"}}>
+<div style={{backgroundColor:"Eff7f9",display:media?"grid":"",justifyItems:media?"center":""}}>
 
 
 {media?
@@ -265,16 +265,16 @@ return (
       </ul>
     </div>
   </div>
-  <div className="navbar-center">
-    <a className="btn btn-ghost text-xl">
-  <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+  <div className="navbar-center" >
+    <a  className="btn btn-ghost text-xl">
+  <img  style={{width:"70px", height:"50px",justifySelf:"center"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
       
       {/* daisyUI */}
       
       
       </a>
   </div>
-  
+  <div className='navbar-end'></div>
 </div>
 :
 <nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
@@ -312,7 +312,6 @@ Login
 </nav>
   
 }
- 
   
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
@@ -402,7 +401,7 @@ Login
     
   </div>    
 </div>
-  <form onSubmit={onSubmit} style={{display:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",flexDirection:"column",justifyContent:"center"}}>
+  <form onSubmit={onSubmit} style={{display:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",flexDirection:"column",justifyContent:"center",justifyItems:"center"}}>
 
 {/* <form onSubmit={onSubmit} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}> */}
   
@@ -460,7 +459,7 @@ Login
   
   
 <div style={{width:"95%",display:"flex",justifyContent:"center",flexDirection:"column"}}>
-    <div style={{isplay:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
+    <div style={{isplay:media?"flex":"block",marginLeft:"auto",marginTop:"12px",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
 
   {/* <div style={{width:"95%",alignSelf:"center",backgroundColor:"white"}}  className="card card-compact card-side w-100 bg-base-100 shadow-xl"  > */}
   <div className="pic"> 

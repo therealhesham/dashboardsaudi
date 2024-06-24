@@ -193,16 +193,16 @@ return (
       </ul>
     </div>
   </div>
-  <div className="navbar-center">
-    <a className="btn btn-ghost text-xl">
-  <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+  <div className="navbar-center" >
+    <a  className="btn btn-ghost text-xl">
+  <img  style={{width:"70px", height:"50px",justifySelf:"center"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
       
       {/* daisyUI */}
       
       
       </a>
   </div>
-  
+  <div className='navbar-end'></div>
 </div>
 :
 <nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
@@ -331,7 +331,7 @@ Login
         {/* <input type="range" min={0} max="60"  onChange={e=>console.log(e.target.value)} className="range" /> */}
 
 
-<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"orange"}} onClick={()=>post()}>Search</Button></div>
+<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#Ecc383"}} onClick={()=>post()}>Search</Button></div>
 </div>
 
  <div>
