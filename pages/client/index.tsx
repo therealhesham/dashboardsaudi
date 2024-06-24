@@ -33,7 +33,7 @@ function valuetext(value: number) {
   return `${value}`;
 }
 
- const [initialdata,setinitidata]=useState(data)
+//  const [initialdata,setinitidata]=useState(datasetiniti)
   const [value, setValue] = React.useState<number[]>([20, 37]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -205,10 +205,11 @@ return (
   
 </div>
 :
-<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
   
-  
-  <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+  {/* <div className="" style={{}}>  */}
+  <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+ 
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">

@@ -227,11 +227,61 @@ setSourceList(json)
   async function name() {
      
   }
+
 return (   
 <div style={{backgroundColor:"Eff7f9"}}>
 
-<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+
+{media?
+<div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <div className="navbar-start">
+    <div   className="dropdown" >
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </div>
+      <ul style={{backgroundColor:"whitesmoke"}}
+      
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <li  ><a href='rec.rawaes.com'>Home</a></li>
+        {/* <li><a></a></li> */}
+        
+        <li ><a>About us</a></li>
+
+
+        <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
+
+      </ul>
+    </div>
+  </div>
+  <div className="navbar-center">
+    <a className="btn btn-ghost text-xl">
   <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+      
+      {/* daisyUI */}
+      
+      
+      </a>
+  </div>
+  
+</div>
+:
+<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+  
+  {/* <div className="" style={{}}>  */}
+  <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+ 
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">
@@ -261,6 +311,7 @@ Login
 }
 </nav>
   
+}
  
   
   
