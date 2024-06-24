@@ -18,19 +18,21 @@ type Data = {
 //@ts-ignore
 const arr = [];
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
+  try {
   const token = req.cookies.token;
   //@ts-nocheck
   //@ts-ignore
   const verify= jwt.verify(token,'secret');
   if (verify.fullname == undefined) return  res.status(301).json("error")
 console.log(verify)
-  const result =  await new Promise((resolve,reject)=>{
+  
+    const result =  await new Promise((resolve,reject)=>{
 
 
     base('السير الذاتية').select({
       view: "الاساسي"
+      
     }).eachPage(function page(records, fetchNextPage) {
-       
 
 records.forEach(function(record,s) {
 // console.log(record)
@@ -44,14 +46,16 @@ records.forEach(function(record,s) {
      //@ts-nocheck
 //@ts-ignore
  resolve(arr)       
-    }, function done(err) {
-        if (err) { console.error(err); return; }
     });
 
  
 })
 // console.log()
-  res.status(200).json(result)
+  res.status(200).json(result)  
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 
   // export base;

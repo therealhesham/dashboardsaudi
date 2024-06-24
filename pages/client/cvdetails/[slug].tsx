@@ -114,9 +114,11 @@ return (
 <>
 
 {data.fields["Name - الاسم"] != null? <div  id='cv' ref={componentRef}> <header>
-<img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 
+<img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
+<p style={{zIndex:+99 ,top:2,fontSize:"2em"}}>{data.fields["م"]}</p>
    </header>
+
 <a ><button onClick={handlePrint}>Print PDF <PrinterFilled/></button></a>
 
    <div style={{display:"flex",flexDirection:"row",flexWrap: "nowrap"}}>
@@ -141,13 +143,18 @@ src=
 
     {/* </div> */}
 <div style={{direction:"rtl", display: "grid" ,gridTemplateColumns: "repeat(3, auto)",gridRowGap: "1px",gridColumnGap: "9px",alignItems:"center",width:"100%"}}>
+     <Label className="mt-4">
+          <span>ID</span>
+          {data.fields["Name - الاسم"]?<Input className="mt-1" value={data.fields["م"]} />:null}
+        </Label>
+
 
         <Label className="mt-4">
           <span>الاسم</span>
           {data.fields["Name - الاسم"]?<Input className="mt-1" value={data.fields["Name - الاسم"]} />:null}
         </Label>
 
-<Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
+<Label className="mt-4" style={{gridColumnStart:3,gridColumnEnd:4}}>
           <span>الجنسية</span>
           <Input className="mt-1" value={data.fields["Nationality copy"]} />
         </Label>
@@ -167,15 +174,15 @@ src=
           <span>جواز السفر</span>
           <Input className="mt-1" value={data.fields["Religion - الديانة"]} />
         </Label>
-<Label className="mt-4">
+{/* <Label className="mt-4">
           <span>تاريخ الاصدار</span>
           <Input className="mt-1" value="تاريخ الاصدار" />
-        </Label>
+        </Label> */}
 
-<Label className="mt-4">
+{/* <Label className="mt-4">
           <span>تاريخ الانتهاء</span>
           <Input className="mt-1" value="تاريخ الانتهاء" />
-        </Label>
+        </Label> */}
 
 <Label className="mt-4">
           <span>الحالة الاجتماعية</span>
@@ -185,11 +192,11 @@ src=
         </Label>
 
 
-<Label className="mt-4">
+{/* <Label className="mt-4">
           <span>عدد الاطفال</span>
           <Input className="mt-1" value="عدد الاطفال" />
         </Label>
-
+ */}
 
 
 <Label className="mt-4">
@@ -200,22 +207,22 @@ src=
         </Label>
 
 
-<Label className="mt-4">
+{/* <Label className="mt-4">
           <span>الدرجة العلمية</span>
           <Input className="mt-1" value="الدرجة العلمية" />
         </Label>
 
-
+ */}
 <Label className="mt-4">
           <span>العربية   </span>
-          <Input className="mt-1" value="" />
+          <Input className="mt-1" value={data.fields["Arabic -  العربية"]} />
         </Label>
 
 
 
 <Label className="mt-4">
           <span>   الانجليزي</span>
-          <Input className="mt-1" value="" />
+          <Input className="mt-1" value={data.fields["English - الانجليزية"]} />
         </Label>
 
 

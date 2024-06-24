@@ -5,6 +5,7 @@ import CTA from 'example/components/CTA'
 import InfoCard from 'example/components/Cards/InfoCard'
 import ChartCard from 'example/components/Chart/ChartCard'
 import ChartLegend from 'example/components/Chart/ChartLegend'
+
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'client/containers/Layout'
@@ -29,7 +30,7 @@ import {
   doughnutLegends,
   lineLegends,
 } from 'utils/demo/chartsData'
-
+// useMediaQuery
 import {
   Chart,
   ArcElement,
@@ -46,6 +47,7 @@ import { User } from 'utils/usercontext'
 import { useRouter } from 'next/router'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
+import { useMediaQuery } from '@mui/material'
 function Status() {
   Chart.register(
     ArcElement,
@@ -57,6 +59,7 @@ function Status() {
     Tooltip,
     Legend
   )
+const media = useMediaQuery('(max-width:820px)',{noSsr:false})
 
   const [officelist,setofficelist]=useState([])
   function datas() {
@@ -96,7 +99,7 @@ function Status() {
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
   const totalResults = fulldata.length
-  const user =useContext(User)
+  // const user =useContext(User)
 // setTimeout(() =
 // pagination change control
   const [paginatedData,setPaginatedData]=useState([])
@@ -109,7 +112,9 @@ function onPageChange(p: number) {
 setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
     }
-  const [users,setUser]=useState("")
+
+const [user,setUser]=useState({})
+
   // on page change, load new sliced data
   // here you would make another server request for new data
   useEffect(() => {
@@ -117,14 +122,13 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
 //@ts-ignore
 //@ts-nocheck
 try {
-
-    const token = Cookies.get("token")
-  const decoder = jwtDecode(token);
-  setUser(decoder)
-  } catch (error) {
-    router.replace("/client/login")
-  }
-
+ const token =  Cookies.get("token")
+ const decoder = jwtDecode(token)
+ console.log(decoder.isUser)
+ setUser(decoder)
+} catch (error) {
+  setUser({isUser:false})
+} 
     try {
       async function names( )  {
         await fetch("../../api/orderlistforclient").then(response => response.json())
@@ -147,39 +151,147 @@ names()
 return (
   
     <>
-    {users?
-
-<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
-  <a className="text-gray-700 dark:text-gray-400" href="#">
-    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
-  </a>
-  <ul className="flex space-x-4">
-    <li>
-      <Link href="/client">
-      <Button style={{backgroundColor:"dodgerblue"}}>الرئيسية</Button></Link>
+{media?
+<div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <div className="navbar-start">
+    <div   className="dropdown" >
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </div>
+{user.isUser?       
+      <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+        
+        <li  className='btn btn-ghost text-l'><a>About us</a></li>
+    <li className='btn btn-ghost text-l'>
+<Link href="/client/status">
+      Status
+      </Link>
     </li>
-    <li>
-      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+      
+<li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
 
         Cookies.remove("token")
 router.reload()
-      }}>تسجيل الخروج</Button>
+      }}>
+      Sign out
     </li>
-  </ul>
-</nav>
- :<nav  className="flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg">
-  <a className="text-gray-700 dark:text-gray-400" href="#">
-    {/* <Logo className="w-6 h-6 text-purple-600" /> */}
-  </a>
-  <ul className="flex space-x-4">
-    
-    <li>
-      <Button style={{backgroundColor:"dodgerblue"}}>Login</Button>
-    </li>
-  </ul>
-</nav> }
+</ul>
+      :
+<ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<h1 style={{fontSize:"23px"}}> Welcome {users.fullname}</h1>
+<li  ><a href='rec.rawaes.com'>Home</a></li>
+        
+        <li ><a>About us</a></li>
+
+
+        <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
+
+
+
+
+      </ul>
+      
+      
+      }
+    </div>
+  </div>
+  <div className="navbar-center" >
+    <a  className="btn btn-ghost text-xl">
+  <img  style={{width:"70px", height:"50px",justifySelf:"center"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+      
+      {/* daisyUI */}
+      
+      
+      </a>
+  </div>
+  <div className='navbar-end'></div>
+</div>
+:
+<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+  
+  {/* <div className="" style={{}}>  */}
+  <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+ 
+  <a className="text-gray-700 dark:text-gray-400" href="#">
+  </a>
+  {user.isUser == true?<ul className="flex space-x-4">
+ 
+ <li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>
+      Sign out
+    </li>
+
+ {/* <li className='btn  text-l'>Home</li> */}
+      <Link href="/client/status">
+    <li className='btn btn-ghost text-l'>
+      Status
+    </li>
+      
+      </Link>
+ <li className='btn btn-ghost text-l'>About us</li>
+
+ <li className='btn btn-ghost text-l'>Home</li>
+
+    
+  </ul>:
+  
+  <ul className="flex justify-between flex items-center space-x-4">
+    <li onClick={()=>router.push("/client/login")}  className='btn  text-xl'>
+Login
+      {/* <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button> */}
+    </li>
+ <li  className='btn btn-ghost text-l'>About us</li>
+ <li className='btn btn-ghost text-l'>Home</li>
+    
+  </ul>
+}
+</nav>
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 style={{fontSize:"23px"}}> Welcome {user.fullname}</h1>
       <TableContainer>
         <Table>
           <TableHeader>

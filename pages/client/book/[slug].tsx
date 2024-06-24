@@ -192,10 +192,9 @@ const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),ema
 try {
  const token =  Cookies.get("token")
  const decoder = jwtDecode(token)
- console.log(user.isUser)
+ console.log(decoder.isUser)
  setUser(decoder)
 } catch (error) {
-  // console.log(error)
   setUser({isUser:false})
 } 
 
@@ -232,6 +231,7 @@ return (
 <div style={{backgroundColor:"Eff7f9",display:media?"grid":"",justifyItems:media?"center":""}}>
 
 
+
 {media?
 <div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
   <div className="navbar-start">
@@ -250,19 +250,42 @@ return (
             d="M4 6h16M4 12h16M4 18h7" />
         </svg>
       </div>
-      <ul style={{backgroundColor:"whitesmoke"}}
+{user.isUser?       
+      <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+        
+        <li  className='btn btn-ghost text-l'><a>About us</a></li>
+    <li className='btn btn-ghost text-l'>
+<Link href="/client/status">
+      Status
+      </Link>
+    </li>
       
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li  ><a href='rec.rawaes.com'>Home</a></li>
-        {/* <li><a></a></li> */}
+<li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>
+      Sign out
+    </li>
+</ul>
+      :
+<ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+
+<li  ><a href='rec.rawaes.com'>Home</a></li>
         
         <li ><a>About us</a></li>
 
 
         <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
 
+
+
+
       </ul>
+      
+      
+      }
     </div>
   </div>
   <div className="navbar-center" >
@@ -285,18 +308,27 @@ return (
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">
- <li>Home</li>
-    <li>
-      <Link href="/client/status">
-      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
-    </li>
-    <li>
-      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+ 
+ <li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
 
         Cookies.remove("token")
 router.reload()
-      }}>تسجيل الخروج</Button>
+      }}>
+      Sign out
     </li>
+
+ {/* <li className='btn  text-l'>Home</li> */}
+      <Link href="/client/status">
+    <li className='btn btn-ghost text-l'>
+      Status
+    </li>
+      
+      </Link>
+ <li className='btn btn-ghost text-l'>About us</li>
+
+ <li className='btn btn-ghost text-l'>Home</li>
+
+    
   </ul>:
   
   <ul className="flex justify-between flex items-center space-x-4">
@@ -312,6 +344,7 @@ Login
 </nav>
   
 }
+
   
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
@@ -349,7 +382,7 @@ Login
 </div>
 :<>{user.isUser  ?  
   <div >
-    <div style={{isplay:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
+    <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
@@ -567,7 +600,9 @@ Login
           <span>كيف تعرفت علينا</span>
 
 <Select>
-  {list.map(e=><option>{data.fields["المصدر"]}</option>
+  {list.map(s=>
+  
+  <option >{s.fields["المصدر"]}</option>
 )}
 
 </Select>

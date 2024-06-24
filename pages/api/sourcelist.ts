@@ -16,16 +16,17 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 // sendSuggestion()
 try {
 
-  
+  const promising = await new Promise(resolve=>{
+
 const create= base('مصدر العميل').select({
     view: "Grid view"
 }).eachPage(function page(records, fetchNextPage) {
 
-    
-     res.status(200).json(records);
-    
-    
-    })
+  resolve(records)
+})
+
+  })
+res.status(200).json(promising);
   
 } catch (error) {
   console.log(error)

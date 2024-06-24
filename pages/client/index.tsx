@@ -178,19 +178,42 @@ return (
             d="M4 6h16M4 12h16M4 18h7" />
         </svg>
       </div>
-      <ul style={{backgroundColor:"whitesmoke"}}
+{user.isUser?       
+      <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+        
+        <li  className='btn btn-ghost text-l'><a>About us</a></li>
+    <li className='btn btn-ghost text-l'>
+<Link href="/client/status">
+      Status
+      </Link>
+    </li>
       
-        tabIndex={0}
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li  ><a href='rec.rawaes.com'>Home</a></li>
-        {/* <li><a></a></li> */}
+<li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
+
+        Cookies.remove("token")
+router.reload()
+      }}>
+      Sign out
+    </li>
+</ul>
+      :
+<ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+
+<li  ><a href='rec.rawaes.com'>Home</a></li>
         
         <li ><a>About us</a></li>
 
 
         <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
 
+
+
+
       </ul>
+      
+      
+      }
     </div>
   </div>
   <div className="navbar-center" >
@@ -213,18 +236,27 @@ return (
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">
- <li>Home</li>
-    <li>
-      <Link href="/client/status">
-      <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
-    </li>
-    <li>
-      <Button style={{backgroundColor:"darkcyan"}} onClick={()=>{
+ 
+ <li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
 
         Cookies.remove("token")
 router.reload()
-      }}>تسجيل الخروج</Button>
+      }}>
+      Sign out
     </li>
+
+ {/* <li className='btn  text-l'>Home</li> */}
+      <Link href="/client/status">
+    <li className='btn btn-ghost text-l'>
+      Status
+    </li>
+      
+      </Link>
+ <li className='btn btn-ghost text-l'>About us</li>
+
+ <li className='btn btn-ghost text-l'>Home</li>
+
+    
   </ul>:
   
   <ul className="flex justify-between flex items-center space-x-4">
