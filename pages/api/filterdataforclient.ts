@@ -17,13 +17,15 @@ export default async function handler(req,res: NextApiResponse) {
 // sendSuggestion()
 let arr = []
 console.log(req.body)
-const result =  await new Promise((resolve,reject)=>{
-  const {religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry}=req.body;
-console.log(religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry)
 
+try {
+const result =  await new Promise((resolve,reject)=>{
+  const {religion,time,ironing,cleaning,cooking,babysitting,sewing,age,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry}=req.body;
+console.log(religion,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry)
   // '(.*)'
 const results=    base('السير الذاتية').select({
-   filterByFormula:`And(REGEX_MATCH({fldUXlZQMZR89xcot},"${experience}"),REGEX_MATCH({fldtal17RtxfMGKFb} ,"${education}"),REGEX_MATCH({Ironing - كوي} ,"${ironing}"),REGEX_MATCH({Experience - الخبرة} ,"${experiencetype}"),REGEX_MATCH({fldJvA6tYkfWokgkC} ,"${arabic}"),REGEX_MATCH({fldW0JTWrXNBJgll9} ,"${english}"),REGEX_MATCH({Old people care - رعاية كبار السن} , "${oldCare}"),REGEX_MATCH({Babysitting - العناية بالأطفال} ,"${babysitting}"),REGEX_MATCH({sewing - الخياطة} ,"${sewing}"),REGEX_MATCH({cleaning - التنظيف} ,"${cleaning}"),REGEX_MATCH({laundry - الغسيل} ,"${laundry}"),REGEX_MATCH({Cooking - الطبخ} ,"${cooking}"),REGEX_MATCH({fldEYaSy8nlV1btk6} ,"${religion}"),REGEX_MATCH({fldVp4gvVPuUJnbyR} ,"${maritalstatus}"))`
+  
+   filterByFormula:`And(REGEX_MATCH({fldUXlZQMZR89xcot},"${experience}"),REGEX_MATCH({fldiWcMdEYNY6TJWy},"${nationality}"),REGEX_MATCH({fldtal17RtxfMGKFb} ,"${education}"),REGEX_MATCH({Ironing - كوي} ,"${ironing}"),REGEX_MATCH({Experience - الخبرة} ,"${experiencetype}"),REGEX_MATCH({fldJvA6tYkfWokgkC} ,"${arabic}"),REGEX_MATCH({fldW0JTWrXNBJgll9} ,"${english}"),REGEX_MATCH({Old people care - رعاية كبار السن} , "${oldCare}"),REGEX_MATCH({Babysitting - العناية بالأطفال} ,"${babysitting}"),REGEX_MATCH({sewing - الخياطة} ,"${sewing}"),REGEX_MATCH({cleaning - التنظيف} ,"${cleaning}"),REGEX_MATCH({laundry - الغسيل} ,"${laundry}"),REGEX_MATCH({Cooking - الطبخ} ,"${cooking}"),REGEX_MATCH({fldEYaSy8nlV1btk6} ,"${religion}"),REGEX_MATCH({fldVp4gvVPuUJnbyR} ,"${maritalstatus}"))`
 ,        view: "الاساسي"
     }).all()
     
@@ -36,6 +38,11 @@ const results=    base('السير الذاتية').select({
 if(result.length == 0) return  res.status(300).json("data 0")
   res.status(200).json(result)
 
+  
+} catch (error) {
+  console.log(error)
+ res.status(300).json("data 0")
+}
 
 }
 

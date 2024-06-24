@@ -19,25 +19,10 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 
 
     base('الدول').select({
-      //  fields:{}
-        // Selecting the first 3 records in Grid view:
+      
         view: "الاساسي"
-    }).eachPage(function page(records, fetchNextPage) {
-        // This function (`page`) will get called for each page of records.
-    
-        records.forEach(function(record,s) {
-            // console.log(s)
-            // console.log('Retrieved', record.get('Name'));
-        });
-    
- resolve(records)       
-    }, function done(err) {
-        if (err) { console.error(err); return; }
-    });
-
- 
-})
+    }).all();
+ resolve(result)   }    
+  )
   res.status(200).json(result)
 }
-
-  // export base;

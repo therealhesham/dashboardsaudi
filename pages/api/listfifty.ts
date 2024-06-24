@@ -19,8 +19,9 @@ let arr = []
 const result =  await new Promise((resolve,reject)=>{
 
 
-  
+
 const results=    base('السير الذاتية').select({
+  
   maxRecords:50,
   view: "الاساسي"
     }).eachPage((e)=>

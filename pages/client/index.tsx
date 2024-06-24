@@ -14,6 +14,8 @@ import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
 import { GridLoader } from 'react-spinners'
 import { useMediaQuery } from '@mui/material'
 import { WhatsappIcon, WhatsappShareButton } from 'next-share'
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 
 
@@ -26,6 +28,25 @@ function DashboardClient() {
   function onPageChange(p: number) {
     setPage(p)
   }
+  
+function valuetext(value: number) {
+  return `${value}`;
+}
+
+ const [initialdata,setinitidata]=useState(data)
+  const [value, setValue] = React.useState<number[]>([20, 37]);
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setValue(newValue as number[]);
+//     // console.log(value)
+// const filtering =initialdata?.filter(e=>{ return( e.fields["age - العمر"] >value[0] && e.fields["age - العمر"]< value[1])})
+// console.log(filtering)
+// // if(fildering.data < 0) setTime()
+//       {/* {/* e?.fields[ksd["age - العمر"] } */}
+// setData(filtering)
+
+  };
+
 
 
 const post=async()=>{
@@ -33,10 +54,15 @@ const post=async()=>{
 const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
       },body:JSON.stringify({religion:religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
-if(fetcher.status == 300) return console.log("no data")
-
+if(fetcher.status != 200) return console.log("no data");
       const waiter = await fetcher.json()
-setData(waiter)
+      console.log(waiter)
+      const filtering =waiter?.filter(e=>{ return( e.fields["age - العمر"] >value[0] && e.fields["age - العمر"]< value[1])})
+// console.log(filtering)
+// // if(fildering.data < 0) setTime()
+//       {/* {/* e?.fields[ksd["age - العمر"] } */}
+// setData(filtering)
+setData(filtering)
 
 
 
@@ -63,10 +89,15 @@ const [cleaning,setCleaning]=useState("(.*)")
 const [cooking,setCooking]=useState("(.*)")
 const [babysitting,setBabySetting]=useState("(.*)")
 const [sewing,setSewing]=useState("(.*)")
-const [age,setAge]=useState(0);
+const [age,setAge]=useState("(1[6-9]|2\d|20)");
 const [time,setTime]=useState()
 const media = useMediaQuery('(max-width:820px)',{noSsr:false})
-
+ const handleClick = () => {
+    const elem = document.activeElement;
+    if (elem) {
+      elem?.blur();
+    }
+  };
 
 const [offset,setOffset] = useState("")
   const [previousNationality,setPreviousNationality]=useState("");
@@ -74,6 +105,17 @@ const [previousreligion,setPreviousreligion]=useState("");
 const [user,setUser]=useState({})
 const router=useRouter()
 const [dataTopages,setDatepages]=useState(0)
+// const [fi]
+
+const filter=(n)=>{
+const filtering =data.filter(e=> n<e.fields["age - العمر"] )
+      {/* {/* e?.fields[ksd["age - العمر"] } */}
+setData(filtering)
+
+}
+
+
+
 useEffect(()=>{
   
 try {
@@ -117,11 +159,60 @@ setData(waiter)
 return (
   // {media?}
 <div  style={{backgroundColor:"rgba(204, 204, 204, 0.1882352941)"}}>
-<nav  style={{position:"sticky",zIndex:+1}} className={"flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+
+{media?
+<div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
+  <div className="navbar-start">
+    <div   className="dropdown" >
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </div>
+      <ul style={{backgroundColor:"whitesmoke"}}
+      
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <li  ><a href='rec.rawaes.com'>Home</a></li>
+        {/* <li><a></a></li> */}
+        
+        <li ><a>About us</a></li>
+
+
+        <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
+
+      </ul>
+    </div>
+  </div>
+  <div className="navbar-center">
+    <a className="btn btn-ghost text-xl">
+  <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
+      
+      {/* daisyUI */}
+      
+      
+      </a>
+  </div>
+  
+</div>
+:
+<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex items-center justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+  
+  
   <img style={{width:"50px", height:"50px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
   <a className="text-gray-700 dark:text-gray-400" href="#">
   </a>
   {user.isUser == true?<ul className="flex space-x-4">
+ <li>Home</li>
     <li>
       <Link href="/client/status">
       <Button style={{backgroundColor:"dodgerblue"}}>حالة الطلب</Button></Link>
@@ -133,16 +224,21 @@ return (
 router.reload()
       }}>تسجيل الخروج</Button>
     </li>
-  </ul>:<ul className="flex space-x-4">
-    
-    <li>
-      <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button>
+  </ul>:
+  
+  <ul className="flex justify-between flex items-center space-x-4">
+    <li onClick={()=>router.push("/client/login")}  className='btn  text-xl'>
+Login
+      {/* <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button> */}
     </li>
+ <li  className='btn btn-ghost text-l'>About us</li>
+ <li className='btn btn-ghost text-l'>Home</li>
+    
   </ul>
 }
 </nav>
   
- 
+}
  <div>
   
   <div style={{display:'grid',gridTemplateColumns:media?"100%":"20% 80%"}}>
@@ -150,58 +246,39 @@ router.reload()
 <div style={{marginTop:"60px",margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
         
 <Label >
-          <span>Arabic</span>
+          <span>Nationality</span>
             <Select className="mt-1" onChange={e=>{
               
-              setArabic(e.target.value);
+              setNationality(e.target.value);
               
 // post();
 }}>
 
 
 
-{/* <option placeholder='الكل'>الكل</option> */}
-
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
-
-
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
-
-  </Select>
-
-  
-
-
-  
-        </Label>
-
-<Label >
-          <span>English</span>
-            <Select className="mt-1" onChange={e=>{
-              
-              setEnglish(e.target.value);
-              
-// post();
-}}>
 
 
 
-{/* <option placeholder='الكل'>الكل</option> */}
+<option placeholder='(.*)' value="(.*)">الكل</option>
 
-<option value="(.*)">الكل</option>
-<option value="Expert - ممتاز">ممتاز</option>
-<option value="Advanced - جيد جداً">جيد جدا</option>
-<option value="Intermediate - جيد">جيد</option>
-<option value="Beginner - مبتدأ">مبتدأ</option>
+<option value="Philippines - الفلبين">
+  الفلبين</option>
+
+<option value="Kenya - كينيا">
+  كينيا</option>
+
+<option value="Ethiopia - إثيوبيا">
+  إثيوبيا</option>
 
 
-{/* <option value="Christianity - المسيحية">المسيحية</option>
-<option value="Non-Muslim - غير مسلم">غير مسلم</option> */}
+<option value="Uganda - أوغندا">
+ أوغندا</option>
+<option value="Pakistan - باكستان">
+ باكستان
+ </option>
+
+
+
 
   </Select>
 
@@ -235,13 +312,31 @@ router.reload()
 
   
         </Label>
-<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#74949c"}} onClick={()=>post()}>Filter</Button></div>
+        <Label>
+          <span>Age Range</span>
+        
+        <Box >
+      <Slider
+        getAriaLabel={() => 'Age Range'}
+        value={value}
+        style={{color:"#003749"}}
+        // color="success"
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+      />
+    </Box>
+</Label>
+        {/* <input type="range" min={0} max="60"  onChange={e=>console.log(e.target.value)} className="range" /> */}
+
+
+<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"orange"}} onClick={()=>post()}>Search</Button></div>
 </div>
 
  <div>
   
-  {data.length>0?<div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(2, auto)"}}>{data?.map((e,i)=>
-  <div style={{width:"90%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
+  {data.length>0?<div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
+  <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
@@ -260,13 +355,15 @@ router.reload()
       {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}
 </div>
 </div>
+
   <div className="card-body" >
-    <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      {/* e?.fields[ksd["age - العمر"] }
-      {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
+      {/* {/* e?.fields[ksd["age - العمر"] } */}
+      <h2 className="card-title">{e?.fields['م']}</h2>
+    <p >{e.fields["Name - الاسم"]}</p>
+      {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> years */}
       <p  >{e?.fields["marital status - الحالة الاجتماعية"]}</p>
-      <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p>
+      {/* <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p> */}
       <p  >{e?.fields["Religion - الديانة"]}</p>
 
       
