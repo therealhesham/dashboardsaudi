@@ -200,12 +200,16 @@ router.reload()
       :
 <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<li  ><a href='rec.rawaes.com'>Home</a></li>
+<li className='btn btn-ghost text-l'  ><a href='rec.rawaes.com'>Home</a></li>
         
-        <li ><a>About us</a></li>
+        <li className='btn btn-ghost text-l' ><a>About us</a></li>
 
 
-        <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
+          <Link  href="/client/login">
+        <li className='btn btn-ghost text-l' style={{color :"whitesmoke",backgroundColor:"#003749"}}>
+            Login
+          </li>
+          </Link  >
 
 
 
@@ -345,6 +349,33 @@ Login
 
   
         </Label>
+       
+       
+<Label >
+          <span>Experience</span>
+            <Select className="mt-1" onChange={e=>{
+              
+              setExperience(e.target.value);
+              
+// post();
+}}>
+
+
+
+<option placeholder='(.*)' value="(.*)">الكل</option>
+<option  value="5 and More - وأكثر">5 Years</option>
+<option value="3-4 Years - سنوات">3 Years</option>
+<option  value="1-2 Years - سنوات">2 Years</option>
+
+  </Select>
+
+  
+
+
+  
+        </Label>
+       
+       
         <Label>
           <span>Age Range</span>
         
@@ -368,7 +399,8 @@ Login
 
  <div>
   
-  {data.length>0?<div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
+  {data.length>0?
+  <div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 

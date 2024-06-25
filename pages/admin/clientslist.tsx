@@ -90,7 +90,7 @@ function onPageChange(p: number) {
      await fetch("../api/clients")
      .then(response => response.json())
   .then(json  => {
-console.log(json)
+// console.log(json)
     json?setLength(json.length):"";
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");})
@@ -149,8 +149,9 @@ setClientOrderslist(e.data)
           <ul >
 {clientlistOrders.map((e,i)=>
   <div style={{display:"flex",flexWrap:"nowrap" ,justifyContent:"space-around",marginBottom:"15px",rowGap:"15px"}}>
+  <Link href={"/client/"+e.id}>
   <li>{e.fields["م"]} </li>
-  
+  </Link>
   <li>{e.fields["Name - الاسم"]} </li>
   <li><Button onClick={()=>confirm(clientlistOrders[i].id)} >Confirm</Button> </li>
   {/* <li><Button onClick={()=>router.push()} >Check Cv</Button></li> */}
@@ -184,10 +185,8 @@ setClientOrderslist(e.data)
             <tr>
               <TableCell>Full Name</TableCell>
               <TableCell>Phone Number</TableCell>
-              <TableCell>رقم الطلب</TableCell>
-
-              <TableCell>Notes</TableCell>
-              <TableCell>Created At</TableCell>
+              {/* <TableCell>رقم الطلب</TableCell> */}
+<TableCell>orders ID</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
@@ -195,25 +194,26 @@ setClientOrderslist(e.data)
               <TableRow >
                 
 {/* <Li */}
-                <TableCell onClick={()=>fetchClientinfo(e.fields["اسم العميل"])}>
+                <TableCell style={{cursor:"pointer"}} onClick={()=>fetchClientinfo(e.fields["اسم العميل"])}>
                   <span className="text-md">{e.fields["اسم العميل"]}</span>
 
                 </TableCell>
-      
+      <TableCell>
+                  <span className="text-md">{e.fields["رقم العميل"]}</span>
+                  {/* <span className="text-md">{i+1}</span> */}
+
+                  {/* <Badge type={user.status}>{user.status}</Badge> */}
+                </TableCell>
+
       {/* </Link> */}
 
                 <TableCell>
-                  <span className="text-md">{e.fields["رقم العميل"]}</span>
+                  <span className="text-md">{e.fields["الطلبات"]}</span>
 
                   {/* <Badge type={user.status}>{user.status}</Badge> */}
                 </TableCell>
 
- <TableCell>
-                  <span className="text-md">{i+1}</span>
-
-                  {/* <Badge type={user.status}>{user.status}</Badge> */}
-                </TableCell>
-
+ 
 
                 <TableCell>
                   <span className="text-md">

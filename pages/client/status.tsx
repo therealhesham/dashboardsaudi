@@ -292,15 +292,18 @@ Login
 
 
 <h1 style={{fontSize:"23px"}}> Welcome {user.fullname}</h1>
-      <TableContainer>
-        <Table>
+<div >
+
+
+      <TableContainer  >
+        <Table >
           <TableHeader>
             <tr>
               {listType =="workers"?<TableCell>اسم العامل</TableCell>:<TableCell>اسماء المكاتب</TableCell>}
               {listType =="workers"?<TableCell>العمر</TableCell>: null}
               {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
               {listType =="workers"?<TableCell>الجنسيات</TableCell>:null}
-              {listType =="workers"?<TableCell>المكتب</TableCell>:null}
+              {/* {listType =="workers"?<TableCell>المcardكتب</TableCell>:null} */}
               {listType =="workers"?<TableCell>حالة الطلب</TableCell>:null}
             </tr>
           </TableHeader>
@@ -311,8 +314,8 @@ Login
                   <div className="flex items-center text-sm" style={{width:"200px"}}>
                     <Avatar
                       className="hidden mr-3 md:block"
-                      src={('fields.Picture[0].url' in e )?e.fields.Picture[0]?.url:""}
-                      alt="User image"
+                      src={e.fields.Picture?e.fields.Picture[0].url:""}
+                      // alt="User image"
                     />
                     <div>
                       <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>
@@ -341,15 +344,7 @@ Login
                
                 </TableCell>
                 
-                <TableCell>
-                  <span className="text-sm">
-                  <span className="text-sm">{e?.fields["External office copy"]}</span>
-
-                    
-                    {/* {new Date(user.date).toLocaleDateString()} */}
-                  </span>
                
-                </TableCell>
                 <TableCell>
 
 
@@ -375,6 +370,7 @@ Login
           />
         </TableFooter>
       </TableContainer>
+      </div>
     </>
   )
 }

@@ -30,7 +30,7 @@ function LoginPage() {
     //@ts-ignore
     setError("")
     setsuccess(true)
-await fetch('../api/clientsignin',{method:"POST",headers: {
+await fetch('./api/clientsignin',{method:"POST",headers: {
 'Accept': 'application/json',
 "Content-Type": "application/json",
 

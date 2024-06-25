@@ -21,39 +21,40 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
   try {
   const token = req.cookies.token;
   //@ts-nocheck
+  
   //@ts-ignore
   const verify= jwt.verify(token,'secret');
   if (verify.fullname == undefined) return  res.status(301).json("error")
-console.log(verify)
   
     const result =  await new Promise((resolve,reject)=>{
+console.log(verify)
 
 
     base('السير الذاتية').select({
       view: "الاساسي"
       
-    }).eachPage(function page(records, fetchNextPage) {
-
-records.forEach(function(record,s) {
-// console.log(record)
- 
-
-
-  if (record.fields["العملاء"] == verify.fullname) arr.push(record);
-            
-            
-        });
-     //@ts-nocheck
-//@ts-ignore
- resolve(arr)       
-    });
-
- 
-})
+    }).all().then(e=>
+      {
+        //@ts-ignore
+        for (let index = 0; index < e.length; index++) {
+          if(e[index].get("العملاء") == verify.fullname)   arr.push(e[index]);   
+          }
+          if(arr.length == 0) return res.status(201).json("Not Found") ;
+        //@ts-ignore
+        
+        res.status(200).json(arr)  
+      }
+      
+      //@ts-ignore
+    );
+    resolve(arr)
+    
+  })
+  // res.status(200).json(arr)  
 // console.log()
-  res.status(200).json(result)  
   } catch (error) {
     console.log(error)
+    res.status(301).json("error")
   }
   
 }

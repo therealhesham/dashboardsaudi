@@ -334,7 +334,7 @@ return (
                 <TableCell>
                 
 
-                <Button onClick={()=>{deleterecord(e.id)  }}  style={{backgroundColor:"red"}}>Delete CV </Button>
+                <Button onClick={()=>{deleterecord(e.id)  }} disabled style={{backgroundColor:"red"}}>Delete CV </Button>
                 </TableCell>
 
 
@@ -359,7 +359,7 @@ return (
 {officelist.map((e) => (
              
   <Link href={"./admin/officeinfo/"+ e.fields["External office - المكتب الخارجي"]}>
-  <li  style={{height:"150px"}}  > 
+  <li  style={{ cursor:"pointer",height:"150px"}}  > 
                   {e?.fields["External office - المكتب الخارجي"]}   
               </li>
                     </Link>
