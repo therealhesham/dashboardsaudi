@@ -10,7 +10,7 @@ import Link from 'next/dist/client/link'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useRouter } from 'next/router'
-import { Button, Label, Pagination, Select } from '@roketid/windmill-react-ui'
+import { Button, Label, Modal, ModalBody, ModalFooter, ModalHeader, Pagination, Select } from '@roketid/windmill-react-ui'
 import { GridLoader } from 'react-spinners'
 import { useMediaQuery } from '@mui/material'
 import { WhatsappIcon, WhatsappShareButton } from 'next-share'
@@ -18,8 +18,16 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
 
-
 function DashboardClient() {
+ 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  function openModal() {
+    setIsModalOpen(true)
+  }
+  function closeModal() {
+    setIsModalOpen(false)
+  }
+
   // console.log(repos)
     const resultsPerPage = 10
   // const totalResults = response.length
@@ -46,16 +54,24 @@ function valuetext(value: number) {
 // setData(filtering)
 
   };
+const errorModal=()=>{
 
+setStatus(false);
+setIsModalOpen(true)
 
+}
 
+const [filterdatastatus,setStatus]=useState(true)
 const post=async()=>{
+  setData([])
+  setStatus(true)
 // console.log("religon",religion)
 const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
       },body:JSON.stringify({religion:religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
-if(fetcher.status != 200) return console.log("no data");
+if(fetcher.status != 200) return errorModal()
       const waiter = await fetcher.json()
+      if(waiter.length == 0) return errorModal()
       console.log(waiter)
       const filtering =waiter?.filter(e=>{ return( e.fields["age - العمر"] >value[0] && e.fields["age - العمر"]< value[1])})
 // console.log(filtering)
@@ -156,9 +172,21 @@ setData(waiter)
 
 // })
 // console.log()
+
+
+// function Detect(){
+
+
+//   return(<>
+//   {filterdatastatus.length > 0?filterdatastatus:
+  
+//   }
+  
+//   </>)
+// }
 return (
   // {media?}
-<div  style={{backgroundColor:"rgba(204, 204, 204, 0.1882352941)"}}>
+<div  style={{backgroundColor:"whitesmoke",objectFit:"cover",height:"100vh"}}>
 
 {media?
 <div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
@@ -185,7 +213,7 @@ return (
         <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
 <Link href="/client/status">
-      Status
+      status
       </Link>
     </li>
       
@@ -283,7 +311,7 @@ Login
 <div style={{marginTop:"60px",margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
         
 <Label >
-          <span>Nationality</span>
+          <span>الجنسية</span>
             <Select className="mt-1" onChange={e=>{
               
               setNationality(e.target.value);
@@ -326,7 +354,7 @@ Login
         </Label>
 
 <Label >
-          <span>Religion</span>
+          <span>الديانة</span>
             <Select className="mt-1" onChange={e=>{
               
               setReligon(e.target.value);
@@ -352,7 +380,7 @@ Login
        
        
 <Label >
-          <span>Experience</span>
+          <span>سنوات الخبرة</span>
             <Select className="mt-1" onChange={e=>{
               
               setExperience(e.target.value);
@@ -363,9 +391,9 @@ Login
 
 
 <option placeholder='(.*)' value="(.*)">الكل</option>
-<option  value="5 and More - وأكثر">5 Years</option>
-<option value="3-4 Years - سنوات">3 Years</option>
-<option  value="1-2 Years - سنوات">2 Years</option>
+<option  value="5 and More - وأكثر">أكثر من 5 اعوام</option>
+<option value="3-4 Years - سنوات">4 اعوام</option>
+<option  value="1-2 Years - سنوات"> عامان</option>
 
   </Select>
 
@@ -394,10 +422,24 @@ Login
         {/* <input type="range" min={0} max="60"  onChange={e=>console.log(e.target.value)} className="range" /> */}
 
 
-<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",backgroundColor:"#Ecc383"}} onClick={()=>post()}>Search</Button></div>
+<div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",cursor:"pointer",backgroundColor:"#Ecc383"}} onClick={()=>post()}>Search</Button></div>
 </div>
 
  <div>
+  
+
+       <Modal  isOpen={isModalOpen} onClose={closeModal}>
+        <ModalHeader>نأسف</ModalHeader>
+        <ModalBody>
+         لا يوجد بيانات متعلقة بهذا البحث
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
+            Close
+          </Button>
+         
+        </ModalFooter>
+      </Modal>
   
   {data.length>0?
   <div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
@@ -466,7 +508,10 @@ Login
 
 
 )}
-  </div>:<div style={{display:"flex",justifyContent:"center"}}><GridLoader style={{width:"800px",height:"600px"}}/></div>}
+  </div>: <div style={{display:"flex",justifyContent:"center"}}>
+    <GridLoader  loading={filterdatastatus?true:false} style={{width:"800px",height:"600px"}}/>
+    </div>
+  }
   
   </div></div>
  </div>
@@ -477,6 +522,7 @@ Login
 
 
 
+  {/* <footer style={{bottom:1}}>asdasdasda</footer> */}
   </div>
   </div>
   )

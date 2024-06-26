@@ -113,7 +113,7 @@ return (
 
 <>
 
-{data.fields["Name - الاسم"] != null? <div  id='cv' ref={componentRef}> <header>
+{data.fields["Name - الاسم"] != null? <div  id='cv' ref={componentRef} style={{margin:"25px"}}> <header>
 
 <img  src='https://res.cloudinary.com/duo8svqci/image/upload/v1716924206/b5e8988f-ae8d-4f15-9eff-43e174b8d7a0.png'/>
 <p style={{zIndex:+99 ,top:2,fontSize:"2em"}}>{data.fields["م"]}</p>
@@ -170,10 +170,10 @@ src=
           <span>الديانة</span>
                <Input className="mt-1" value={data.fields["Religion - الديانة"]} />
         </Label>
-<Label className="mt-4">
-          <span>جواز السفر</span>
-          <Input className="mt-1" value={data.fields["Religion - الديانة"]} />
-        </Label>
+{/* <Label className="mt-4"> */}
+          {/* <span>جواز السفر</span> */}
+          {/* <Input className="mt-1" value={data.fields["Religion - الديانة"]} /> */}
+        {/* </Label> */}
 {/* <Label className="mt-4">
           <span>تاريخ الاصدار</span>
           <Input className="mt-1" value="تاريخ الاصدار" />
