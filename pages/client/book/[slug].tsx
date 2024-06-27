@@ -7,6 +7,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import * as yup from "yup"
+import Style from "styles/Home.module.css"
+
 
 
 import { useRouter } from "next/router"
