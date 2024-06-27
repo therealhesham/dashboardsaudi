@@ -16,6 +16,7 @@ import { useMediaQuery } from '@mui/material'
 import { WhatsappIcon, WhatsappShareButton } from 'next-share'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
+import dayjs from 'dayjs'
 
 
 function DashboardClient() {
@@ -60,7 +61,7 @@ setStatus(false);
 setIsModalOpen(true)
 
 }
-
+const [filtering,setFiltering]=useState(false)
 const [filterdatastatus,setStatus]=useState(true)
 const post=async()=>{
   setData([])
@@ -78,6 +79,7 @@ if(fetcher.status != 200) return errorModal()
 // // if(fildering.data < 0) setTime()
 //       {/* {/* e?.fields[ksd["age - العمر"] } */}
 // setData(filtering)
+setFiltering(true)
 setData(filtering)
 
 
@@ -155,38 +157,8 @@ setData(waiter)
 )()
   
   },[])
-// useEffect(()=>{
-//   // console.log(dataTopages)
-//   // console.log(encodeURIComponent(english))
-// (async function get() {
-//  const waiter = await  fetch("https://api.airtable.com/v0/app1mph1VMncBBJid/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%20%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9?filterByFormula=%22And(REGEX_MATCH(%7BfldUXlZQMZR89xcot%7D+%2C+"+encodeURIComponent(experience)+")%2CREGEX_MATCH(%7Bfldtal17RtxfMGKFb%7D+%2C+"+encodeURIComponent(education)+")%2CREGEX_MATCH(%7BIroning+-+%D9%83%D9%88%D9%8A%7D+%2C"+encodeURIComponent(ironing)+")%2CREGEX_MATCH(%7BExperience+-+%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A9%7D+%2C"+encodeURIComponent(experiecetype)+")%2CREGEX_MATCH(%7BfldJvA6tYkfWokgkC%7D+%2C"+encodeURIComponent(arabic)+")%2CREGEX_MATCH(%7BfldW0JTWrXNBJgll9%7D+%2C"+encodeURIComponent(english)+")%2CREGEX_MATCH(%7BOld+people+care+-+%D8%B1%D8%B9%D8%A7%D9%8A%D8%A9+%D9%83%D8%A8%D8%A7%D8%B1+%D8%A7%D9%84%D8%B3%D9%86%7D+%2C+"+encodeURIComponent(oldCare)+")%2CREGEX_MATCH(%7BBabysitting+-+%D8%A7%D9%84%D8%B9%D9%86%D8%A7%D9%8A%D8%A9+%D8%A8%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84%7D+%2C+"+encodeURIComponent(babysitting)+")%2CREGEX_MATCH(%7Bsewing+-+%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B7%D8%A9%7D+%2C+"+encodeURIComponent(sewing)+")%2CREGEX_MATCH(%7Bcleaning+-+%D8%A7%D9%84%D8%AA%D9%86%D8%B8%D9%8A%D9%81%7D+%2C"+encodeURIComponent(cleaning)+"+)%2CREGEX_MATCH(%7Blaundry+-+%D8%A7%D9%84%D8%BA%D8%B3%D9%8A%D9%84%7D+%2C+"+encodeURIComponent(laundry)+")%2CREGEX_MATCH(%7BCooking+-+%D8%A7%D9%84%D8%B7%D8%A8%D8%AE%7D+%2C"+encodeURIComponent(cooking)+"+)%2CREGEX_MATCH(%7BfldEYaSy8nlV1btk6%7D+%2C"+encodeURIComponent(religion)+")%2CREGEX_MATCH(%7BfldVp4gvVPuUJnbyR%7D+%2C"+encodeURIComponent(maritalstatus)+"))%22&pageSize=100&offset="+offset+"&view=%D8%A7%D9%84%D8%A7%D8%B3%D8%A7%D8%B3%D9%8A",{method:"get",headers: {'Authorization':'Bearer patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d'}})
-//  const dataextracted = await waiter.json()
-//  {dataextracted.offset?setOffset(dataextracted.offset):setOffset("")}
-//  setData(dataextracted.records)
-  
-// })()
-// },[])
-// LogoutOutlined
-// console.log()
-// document.addEventListener("change",()=>{
-
-// })
-// console.log()
-
-
-// function Detect(){
-
-
-//   return(<>
-//   {filterdatastatus.length > 0?filterdatastatus:
-  
-//   }
-  
-//   </>)
-// }
 return (
-  // {media?}
-<div  style={{backgroundColor:"whitesmoke",objectFit:"cover",height:"100vh"}}>
+<div  style={{backgroundColor:"whitesmoke",objectFit:"fill",height:"auto",marginBottom:"1px"}}>
 
 {media?
 <div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
@@ -222,20 +194,20 @@ return (
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 </ul>
       :
 <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<li className='btn btn-ghost text-l'  ><a href='rec.rawaes.com'>Home</a></li>
+<li className={'btn btn-ghost text-l' + Style['almarai-bold']} onClick={()=>router.push("/client")} >الرئيسية</li>
         
-        <li className='btn btn-ghost text-l' ><a>About us</a></li>
+        <li className='btn btn-ghost text-l' ><a>نبذة عنا</a></li>
 
 
           <Link  href="/client/login">
         <li className='btn btn-ghost text-l' style={{color :"whitesmoke",backgroundColor:"#003749"}}>
-            Login
+           تسجيل الدخول
           </li>
           </Link  >
 
@@ -260,7 +232,7 @@ router.reload()
   <div className='navbar-end'></div>
 </div>
 :
-<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+<nav dir='ltr' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
   
   {/* <div className="" style={{}}>  */}
   <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
@@ -274,42 +246,97 @@ router.reload()
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 
  {/* <li className='btn  text-l'>Home</li> */}
       <Link href="/client/status">
     <li className='btn btn-ghost text-l'>
-      Status
+      طلباتي
     </li>
       
       </Link>
- <li className='btn btn-ghost text-l'>About us</li>
+ <li className='btn btn-ghost text-l'>نبذة عننا</li>
 
- <li className='btn btn-ghost text-l'>Home</li>
+ <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>الرئيسية</li>
 
     
   </ul>:
   
-  <ul className="flex justify-between flex items-center space-x-4">
-    <li onClick={()=>router.push("/client/login")}  className='btn  text-xl'>
-Login
+  <ul className={"flex justify-between flex items-center space-x-4" }>
+    <li onClick={()=>router.push("/client/login")}  className='btn  text-md'>
+تسجيل الدخول
       {/* <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button> */}
+
     </li>
- <li  className='btn btn-ghost text-l'>About us</li>
- <li className='btn btn-ghost text-l'>Home</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>نبذة عنا</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>السير الذاتية</li>
+
+ <li onClick={()=>router.push("/client")} className={'btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' } style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}> 
+  الرئيسية</li>
     
   </ul>
 }
+  <div className='navbar-end'></div>
+
 </nav>
   
 }
  <div>
+{/*   
+  <div style={{}}  >
   
-  <div style={{display:'grid',gridTemplateColumns:media?"100%":"20% 80%"}}>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  
+  
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+  <div className="carousel-item object-contain h-20 w-96">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/320px-Flag_of_Kenya.svg.png"
+      />
+  </div>
+
+</div> */}
  
-<div style={{marginTop:"60px",margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"scroll"}}>
-        
+  <div style={{display:'grid',gridTemplateColumns:media?"100%":"20% 80%"}}>
+<div style={{marginTop:"60px",margin:"20px",borderRadius:"10px",gridRowStart:media?"1":null,gridRowEnd:media?"2":null,gridColumnStart:media?null:1,gridColumnEnd:media?null:1,overflow:"hidden",}}>
+
 <Label >
           <span>الجنسية</span>
             <Select className="mt-1" onChange={e=>{
@@ -405,7 +432,7 @@ Login
        
        
         <Label>
-          <span>Age Range</span>
+          <span>العمر</span>
         
         <Box >
       <Slider
@@ -424,7 +451,7 @@ Login
 
 <div style={{display:"flex",justifyContent:"center",marginTop:"5px"}}><Button style={{alignItems:"center",cursor:"pointer",backgroundColor:"#Ecc383"}} onClick={()=>post()}>Search</Button></div>
 </div>
-
+  
  <div>
   
 
@@ -440,7 +467,9 @@ Login
          
         </ModalFooter>
       </Modal>
-  
+{/* <div> */}
+        {!filtering?<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >أحدث السير الذاتية</p>:<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >نتائج البحث {data.length} سيرة ذاتية </p>}
+{/* </div> */}
   {data.length>0?
   <div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
@@ -467,8 +496,10 @@ Login
     <div className="textcard">
       {/* {/* e?.fields[ksd["age - العمر"] } */}
       <h2 className="card-title">{e?.fields['م']}</h2>
-    <p >{e.fields["Name - الاسم"]}</p>
-      {/* <p  >{e?.fields['age - العمر']?e.fields['age - العمر']:""}</p> years */}
+    {/* <p >{e.fields["Name - الاسم"]}</p> */}
+      <p  >{e.fields['Nationality copy']}</p> 
+
+      <p  >{Math.ceil(dayjs(new Date()).diff(e.fields['date of birth - تاريخ الميلاد'])/31556952000)} years old</p> 
       <p  >{e?.fields["marital status - الحالة الاجتماعية"]}</p>
       {/* <p  >{e?.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p> */}
       <p  >{e?.fields["Religion - الديانة"]}</p>
@@ -478,14 +509,14 @@ Login
       
       </div>
     <div className="card-actions justify-end  pointer">
-<div style={{display:"inline-flex"}}>
+<div style={{display:"inline-flex",justifyContent:"space-around"}}>
 <div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/book/"+e.id} > */}
 
  <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
 {/* </Link> */}
  
-  <PlusOutlined  />
+  {/* <PlusOutlined  /> */}
 
 
 </div>
@@ -494,7 +525,7 @@ Login
  <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
 
 {/* </Link> */}
-  <FileOutlined />
+  {/* <FileOutlined /> */}
 
 </div>
 

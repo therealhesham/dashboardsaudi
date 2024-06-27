@@ -176,7 +176,7 @@ return (
         <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
 <Link href="/client/status">
-      Status
+      status
       </Link>
     </li>
       
@@ -185,18 +185,22 @@ return (
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 </ul>
       :
 <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<li  ><a href='rec.rawaes.com'>Home</a></li>
+<li className={'btn btn-ghost text-l' + Style['almarai-bold']}  onClick={()=>router.push("/client")}>الرئيسية</li>
         
-        <li ><a>About us</a></li>
+        <li className='btn btn-ghost text-l' ><a>نبذة عنا</a></li>
 
 
-        <li ><Button  style={{backgroundColor:"#003749"}}>Login</Button  ></li>
+          <Link  href="/client/login">
+        <li className='btn btn-ghost text-l' style={{color :"whitesmoke",backgroundColor:"#003749"}}>
+           تسجيل الدخول
+          </li>
+          </Link  >
 
 
 
@@ -217,9 +221,7 @@ router.reload()
       </a>
   </div>
   <div className='navbar-end'></div>
-</div>
-:
-<nav dir='rtl' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+</div>:<nav dir='ltr' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
   
   {/* <div className="" style={{}}>  */}
   <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
@@ -233,37 +235,50 @@ router.reload()
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 
  {/* <li className='btn  text-l'>Home</li> */}
       <Link href="/client/status">
     <li className='btn btn-ghost text-l'>
-      Status
+      طلباتي
     </li>
       
       </Link>
- <li className='btn btn-ghost text-l'>About us</li>
+ <li className='btn btn-ghost text-l'>نبذة عننا</li>
 
- <li className='btn btn-ghost text-l'>Home</li>
+ <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}} onClick={()=>router.push("/client")}>الرئيسية</li>
 
     
   </ul>:
   
-  <ul className="flex justify-between flex items-center space-x-4">
-    <li onClick={()=>router.push("/client/login")}  className='btn  text-xl'>
-Login
+  <ul className={"flex justify-between flex items-center space-x-4" }>
+    <li onClick={()=>router.push("/client/login")}  className='btn  text-md'>
+تسجيل الدخول
       {/* <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button> */}
+
     </li>
- <li  className='btn btn-ghost text-l'>About us</li>
- <li className='btn btn-ghost text-l'>Home</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>نبذة عنا</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>السير الذاتية</li>
+
+ <li onClick={()=>router.push("/client")} className={'btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' } style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}> 
+  الرئيسية</li>
     
   </ul>
 }
+  <div className='navbar-end'></div>
+
 </nav>
   
 }
-
 
 
 

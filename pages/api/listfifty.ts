@@ -21,6 +21,7 @@ const result =  await new Promise((resolve,reject)=>{
 
 
 const results=    base('السير الذاتية').select({
+  sort:[{field:"تاريخ الانشاء",direction:"desc"}],
   
   maxRecords:50,
   view: "الاساسي"
