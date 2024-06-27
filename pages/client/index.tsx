@@ -58,7 +58,7 @@ function valuetext(value: number) {
 const errorModal=()=>{
 
 setStatus(false);
-setIsModalOpen(true)
+openModal()
 
 }
 const [filtering,setFiltering]=useState(false)
@@ -72,15 +72,12 @@ const fetcher = await fetch('../api/filterdataforclient',{method:"post",headers:
       },body:JSON.stringify({religion:religion,time,ironing,cleaning,cooking,babysitting,sewing,nationality,maritalstatus,education,experience,oldCare,arabic,experiencetype,english,laundry})})
 if(fetcher.status != 200) return errorModal()
       const waiter = await fetcher.json()
-      if(waiter.length == 0) return errorModal()
-      console.log(waiter)
-      const filtering =waiter?.filter(e=>{ return( e.fields["age - العمر"] >value[0] && e.fields["age - العمر"]< value[1])})
-// console.log(filtering)
-// // if(fildering.data < 0) setTime()
-//       {/* {/* e?.fields[ksd["age - العمر"] } */}
-// setData(filtering)
-setFiltering(true)
-setData(filtering)
+    // console.log(waiter)
+    // console.log(waiter)
+    const filteringData =waiter?.filter(e=>{ return( e.fields["age - العمر"] >value[0] && e.fields["age - العمر"]< value[1])})
+    if(filteringData.length == 0) return errorModal();
+    setFiltering(true)
+setData(filteringData)
 
 
 
@@ -419,8 +416,8 @@ router.reload()
 
 <option placeholder='(.*)' value="(.*)">الكل</option>
 <option  value="5 and More - وأكثر">أكثر من 5 اعوام</option>
-<option value="3-4 Years - سنوات">4 اعوام</option>
-<option  value="1-2 Years - سنوات"> عامان</option>
+<option value="3-4 Years - سنوات">3 الى 5 اعوام</option>
+<option  value="1-2 Years - سنوات"> عامان الى ثلاث اعوام</option>
 
   </Select>
 
@@ -471,7 +468,7 @@ router.reload()
         {!filtering?<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >أحدث السير الذاتية</p>:<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >نتائج البحث {data.length} سيرة ذاتية </p>}
 {/* </div> */}
   {data.length>0?
-  <div  className={Style.divbox} style={{marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
+  <div  className={Style.divbox} style={{display: media?"ruby":"grid",marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 

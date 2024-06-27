@@ -31,7 +31,9 @@ grid-template-rows: repeat(3, auto);
   
   }
 
-    }
+
+
+}
 
     .DivPosition{
 position: sticky !important;
@@ -65,9 +67,9 @@ position: sticky !important;
 .divbox{
 
 
-    display:grid;
+    /* display:grid; */
     /* gred */
-  
+  /* margin:2px; */
   align-items: center;
     /* row-gap: "4px"; */
     /* justify-content: center; */
