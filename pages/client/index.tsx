@@ -468,7 +468,7 @@ router.reload()
         {!filtering?<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >أحدث السير الذاتية</p>:<p style={{display: "flex",justifyContent: "flex-end",margin:"6px"}} className={Style['almarai-bold'] } >نتائج البحث {data.length} سيرة ذاتية </p>}
 {/* </div> */}
   {data.length>0?
-  <div  className={Style.divbox} style={{display: media?"ruby":"grid",marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
+  <div  className={Style.divbox} style={{display: media?"grid":"grid",marginTop:"10px", gridTemplateColumns: media?"repeat(1, auto)":"repeat(3, auto)"}}>{data?.map((e,i)=>
   <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
