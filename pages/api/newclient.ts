@@ -8,6 +8,8 @@ import Cookies from "js-cookie";
 import jwt from "jsonwebtoken"
 import type { NextApiRequest, NextApiResponse } from 'next'
 var base = new Airtable({apiKey: 'patovGWItwsDoXzng.84565b10c27835cf1ac38c9f9b64e14a42a6ac3b825728e3970dffa94292577c'}).base('app1mph1VMncBBJid');
+var baseFinder = new Airtable({apiKey: 'patqpqm8yUGAdhSoj.b42530f3bb52b3073c8a30eb1507a54227cb17fdc0d8ce0368ee61a8acf1c66d'}).base('app1mph1VMncBBJid');
+
 type Data = {
   name: string
 }
@@ -16,7 +18,17 @@ const prisma =new PrismaClient()
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
 // sendSuggestion()
 try {
-console.log(req.body)
+baseFinder("السير الذاتية").find(req.body.id, function(err, record) {
+    if (err) { console.error(err); return; }
+    //@ts-ignore
+    // console.log('Retrieved', record.id);
+    if(record?.fields["العملاء"] != null) return  res.status(302).json("sign")  
+
+});
+
+
+
+  // console.log(req.body)
 const finder = await prisma.client.findFirst({where:{email:req.body.email}})
 if(finder?.email == req.body.email) return res.status(301).json({error:"البريد الالكتروني مسجل لدينا في قاعدة البيانات"});
 try {
@@ -48,13 +60,6 @@ const create = base('العملاء').create([
   })
 
   const result =  await new Promise((resolve,reject)=>{
-base("السير الذاتية").find(req.body.id, function(err, record) {
-    if (err) { console.error(err); return; }
-    //@ts-ignore
-    // console.log('Retrieved', record.id);
-    if(record?.fields["العملاء"] != null) return  res.status(302).json("sign")  
-
-});
 
 
 
