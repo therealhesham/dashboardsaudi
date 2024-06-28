@@ -421,21 +421,34 @@ router.reload()
 </div>
 
 </div>
-    <h2 className="card-title" style={{marginTop:"12px"}}>{data.fields["م"]}</h2>
+     <h2 className="card-title" style={{marginTop:"12px"}}>{data.fields["م"]}</h2>
 
     <h2 className="card-title">{data.fields["Name - الاسم"]}</h2>
     <div className="textcard">
       {/* data.fields[ksd["age - العمر"] }
       {/* <p  >{data.fields['age - العمر']?data.fields['age - العمر']:""}</p> */}
-      <h1 className={Style['almarai-bold']}>{data.fields["marital status - الحالة الاجتماعية"]}</h1>
+     {data.fields["marital status - الحالة الاجتماعية"]? <h1 className={Style['almarai-bold']}>الحالة الاجتماعية</h1>:null}
+      
+      <h1 >{data.fields["marital status - الحالة الاجتماعية"]}</h1>
       {/* <p  >{data.fields["External office - المكتب الخارجي"]}</p> */}
-      <h1 className={Style['almarai-bold']} >{data.fields["Education - التعليم"]}</h1>
-  <h1 className={Style['almarai-bold']} >{data.fields["Nationality copy"]}</h1>
-      <h1 className={Style['almarai-bold']} >{data.fields["Salary - الراتب"]} sar</h1> 
+{data.fields["Education - التعليم"]?      <h1 className={Style['almarai-bold']} >التعليم</h1>:null}
+
+      <h1 >{data.fields["Education - التعليم"]}</h1>
+ {data.fields["Nationality copy"]? <h1 className={Style['almarai-bold']} >الجنسية</h1>:null}
+
+  <h1 >{data.fields["Nationality copy"]}</h1>
+     {data.fields["Salary - الراتب"]? <h1 className={Style['almarai-bold']} >الراتب</h1> :null}
+      
+      <h1 >{data.fields["Salary - الراتب"]} sar</h1> 
+     {data.fields["Religion - الديانة"]? <h1 className={Style['almarai-bold']}  >الديانة</h1>:null}
      
-      <h1 className={Style['almarai-bold']}  >{data.fields["Religion - الديانة"]}</h1>
-<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
-      <p  >{data.fields["Nationality copy"]?data.fields["Nationality copy"]:""}</p>
+      <h1 >{data.fields["Religion - الديانة"]}</h1>
+    {data.fields['date of birth - تاريخ الميلاد']?  <h1 className={Style['almarai-bold']}  >العمر</h1>:null}
+      
+<h1 >{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
+
+
+
       {/* <Rating  name="half-rating" defaultValue={4}  /> */}
       <strong className='card-title'>skills</strong>
       {/* <div className="rating rating-sm"> */}
@@ -591,15 +604,25 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
     <div className="textcard">
       {/* data.fields[ksd["age - العمر"] }
       {/* <p  >{data.fields['age - العمر']?data.fields['age - العمر']:""}</p> */}
-      <h1 className={Style['almarai-bold']}>{data.fields["marital status - الحالة الاجتماعية"]}</h1>
+     {data.fields["marital status - الحالة الاجتماعية"]? <h1 className={Style['almarai-bold']}>الحالة الاجتماعية</h1>:null}
+      
+      <h1 >{data.fields["marital status - الحالة الاجتماعية"]}</h1>
       {/* <p  >{data.fields["External office - المكتب الخارجي"]}</p> */}
-      <h1 className={Style['almarai-bold']} >{data.fields["Education - التعليم"]}</h1>
-  <h1 className={Style['almarai-bold']} >{data.fields["Nationality copy"]}</h1>
-      <h1 className={Style['almarai-bold']} >{data.fields["Salary - الراتب"]} sar</h1> 
+{data.fields["Education - التعليم"]?      <h1 className={Style['almarai-bold']} >التعليم</h1>:null}
+
+      <h1 >{data.fields["Education - التعليم"]}</h1>
+ {data.fields["Nationality copy"]? <h1 className={Style['almarai-bold']} >الجنسية</h1>:null}
+
+  <h1 >{data.fields["Nationality copy"]}</h1>
+     {data.fields["Salary - الراتب"]? <h1 className={Style['almarai-bold']} >الراتب</h1> :null}
+      
+      <h1 >{data.fields["Salary - الراتب"]} sar</h1> 
+     {data.fields["Religion - الديانة"]? <h1 className={Style['almarai-bold']}  >الديانة</h1>:null}
      
-      <h1 className={Style['almarai-bold']}  >{data.fields["Religion - الديانة"]}</h1>
-<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
-      <p  >{data.fields["Nationality copy"]?data.fields["Nationality copy"]:""}</p>
+      <h1 >{data.fields["Religion - الديانة"]}</h1>
+    {data.fields['date of birth - تاريخ الميلاد']?  <h1 className={Style['almarai-bold']}  >العمر</h1>:null}
+      
+<h1 >{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
       <strong className='card-title'>المهارات</strong>
       {/* <div className="rating rating-sm"> */}
       <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}>
