@@ -400,12 +400,12 @@ router.reload()
          
         </ModalFooter>
       </Modal>
-    
+    {/* <div style={{display:"flex",justifyContent:"center"}}> */}
 {fetching?
 <div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
 </div>
-:<>{user.isUser  ?  
-  <div >
+:<div style={{  marginLeft:media?"12px":""}}>{user.isUser  ?  
+  <div  >
     <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
  
   <div className="card-body" style={{ borderRadius:"10px"}} >
@@ -734,7 +734,8 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
 <Button color='#003749' style={{backgroundColor:"#003749"}} type='submit' >  حجز</Button>        </div>
         </form>      </div>
         </div>}
-  </>}
+  </div>}
+  {/* </div> */}
           </div>
 
 )}
