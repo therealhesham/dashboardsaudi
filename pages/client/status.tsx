@@ -6,6 +6,7 @@ import InfoCard from 'example/components/Cards/InfoCard'
 import ChartCard from 'example/components/Chart/ChartCard'
 import ChartLegend from 'example/components/Chart/ChartLegend'
 import Style from "styles/Home.module.css"
+// import "../api"
 
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
@@ -49,6 +50,7 @@ import { useRouter } from 'next/router'
 import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
 import { useMediaQuery } from '@mui/material'
+import dayjs from 'dayjs'
 function Status() {
   Chart.register(
     ArcElement,
@@ -114,6 +116,7 @@ setPaginatedData(fulldata.slice((p - 1) * resultsPerPage, p * resultsPerPage))
     // setPage(p)
     }
 
+    // console.log(paginatedData)
 const [user,setUser]=useState({})
 
   // on page change, load new sliced data
@@ -137,7 +140,7 @@ try {
     json?setLength(json.length):"";
     setFulldata(json)
     json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");
-console.log(json[0])
+// console.log(json[0])
   } 
 
 )
@@ -151,7 +154,7 @@ names()
 }, [])
 return (
   
-    <>
+    <div style={{backgroundColor:"whitesmoke",marginBottom:"5px"}}>
 {media?
 <div className="navbar   bg-gray-50 dark:bg-gray-800 shadow-lg">
   <div className="navbar-start">
@@ -172,7 +175,7 @@ return (
       </div>
 {user.isUser?       
       <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+<li  className='btn btn-ghost text-l' onClick={()=>router.push("/client")}>Home</li>
         
         <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
@@ -306,88 +309,60 @@ router.reload()
 
 
 
-
-<h1 style={{fontSize:"23px"}}> Welcome {user.fullname}</h1>
 <div >
+<h1 style={{fontSize:"23px",justifyContent:"flex-end",marginRight:"12px",display:"flex"}}> قائمة حجوزاتي</h1>
+{/* <div style={{display:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl" > */}
 
+{paginatedData.map(e=>
+    <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
 
-      <TableContainer  >
-        <Table >
-          <TableHeader>
-            <tr>
-              {listType =="workers"?<TableCell>اسم العامل</TableCell>:<TableCell>اسماء المكاتب</TableCell>}
-              {listType =="workers"?<TableCell>العمر</TableCell>: null}
-              {listType =="workers"?<TableCell>الحالة الاجتماعية</TableCell>:null}
-              {listType =="workers"?<TableCell>الجنسيات</TableCell>:null}
-              {/* {listType =="workers"?<TableCell>المcardكتب</TableCell>:null} */}
-              {listType =="workers"?<TableCell>حالة الطلب</TableCell>:null}
-            </tr>
-          </TableHeader>
-          <TableBody>
-            {paginatedData?.map((e, i) => (
-              <TableRow key={i}>
-                <TableCell>
-                  <div className="flex items-center text-sm" style={{width:"200px"}}>
-                    <Avatar
-                      className="hidden mr-3 md:block"
-                      src={e.fields.Picture?e.fields.Picture[0].url:""}
-                      // alt="User image"
-                    />
-                    <div>
-                      <p className="font-semibold" >{e?.fields["Name - الاسم"]}</p>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">
-                        
-                      </p>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm">{e?.fields["age - العمر"]}</span>
+  <div className="card-body" style={{ borderRadius:"10px"}} >
+    <div style={{right:"15px",top:"10px",position:"absolute",padding:"10px",borderRadius:"3px",color:"white",backgroundColor:"dodgerblue"}}>
+{e.fields["حالة الحجز"]}
+{/* {} */}
+</div>
 
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm">{e?.fields["marital status - الحالة الاجتماعية"]}</span>
+   <div className="pic"> 
+    <div  style={{width:"80px",height:"70px"}}> 
+    <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
+    
+    >
+    
+    </div>
+      {e.fields.Picture?<img     src={e.fields.Picture[0].url}  />:""}
+</div>
+</div>
+    
+      <h2 className="card-title">{e.fields["م"]}</h2>
 
-                  {/* <Badge type={user.status}>{user.status}</Badge> */}
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm">
-                  <span className="text-sm">{e?.fields["Nationality copy"]}</span>
+    <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
+    <div className="textcard">
+      {/* e.fields[ksd["age - العمر"] }
+      {/* <p  >{e.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
+      <h1 className={Style['almarai-bold']}>{e.fields["marital status - الحالة الاجتماعية"]}</h1>
+      {/* <p  >{e.fields["External office - المكتب الخارجي"]}</p> */}
+      <h1 className={Style['almarai-bold']} >{e.fields["Education - التعليم"]}</h1>
+  <h1 className={Style['almarai-bold']} >{e.fields["Nationality copy"]}</h1>
+      <h1 className={Style['almarai-bold']} >{e.fields["Salary - الراتب"]} sar</h1> 
+     
+      <h1 className={Style['almarai-bold']}  >{e.fields["Religion - الديانة"]}</h1>
+<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(e.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
+      <p  >{e.fields["Nationality copy"]?e.fields["Nationality copy"]:""}</p>
+      {/* <Rating  name="half-rating" defaultValue={4}  /> */}
+   
 
-                    
-                    {/* {new Date(user.date).toLocaleDateString()} */}
-                  </span>
-               
-                </TableCell>
-                
-               
-                <TableCell>
-
-
-                   <span className="text-sm">
-                  <span className="text-sm">{e?.fields["حالة الحجز"]}</span>
-
-                    
-                    {/* {new Date(user.date).toLocaleDateString()} */}
-                  </span>
-                                 </TableCell>
-
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-
-        <TableFooter>
-          <Pagination
-            totalResults={totalResults}
-            resultsPerPage={resultsPerPage}
-            label="Table navigation"
-            onChange={onPageChange}
-          />
-        </TableFooter>
-      </TableContainer>
       </div>
-    </>
+    <div style={{right:"15px",bottom:"1px",position:"absolute",borderRadius:"3px",color:"red"}}>
+ 
+ <p>سيتم مراجعة الطلب و التواصل معك في اقرب وقت *</p>
+ 
+ </div>   
+  </div> 
+     </div>
+  )  } 
+      {/* </div> */}
+      </div>
+    </div>
   )
 }
 

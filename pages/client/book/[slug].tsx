@@ -49,12 +49,12 @@ import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { FileOutlined, PlusOutlined, PrinterFilled, ShareAltOutlined } from '@ant-design/icons'
 import Cookies from 'js-cookie'
 import { useForm } from 'react-hook-form'
-
+// Rating
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { jwtDecode } from 'jwt-decode'
 import dayjs from 'dayjs'
-import { useMediaQuery } from '@mui/material'
+import { Rating, useMediaQuery } from '@mui/material'
 import { WhatsappShareButton } from 'next-share'
 const options: Options = {
   filename: "advanced-example.pdf",
@@ -99,9 +99,8 @@ const options: Options = {
 
 export default function Page() {
   const router = useRouter()
-
-const media = useMediaQuery('(max-width:820px)',{noSsr:false})
-
+  const media = useMediaQuery('(max-width:820px)',{noSsr:false})
+  
   const [errorEmail,setErrorEmail]=useState(false);
   const [data,setData]=useState({fields:{"Name - الاسم":null}});
 
@@ -188,6 +187,7 @@ const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),ema
 })
   const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
 
+  console.log(data.fields["laundry - الغسيل"] )
   useEffect(() => {
     // if(data.fields["Name - الاسم"] == null)return;
     if(!router.isReady )return;
@@ -229,8 +229,13 @@ setSourceList(json)
      
   }
 
+const rates =["inner - مبتدأ",
+"Beginner - مبتدأ",
+"Intermediate - جيد",
+"Advanced - جيد جداً",
+"Expert - ممتاز"]
 return (   
-<div style={{backgroundColor:"Eff7f9",display:media?"grid":"",justifyItems:media?"center":""}}>
+<div style={{backgroundColor:"whitesmoke",display:media?"grid":"",justifyItems:media?"center":""}}>
 
 
 {media?
@@ -367,7 +372,7 @@ router.reload()
   
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
-        <ModalHeader color='pink' style={{color:"red"}}>Error Inserting Data</ModalHeader>
+        <ModalHeader color='pink' style={{color:"red"}}>Error</ModalHeader>
         <ModalBody>
           Check Internet Connectivity
         </ModalBody>
@@ -401,8 +406,10 @@ router.reload()
 </div>
 :<>{user.isUser  ?  
   <div >
-    <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
-  <div className="pic"> 
+    <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
+ 
+  <div className="card-body" style={{ borderRadius:"10px"}} >
+   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
     
@@ -412,44 +419,90 @@ router.reload()
       {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
 </div>
 </div>
-  <div className="card-body" >
+    <h2 className="card-title">{data.fields["م"]}</h2>
+
     <h2 className="card-title">{data.fields["Name - الاسم"]}</h2>
     <div className="textcard">
       {/* data.fields[ksd["age - العمر"] }
       {/* <p  >{data.fields['age - العمر']?data.fields['age - العمر']:""}</p> */}
-      <p  >{data.fields["marital status - الحالة الاجتماعية"]}</p>
-      <p  >{data.fields["External office - المكتب الخارجي "]}</p>
-      <p  >{data.fields["Religion - الديانة"]}</p>
+      <h1 className={Style['almarai-bold']}>{data.fields["marital status - الحالة الاجتماعية"]}</h1>
+      {/* <p  >{data.fields["External office - المكتب الخارجي"]}</p> */}
+      <h1 className={Style['almarai-bold']} >{data.fields["Education - التعليم"]}</h1>
+  <h1 className={Style['almarai-bold']} >{data.fields["Nationality copy"]}</h1>
+      <h1 className={Style['almarai-bold']} >{data.fields["Salary - الراتب"]} sar</h1> 
+     
+      <h1 className={Style['almarai-bold']}  >{data.fields["Religion - الديانة"]}</h1>
+<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
+      <p  >{data.fields["Nationality copy"]?data.fields["Nationality copy"]:""}</p>
+      {/* <Rating  name="half-rating" defaultValue={4}  /> */}
+      <strong className='card-title'>skills</strong>
+      {/* <div className="rating rating-sm"> */}
+      <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}>
+      <div>
+      <h4>الغسيل</h4>  {rates.map((e,i)=>
+data.fields["laundry - الغسيل"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
 
-      
-      
-      
+        )}</div>
+        <div>
+  <h4>الكوي</h4>  {rates.map((e,i)=>
+data.fields["Ironing - كوي"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}</div>
+        <div>
+ <h4>التنظيف</h4>  {rates.map((e,i)=>
+data.fields["cleaning - التنظيف"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+</div>
+<div>
+         <h4>الطبخ</h4>  {rates.map((e,i)=>
+data.fields["Cooking - الطبخ"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+     </div>
+
+
+<div>
+         <h4>الخياطة</h4>  {rates.map((e,i)=>
+data.fields["sewing - الخياطة"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+
+
+
+     </div>
+
+
+        </div>
+{/* </div> */}
+
+      <strong className='card-title'>Languages</strong>
+<div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}><div >  <h4>اللغة العربية</h4>
+  {rates.map((e,i)=>
+data.fields["Arabic -  العربية"] == e?<Rating   aria-label={e} name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        
+        )}
+        </div><div>
+<h4>اللغة الانجليزية</h4>
+  {rates.map((e,i)=>
+data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+</div>
+
+</div>
+
+
       </div>
-    <div className="card-actions justify-end  pointer">
-<div style={{display:"inline-flex"}}>
-<div  onClick={()=>router.push("../client/book/"+data.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
-  {/* <Link href={"../client/book/"+e.id} > */}
-
- <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
-{/* </Link> */}
  
-  <PlusOutlined  />
-
-
-</div>
-<div style={{display:"inline-flex",cursor:"pointer"}}> 
-  {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+data.id)}>السيرة الذاتية</span>
-
-{/* </Link> */}
-  <FileOutlined />
-
-</div>
-
- 
-</div>
-   
-</div>
     
   </div>    
 </div>
@@ -460,7 +513,7 @@ router.reload()
 
 
 
-
+{/* 
   <Label className="mt-4">
   
   
@@ -489,8 +542,8 @@ router.reload()
           <span>الديانة</span>
         {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Religion - الديانة"]} />:""}
 
-          </Label>
-<Label className="mt-4">
+          </Label> */}
+{/* <Label className="mt-4">
           <span>كيف تعرفت علينا</span>
 
 <Select >
@@ -499,73 +552,119 @@ router.reload()
 
 </Select>
 
-        </Label>
+        </Label> */}
 
 
 
 
         <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
-<Button color='#003749' style={{backgroundColor:"#003749"}} type='submit' >  حجز</Button>        </div>
+<Button color='#003749' style={{backgroundColor:"#003749"}} type='submit' >  تأكيد الحجز</Button>        </div>
         </form></div>:
         <div >
   
   
 <div style={{width:"95%",display:"flex",justifyContent:"center",flexDirection:"column"}}>
-    <div style={{isplay:media?"flex":"block",marginLeft:"auto",marginTop:"12px",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
-
-  {/* <div style={{width:"95%",alignSelf:"center",backgroundColor:"white"}}  className="card card-compact card-side w-100 bg-base-100 shadow-xl"  > */}
-  <div className="pic"> 
+    <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
+ 
+  <div className="card-body" style={{ borderRadius:"10px"}} >
+   <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
     
     >
-   
+    
     </div>
       {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
 </div>
 </div>
-  <div className="card-body" >
+    <h2 className="card-title">{data.fields["م"]}</h2>
+
     <h2 className="card-title">{data.fields["Name - الاسم"]}</h2>
     <div className="textcard">
-      <p  >{data.fields["marital status - الحالة الاجتماعية"]}</p>
-      <p  >{data.fields["Nationality copy"]}</p>
+      {/* data.fields[ksd["age - العمر"] }
+      {/* <p  >{data.fields['age - العمر']?data.fields['age - العمر']:""}</p> */}
+      <h1 className={Style['almarai-bold']}>{data.fields["marital status - الحالة الاجتماعية"]}</h1>
+      {/* <p  >{data.fields["External office - المكتب الخارجي"]}</p> */}
+      <h1 className={Style['almarai-bold']} >{data.fields["Education - التعليم"]}</h1>
+  <h1 className={Style['almarai-bold']} >{data.fields["Nationality copy"]}</h1>
+      <h1 className={Style['almarai-bold']} >{data.fields["Salary - الراتب"]} sar</h1> 
+     
+      <h1 className={Style['almarai-bold']}  >{data.fields["Religion - الديانة"]}</h1>
+<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
+      <p  >{data.fields["Nationality copy"]?data.fields["Nationality copy"]:""}</p>
+      {/* <Rating  name="half-rating" defaultValue={4}  /> */}
+      <strong className='card-title'>skills</strong>
+      {/* <div className="rating rating-sm"> */}
+      <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}>
+      <div>
+      <h4>الغسيل</h4>  {rates.map((e,i)=>
+data.fields["laundry - الغسيل"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
 
-      {/* <p  >{data.fields["External office - المكتب الخارجي (from External office - المكتب الخارجي)"][0]}</p> */}
-      <p  >{data.fields["Religion - الديانة"]}</p>
-      <p  >{data.fields["age - العمر"]}</p>
+        )}</div>
+        <div>
+  <h4>الكوي</h4>  {rates.map((e,i)=>
+data.fields["Ironing - كوي"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
 
-      
-      
-      
+        )}</div>
+        <div>
+ <h4>التنظيف</h4>  {rates.map((e,i)=>
+data.fields["cleaning - التنظيف"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+</div>
+<div>
+         <h4>الطبخ</h4>  {rates.map((e,i)=>
+data.fields["Cooking - الطبخ"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+     </div>
+
+
+<div>
+         <h4>الخياطة</h4>  {rates.map((e,i)=>
+data.fields["sewing - الخياطة"] == e?<Rating  name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+
+
+
+     </div>
+
+
+        </div>
+{/* </div> */}
+
+      <strong className='card-title'>Languages</strong>
+<div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}><div >  <h4>اللغة العربية</h4>
+  {rates.map((e,i)=>
+data.fields["Arabic -  العربية"] == e?<Rating   aria-label={e} name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        
+        )}
+        </div><div>
+<h4>اللغة الانجليزية</h4>
+  {rates.map((e,i)=>
+data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="half-rating" defaultValue={i+1}  />:console.log(e)
+        
+
+        )}
+</div>
+
+</div>
+
+
       </div>
-    <div className="card-actions justify-end  pointer">
-<div style={{display:"inline-flex"}}>
-<div  onClick={()=>router.push("../client/book/"+data.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
-  {/* <Link href={"../client/book/"+e.id} > */}
-
- <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
-{/* </Link> */}
  
-  <PlusOutlined  />
-
-
-</div>
-<div style={{display:"inline-flex",cursor:"pointer"}}> 
-  {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+data.id)}>السيرة الذاتية</span>
-
-{/* </Link> */}
-  <FileOutlined />
-
-</div>
-
- 
-</div>
-   
-</div>
     
   </div>    
 </div>
+
 
   
   <form onSubmit={handleSubmit(onSubmitNewclient)} style={{display:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",flexDirection:"column",justifyContent:"center"}}>

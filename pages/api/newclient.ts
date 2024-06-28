@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
 try {
 console.log(req.body)
 const finder = await prisma.client.findFirst({where:{email:req.body.email}})
-// if(finder?.email == req.body.email) return res.status(301).json({error:"البريد الالكتروني مسجل لدينا في قاعدة البيانات"});
+if(finder?.email == req.body.email) return res.status(301).json({error:"البريد الالكتروني مسجل لدينا في قاعدة البيانات"});
 try {
   //@ts-ignore
   if(req.body.password.length < 8) return res.status(301).json({error:"خطأ في الرقم السري"});
@@ -48,12 +48,22 @@ const create = base('العملاء').create([
   })
 
   const result =  await new Promise((resolve,reject)=>{
-const update = base('السير الذاتية').update([
+base("السير الذاتية").find(req.body.id, function(err, record) {
+    if (err) { console.error(err); return; }
+    //@ts-ignore
+    // console.log('Retrieved', record.id);
+    if(record?.fields["العملاء"] != null) return  res.status(302).json("sign")  
+
+});
+
+
+
+    const update = base('السير الذاتية').update([
   {
     "id": req.body.id,
     "fields": {
       "العملاء":req.body.fullname,
-      "حالة الحجز":"محجوز"
+      "حالة الحجز":"حجز جديد"
     }}])
 
    resolve(update)

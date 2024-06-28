@@ -20,10 +20,10 @@ const arr = [];
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
   try {
   const token = req.cookies.token;
-  //@ts-nocheck
-  
-  //@ts-ignore
+  console.log(token)
   const verify= jwt.verify(token,'secret');
+  //@ts-nocheck
+  //@ts-ignore
   if (verify.fullname == undefined) return  res.status(301).json("error")
   
     const result =  await new Promise((resolve,reject)=>{
@@ -36,6 +36,7 @@ console.log(verify)
     }).all().then(e=>
       {
         //@ts-ignore
+        // console.log(e)
         for (let index = 0; index < e.length; index++) {
           if(e[index].get("العملاء") == verify.fullname)   arr.push(e[index]);   
           }
