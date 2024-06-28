@@ -582,6 +582,7 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
 </div>
 
 </div>
+
    
 
    <h2 className="card-title" style={{marginTop:"12px"}}>{data.fields["م"]}</h2>
