@@ -27,6 +27,8 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  Select,
+  Label,
 } from '@roketid/windmill-react-ui'
 
 import {
@@ -69,6 +71,7 @@ function ClientsList() {
   const [office,setOffice]=useState([])
   const [fulldata,setFulldata]=useState([])
   const resultsPerPage = 10
+  const [bookingstatus,setStatusBooking]=useState("")
   const totalResults = fulldata.length
 const router = useRouter()  
   const [paginatedData,setPaginatedData]=useState([])
@@ -112,7 +115,7 @@ const confirm=async (id)=>{
 
   const fetcher = await fetch('../api/adminconfirmation',{method:"post",headers: {'Accept':'application/json',
         "Content-Type": "application/json",
-      },body:JSON.stringify({id,status:"Done"})})
+      },body:JSON.stringify({id,status:bookingstatus})})
 
       const e= await fetcher.json()
       if(fetcher.status == 200) return alert("Changed to Done in Airtable Database")
@@ -153,6 +156,21 @@ setClientOrderslist(e.data)
   <li>{e.fields["م"]} </li>
   </Link>
   <li>{e.fields["Name - الاسم"]} </li>
+  <li>
+    <Select onChange={e=>setStatusBooking(e.target.value)}>
+
+  
+  <option value="محتمل">محتمل</option>
+  <option value="مؤكد" >مؤكد</option>
+  <option value="تم الاستقدام">تم الاستقدام</option>
+  {/* <option >تم الاستق"دام</option> */}
+
+
+
+    </Select>
+    
+     </li>
+
   <li><Button onClick={()=>confirm(clientlistOrders[i].id)} >Confirm</Button> </li>
   {/* <li><Button onClick={()=>router.push()} >Check Cv</Button></li> */}
   </div>

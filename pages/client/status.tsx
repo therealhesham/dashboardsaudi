@@ -251,9 +251,7 @@ router.reload()
       </Link>
  <li className='btn btn-ghost text-l'>نبذة عننا</li>
 
- <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
-  fontWeight: 800,
-  fontStyle: 'normal'}} onClick={()=>router.push("/client")}>الرئيسية</li>
+ <li className='btn btn-ghost text-l'  onClick={()=>router.push("/client")}>الرئيسية</li>
 
     
   </ul>:
@@ -310,7 +308,8 @@ router.reload()
 
 
 <div >
-<h1 style={{fontSize:"23px",justifyContent:"flex-end",marginRight:"12px",display:"flex"}}> قائمة حجوزاتي</h1>
+  {/* <h3  style={{fontFamily:"Almarai" , marginTop:"9px",justifySelf:"center"}}>حجز عاملة منزلية</h3> */}
+<h1 style={{fontSize:"23px",justifyContent:"center",marginRight:"12px",display:"flex"}}> قائمة حجوزاتي</h1>
 {/* <div style={{display:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl" > */}
 
 {paginatedData.map(e=>
@@ -339,15 +338,29 @@ router.reload()
     <div className="textcard">
       {/* e.fields[ksd["age - العمر"] }
       {/* <p  >{e.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
-      <h1 className={Style['almarai-bold']}>{e.fields["marital status - الحالة الاجتماعية"]}</h1>
+      <h1 className={Style['almarai-bold']}> الحالة الاجتماعية</h1>
+
+      <h1 >{e.fields["marital status - الحالة الاجتماعية"]}</h1>
       {/* <p  >{e.fields["External office - المكتب الخارجي"]}</p> */}
-      <h1 className={Style['almarai-bold']} >{e.fields["Education - التعليم"]}</h1>
-  <h1 className={Style['almarai-bold']} >{e.fields["Nationality copy"]}</h1>
-      <h1 className={Style['almarai-bold']} >{e.fields["Salary - الراتب"]} sar</h1> 
-     
-      <h1 className={Style['almarai-bold']}  >{e.fields["Religion - الديانة"]}</h1>
+      
+      <h1 className={Style['almarai-bold']}> التعليم</h1>
+      
+      <h1>{e.fields["Education - التعليم"]}</h1>
+ 
+      <h1 className={Style['almarai-bold']}> الجنسية</h1>
+   <h1 >{e.fields["Nationality copy"]}</h1>
+      
+      <h1 className={Style['almarai-bold']}> الراتب</h1>
+      <h1 >{e.fields["Salary - الراتب"]} sar</h1> 
+
+      <h1 className={Style['almarai-bold']}> الديانة</h1>
+      <h1   >{e.fields["Religion - الديانة"]}</h1>
+
+
+      <h1 className={Style['almarai-bold']}> العمر</h1>
+
 <h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(e.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
-      <p  >{e.fields["Nationality copy"]?e.fields["Nationality copy"]:""}</p>
+      {/* <p  >{e.fields["Nationality copy"]?e.fields[""Nationality copy"]:""}</p> */}
       {/* <Rating  name="half-rating" defaultValue={4}  /> */}
    
 
