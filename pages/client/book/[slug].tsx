@@ -369,7 +369,7 @@ router.reload()
   
 }
 
-  
+  <h3 className='card-title' style={{fontFamily:"Almarai" , marginTop:"9px"}}>حجز عاملة منزلية</h3>
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
         <ModalHeader color='pink' style={{color:"red"}}>Error</ModalHeader>
@@ -416,10 +416,12 @@ router.reload()
     >
     
     </div>
-      {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
+    <div>  {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
 </div>
 </div>
-    <h2 className="card-title">{data.fields["م"]}</h2>
+
+</div>
+    <h2 className="card-title" style={{marginTop:"12px"}}>{data.fields["م"]}</h2>
 
     <h2 className="card-title">{data.fields["Name - الاسم"]}</h2>
     <div className="textcard">
@@ -574,10 +576,15 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
     >
     
     </div>
-      {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
+   <div>
+       {data.fields.Picture?<img     src={data.fields.Picture[0].url}  />:""}
 </div>
 </div>
-    <h2 className="card-title">{data.fields["م"]}</h2>
+
+</div>
+   
+
+   <h2 className="card-title" style={{marginTop:"12px"}}>{data.fields["م"]}</h2>
 
     <h2 className="card-title">{data.fields["Name - الاسم"]}</h2>
     <div className="textcard">
@@ -592,8 +599,7 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
       <h1 className={Style['almarai-bold']}  >{data.fields["Religion - الديانة"]}</h1>
 <h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(data.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
       <p  >{data.fields["Nationality copy"]?data.fields["Nationality copy"]:""}</p>
-      {/* <Rating  name="half-rating" defaultValue={4}  /> */}
-      <strong className='card-title'>skills</strong>
+      <strong className='card-title'>المهارات</strong>
       {/* <div className="rating rating-sm"> */}
       <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}>
       <div>
@@ -639,7 +645,7 @@ data.fields["sewing - الخياطة"] == e?<Rating  name="half-rating" defaultV
         </div>
 {/* </div> */}
 
-      <strong className='card-title'>Languages</strong>
+      <strong className='card-title'>اللغات</strong>
 <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-around",alignContent:"space-around",justifyItems:"center",flexDirection:"row",width:"50%"}}><div >  <h4>اللغة العربية</h4>
   {rates.map((e,i)=>
 data.fields["Arabic -  العربية"] == e?<Rating   aria-label={e} name="half-rating" defaultValue={i+1}  />:console.log(e)
