@@ -320,12 +320,12 @@ router.reload()
   <div className="card-body" style={{ borderRadius:"10px"}} >
     <div style={{right:"15px",top:"10px",position:"absolute",padding:"10px",borderRadius:"3px"}}>
 
-<h1 style={{cursor:"pointer",textDecoration:"underline" }} onClick={()=>router.push("/client/cvdetails/"+e.id)}  className={Style['almarai-bold']}> تفاصيل السيرة الذاتية</h1>
+<h1 style={{cursor:"pointer",textDecoration:"underline" }} onClick={()=>router.push("/client/cv/"+e.id)}  className={Style['almarai-bold']}> تفاصيل السيرة الذاتية</h1>
 
 
 </div>
 
-   <div className="pic"> 
+   {/* <div className="pic"> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
     
@@ -335,8 +335,8 @@ router.reload()
       {e.fields.Picture?<img     src={e.fields.Picture[0].url}  />:""}
 </div>
 </div>
-    
-      <h2 className="card-title">{e.fields["م"]}</h2>
+     */}
+      {/* <h2 className="card-title">{e.fields["م"]}</h2> */}
 
     <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
     <div className="textcard">
@@ -370,7 +370,7 @@ router.reload()
         <h4 style={{justifyContent:"center",display:"flex"}} className={Style['almarai-bold']}>حالة الطلب</h4>
 {e.fields["حالة الحجز"] == "تم الاستقدام"?
 
-<VerticalTimeline>
+<VerticalTimeline animate={media?false:true}>
   <VerticalTimelineElement
     className="vertical-timeline-element--work"
     // date="2010 - 2011"
@@ -378,7 +378,7 @@ router.reload()
   //  icon={}
   style={{backgroundColor:e.fields.Picture[0].url}} 
   >
-    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    <h1  style={{justifyContent:"center",display:"flex"}}  className={Style['almarai-bold']}>التقديم</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
       تم ارسال الطلب الى مؤسسة روائس القمم 
@@ -390,7 +390,7 @@ router.reload()
     iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    <h1 className={Style['almarai-bold']}>محتمل</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
      تم استلام الطلب ويتم مراجعته لدينا
@@ -402,7 +402,7 @@ router.reload()
     iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
  
   >
-    <h3 className="vertical-timeline-element-title">مؤكد</h3>
+    <h1 className={Style['almarai-bold']}>مؤكد</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p>
       تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
@@ -413,7 +413,7 @@ router.reload()
     // date="April 2013"
     iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
   >
-<h3 className="vertical-timeline-element-title">انهاء</h3>
+<h1 className={Style['almarai-bold']}>انهاء</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p>
       تهانينا , تم انهاء اجراءات الاستقدام
@@ -439,14 +439,14 @@ router.reload()
 
 {e.fields["حالة الحجز"] == "مؤكد"?
 
-<VerticalTimeline>
+<VerticalTimeline animate={media?false:true}>
   <VerticalTimelineElement
     className="vertical-timeline-element--work"
     // date="2010 - 2011"
     iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    <h1 className={Style['almarai-bold']}>التقديم</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
       تم ارسال الطلب الى مؤسسة روائس القمم 
@@ -458,7 +458,7 @@ router.reload()
     iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    <h1 className={Style['almarai-bold']}>محتمل</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
      تم استلام الطلب ويتم مراجعته لدينا
@@ -470,7 +470,7 @@ router.reload()
     iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
  
   >
-    <h3 className="vertical-timeline-element-title">مؤكد</h3>
+    <h1 className={Style['almarai-bold']}>مؤكد</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p>
       تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
@@ -481,7 +481,7 @@ router.reload()
     // date="April 2013"
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
   >
-<h3 className="vertical-timeline-element-title">انهاء</h3>
+<h1 className={Style['almarai-bold']}>انهاء</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p>
       تهانينا , تم انهاء اجراءات الاستقدام
@@ -508,14 +508,14 @@ router.reload()
 
 {e.fields["حالة الحجز"] == "حجز جديد"?
 
-<VerticalTimeline>
+<VerticalTimeline animate={media?false:true}>
   <VerticalTimelineElement
     className="vertical-timeline-element--work"
     // date="2010 - 2011"
     iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    <h1 className={Style['almarai-bold']}>التقديم</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
       تم ارسال الطلب الى مؤسسة روائس القمم 
@@ -527,7 +527,7 @@ router.reload()
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title" style={{color:'rgb(224, 224, 224)'}}>محتمل</h3>
+    <h1 className={Style['almarai-bold']} style={{color:'rgb(224, 224, 224)'}}>محتمل</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p  style={{color:'rgb(224, 224, 224)'}}>
      تم استلام الطلب ويتم مراجعته لدينا
@@ -539,7 +539,7 @@ router.reload()
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
  
   >
-    <h3  style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">مؤكد</h3>
+    <h1  style={{color:'rgb(224, 224, 224)'}} className={Style['almarai-bold']}>مؤكد</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p style={{color:'rgb(224, 224, 224)'}}>
       تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
@@ -550,7 +550,7 @@ router.reload()
     // date="April 2013"
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
   >
-<h3 style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">انهاء</h3>
+<h1 style={{color:'rgb(224, 224, 224)'}} className={Style['almarai-bold']}>انهاء</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p style={{color:'rgb(224, 224, 224)'}}>
       تهانينا , تم انهاء اجراءات الاستقدام
@@ -571,14 +571,14 @@ router.reload()
 
 {e.fields["حالة الحجز"] == "محتمل"?
 
-<VerticalTimeline>
+<VerticalTimeline animate={media?false:true}>
   <VerticalTimelineElement
     className="vertical-timeline-element--work"
     // date="2010 - 2011"
     iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
   
   >
-    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    <h1 className={Style['almarai-bold']}>التقديم</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
       تم ارسال الطلب الى مؤسسة روائس القمم 
@@ -590,7 +590,7 @@ router.reload()
     iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
     
   >
-    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    <h1 className={Style['almarai-bold']}>محتمل</h1>
     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
     <p>
      تم استلام الطلب ويتم مراجعته لدينا
@@ -602,7 +602,7 @@ router.reload()
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
  
   >
-    <h3  style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">مؤكد</h3>
+    <h1  style={{color:'rgb(224, 224, 224)'}} className={Style['almarai-bold']}>مؤكد</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p style={{color:'rgb(224, 224, 224)'}}>
       تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
@@ -613,7 +613,7 @@ router.reload()
     // date="April 2013"
     iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
   >
-<h3 style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">انهاء</h3>
+<h1 style={{color:'rgb(224, 224, 224)'}} className={Style['almarai-bold']}>انهاء</h1>
     {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
     <p style={{color:'rgb(224, 224, 224)'}}>
       تهانينا , تم انهاء اجراءات الاستقدام

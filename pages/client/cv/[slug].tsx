@@ -141,53 +141,11 @@ setFetching(false)
 setErrorEmail(true)
 }
 //@ts-ignore
-const onSubmit = async (sata) => {
-  // console.log(sata)
-  // return
-setFetching(true)
-  const fetcher = await fetch('../../api/orderforexistingclient',{method:"post",headers: {'Accept':'application/json',
-        "Content-Type": "application/json",
-      },body:JSON.stringify({fullname:user.fullname,phonenumber:user.phonenumber,email:user.email,id:data.id,cvnumber:data.fields.Name})})
-
-
-      const e= await fetcher.text()
-      
-      // console.log(fetcher.status)
-if(fetcher.status == 200) {
-  // Cookies.set("token",e)
-    truefunc();}
-else if (fetcher.status == 301 ) return erroremailfunc();
-else{errorfunc()
-  }
-  }
-
-//@ts-ignore
-const onSubmitNewclient = async (sata) => {
-  console.log(sata)
-setFetching(true)
-  const fetcher = await fetch('../../api/newclient',{method:"post",headers: {'Accept':'application/json',
-        "Content-Type": "application/json",
-      },body:JSON.stringify({...sata,id:data.id,cvnumber:data.fields.Name})})
-
-      const e= await fetcher.text()
-      
-      // console.log(fetcher.status)
-if(fetcher.status == 200) {
-  Cookies.set("token",e)
-    truefunc();}
-else if (fetcher.status == 301 ) return erroremailfunc();
-else{errorfunc()
-  }
-  }
-  // // console.log(data)
   const [user,setUser] = useState({})
   const [list,setSourceList] = useState([]);
 
 const Schema =yup.object({ id:yup.string(),source:yup.string().notRequired(),email:yup.string().notRequired() , phonenumber:yup.string(),password:yup.string().notRequired(),fullname:yup.string().typeError("الرجاء كتابة الاسم ثلاثي")
 })
-  const{register,handleSubmit,formState:{errors}} = useForm({resolver:yupResolver(Schema)})
-
-  console.log(data.fields["laundry - الغسيل"] )
   useEffect(() => {
     // if(data.fields["Name - الاسم"] == null)return;
     if(!router.isReady )return;
@@ -368,8 +326,8 @@ router.reload()
 </nav>
   
 }
-  <h3 className='card-title' style={{fontFamily:"Almarai" ,display:"flex",justifyContent:"center", marginTop:"9px"}}>حجز عاملة منزلية</h3>
 
+  <h3 className='card-title' style={{fontFamily:"Almarai" ,display:"flex",justifyContent:"center", marginTop:"9px"}}>حجز عاملة منزلية</h3>
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
         <ModalHeader color='pink' style={{color:"red"}}>Error</ModalHeader>
@@ -404,7 +362,7 @@ router.reload()
 {fetching?
 <div  style={{display:"flex",justifyContent:"center"}}><ClipLoader  cssOverride={{width:"390px",height:"390px",alignSelf:"center"}}/>  
 </div>
-:<div style={{  marginLeft:media?"12px":""}}>{user.isUser  ?  
+:<div style={{ marginBottom:"10px", marginLeft:media?"12px":""}}>{user.isUser  ?  
   <div  >
     <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
  
@@ -521,60 +479,8 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
     
   </div>    
 </div>
-  <form onSubmit={onSubmit} style={{display:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",flexDirection:"column",justifyContent:"center",justifyItems:"center"}}>
 
-{/* <form onSubmit={onSubmit} style={{margin:"80px",display:"block",flexDirection:"column",alignItems:"center"}}> */}
-  
-
-
-
-{/* 
-  <Label className="mt-4">
-  
-  
-  
-  <span>الاسم</span>
-        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Name - الاسم"]} />:""}
-
-        </Label>
-
-<Label className="mt-4" style={{gridColumnStart:2,gridColumnEnd:4}}>
-          <span>الجنسية</span>
-        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Nationality copy"]} />:""}
-
-        </Label>
-<Label className="mt-4">
-          <span>تاريخ الميلاد</span>
-        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["date of birth - تاريخ الميلاد"]} />:""}
-
-        </Label>
-<Label className="mt-4">
-          <span>العمر</span>
-        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["age - العمر"]} />:""}
-
-        </Label>
-<Label className="mt-4">
-          <span>الديانة</span>
-        {data.fields["Name - الاسم"] != null?  <Input className="mt-1" value={data.fields["Religion - الديانة"]} />:""}
-
-          </Label> */}
-{/* <Label className="mt-4">
-          <span>كيف تعرفت علينا</span>
-
-<Select >
-  {list.map(e=><option>{data.fields["المصدر"]}</option>
-)}
-
-</Select>
-
-        </Label> */}
-
-
-
-
-        <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
-<Button color='#003749' style={{backgroundColor:"#003749"}} type='submit' >  تأكيد الحجز</Button>        </div>
-        </form></div>:
+        </div>:
         <div >
   
   
@@ -697,72 +603,7 @@ data.fields["English - الانجليزية"] == e?<Rating aria-label={e} name="
 
 
   
-  <form onSubmit={handleSubmit(onSubmitNewclient)} style={{display:media?"flex":"block",marginLeft:"auto",marginRight:"auto",width:media?"100%":"60%",flexDirection:"column",justifyContent:"center"}}>
-  <Label className="mt-4">
-  
-
-  
-  <span>اسم العميل</span>
-
-          <Input className="mt-1" placeholder="Full Name" type='text' {...register("fullname",{required:true})}/>
-            {errors.fullname?<span>{errors.fullname.message}</span>:""}
-          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
-        </Label>
-
-  <Label className="mt-4">
-  
-  
-  
-  <span>البريد الالكتروني </span>
-  
-          <Input className="mt-1" placeholder="Email" type='text' {...register("email",{required:true})}/>
-{errorEmail?<span style={{color:"red"}}>البريد الالكتروني مسجل في قاعدة البيانات لستجيل الدخول اضغط <Link href="/client/login" ><span style={{color:"black",cursor:"pointer"}}>هنا</span></Link></span>:""}
-        </Label>
-  
-  <Label className="mt-4">
-  
-  
-  
-  <span>رقم الهاتف </span>
-  
-          <Input className="mt-1" placeholder="phonenumber" {...register("phonenumber",{required:true})}/>
-{/* <span>رقم الجوال سيتم استخدامه كرقم سري لمتابعة الطلب</span> */}
-          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
-        </Label>
-  
-
- <Label className="mt-4">
-  
-  
-  
-  <span>الرقم السري لتسجيل الدخول ومتابعة حالة الطلب</span>
-  
-          <Input className="mt-1" placeholder="password" {...register("password",{required:true})}/>
-{/* <span>رقم الجوال سيتم استخدامه كرقم سري لمتابعة الطلب</span> */}
-          {/* <h1 className="mt-1"  >{data.fields["Name - الاسم"]}</h1> */}
-        </Label>
-  
-
-
-<Label className="mt-4">
-          <span>كيف تعرفت علينا</span>
-
-<Select>
-  {list.map(s=>
-  
-  <option >{s.fields["المصدر"]}</option>
-)}
-
-</Select>
-
-        </Label>
-
-
-
-
-        <div  style={{display:"flex",justifyContent:"center",marginTop:"3px"}}>
-<Button color='#003749' style={{backgroundColor:"#003749"}} type='submit' >  حجز</Button>        </div>
-        </form>      </div>
+  </div>
         </div>}
   </div>}
   {/* </div> */}
