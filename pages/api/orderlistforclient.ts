@@ -43,7 +43,7 @@ console.log(verify)
           if(arr.length == 0) return res.status(201).json("Not Found") ;
         //@ts-ignore
         
-        res.status(200).json(arr)  
+        // res.status(200).json(arr)  
       }
       
       //@ts-ignore
@@ -51,7 +51,7 @@ console.log(verify)
     resolve(arr)
     
   })
-  // res.status(200).json(arr)  
+  res.status(200).json(result)  
 // console.log()
   } catch (error) {
     console.log(error)

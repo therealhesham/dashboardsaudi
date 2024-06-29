@@ -208,27 +208,27 @@ return (
       </div>
 {user.isUser?       
       <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>الرئيسية</a></li>
         
-        <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
 <Link href="/client/status">
-      status
+      طلباتي
       </Link>
     </li>
+        <li  className='btn btn-ghost text-l'><a>نبذة عننا</a></li>
       
 <li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
 
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 </ul>
       :
 <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<li className={'btn btn-ghost text-l' + Style['almarai-bold']}  >الرئيسية</li>
+<li className={'btn btn-ghost text-l' + Style['almarai-bold']} onClick={()=>router.push("/client")} >الرئيسية</li>
         
         <li className='btn btn-ghost text-l' ><a>نبذة عنا</a></li>
 
@@ -274,19 +274,21 @@ router.reload()
         Cookies.remove("token")
 router.reload()
       }}>
-      Sign out
+      تسجيل الخروج
     </li>
 
  {/* <li className='btn  text-l'>Home</li> */}
+ <li className='btn btn-ghost text-l'>نبذة عننا</li>
       <Link href="/client/status">
     <li className='btn btn-ghost text-l'>
-      Status
+      طلباتي
     </li>
       
       </Link>
- <li className='btn btn-ghost text-l'>About us</li>
 
- <li className='btn btn-ghost text-l'>Home</li>
+ <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>الرئيسية</li>
 
     
   </ul>:
@@ -297,13 +299,22 @@ router.reload()
       {/* <Button style={{backgroundColor:"#164654"}} onClick={()=>router.push("/client/login")}>Login</Button> */}
 
     </li>
- <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]'>نبذة عنا</li>
- <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]'>السير الذاتية</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>نبذة عنا</li>
+ <li  className='btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>السير الذاتية</li>
 
- <li className={'btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' + Style['almarai-extrabold']}>الرئيسية</li>
+ <li onClick={()=>router.push("/client")} className={'btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' } style={{ fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}> 
+  الرئيسية</li>
     
   </ul>
 }
+  <div className='navbar-end'></div>
+
 </nav>
   
 }

@@ -177,14 +177,14 @@ return (
       </div>
 {user.isUser?       
       <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-<li  className='btn btn-ghost text-l' onClick={()=>router.push("/client")}>Home</li>
+<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>الرئيسية</a></li>
         
-        <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
 <Link href="/client/status">
-      status
+      طلباتي
       </Link>
     </li>
+        <li  className='btn btn-ghost text-l'><a>نبذة عننا</a></li>
       
 <li className='btn btn-ghost text-l' style={{backgroundColor:"#003749" ,color:"whitesmoke"}} onClick={()=>{
 
@@ -197,7 +197,7 @@ router.reload()
       :
 <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
 
-<li className={'btn btn-ghost text-l' + Style['almarai-bold']}  onClick={()=>router.push("/client")}>الرئيسية</li>
+<li className={'btn btn-ghost text-l' + Style['almarai-bold']} onClick={()=>router.push("/client")} >الرئيسية</li>
         
         <li className='btn btn-ghost text-l' ><a>نبذة عنا</a></li>
 
@@ -227,7 +227,9 @@ router.reload()
       </a>
   </div>
   <div className='navbar-end'></div>
-</div>:<nav dir='ltr' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
+</div>
+:
+<nav dir='ltr' style={{position:"sticky",zIndex:+1 ,height:"70px"}} className={"flex  justify-between px-6 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 shadow-lg"}>
   
   {/* <div className="" style={{}}>  */}
   <img style={{width:"50px", height:"70px",alignSelf:"center",justifySelf:"center",marginRight:"50px",width:"60px"}} src='https://res.cloudinary.com/duo8svqci/image/upload/v1716302380/dkqowbgajxgcy8auxskm.svg'/>
@@ -245,15 +247,17 @@ router.reload()
     </li>
 
  {/* <li className='btn  text-l'>Home</li> */}
+ <li className='btn btn-ghost text-l'>نبذة عننا</li>
       <Link href="/client/status">
     <li className='btn btn-ghost text-l'>
       طلباتي
     </li>
       
       </Link>
- <li className='btn btn-ghost text-l'>نبذة عننا</li>
 
- <li className='btn btn-ghost text-l'  onClick={()=>router.push("/client")}>الرئيسية</li>
+ <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
+  fontWeight: 800,
+  fontStyle: 'normal'}}>الرئيسية</li>
 
     
   </ul>:
@@ -308,13 +312,12 @@ router.reload()
 
 
 
-
 <div >
   {/* <h3  style={{fontFamily:"Almarai" , marginTop:"9px",justifySelf:"center"}}>حجز عاملة منزلية</h3> */}
 <h1 style={{fontSize:"23px",justifyContent:"center",marginRight:"12px",display:"flex"}}> قائمة حجوزاتي</h1>
 {/* <div style={{display:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl" > */}
 
-{paginatedData.map(e=>
+{fulldata.map(e=>
     <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
 
   <div className="card-body" style={{ borderRadius:"10px"}} >
