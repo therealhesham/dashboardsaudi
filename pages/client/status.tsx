@@ -341,7 +341,7 @@ router.reload()
      */}
       {/* <h2 className="card-title">{e.fields["م"]}</h2> */}
 
-    <h2 className="card-title">{e.fields["Name - الاسم"]}</h2>
+    <h2 className="card-title">{e.fields["م"]}</h2>
     <div className="textcard">
       {/* e.fields[ksd["age - العمر"] }
       {/* <p  >{e.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
