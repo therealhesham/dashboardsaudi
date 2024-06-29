@@ -327,7 +327,7 @@ router.reload()
   
 }
 
-  <h3 className='card-title' style={{fontFamily:"Almarai" ,display:"flex",justifyContent:"center", marginTop:"9px"}}>حجز عاملة منزلية</h3>
+  <h3 className='card-title' style={{fontFamily:"Almarai" ,display:"flex",justifyContent:"center", marginTop:"9px"}}>السيرة الذاتية</h3>
   
 <Modal  isOpen={isErrorModalOpen} onClose={closeErrorModal}>
         <ModalHeader color='pink' style={{color:"red"}}>Error</ModalHeader>
