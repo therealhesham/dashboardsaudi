@@ -16,8 +16,8 @@ type Data = {
 }
 //@ts-nocheck
 //@ts-ignore
-const arr = [];
 export default async function handler(req: NextApiRequest,res: NextApiResponse) {
+  const arr = [];
   try {
   const token = req.cookies.token;
   console.log(token)
