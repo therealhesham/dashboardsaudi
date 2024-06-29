@@ -7,6 +7,8 @@ import ChartCard from 'example/components/Chart/ChartCard'
 import ChartLegend from 'example/components/Chart/ChartLegend'
 import Style from "styles/Home.module.css"
 // import "../api"
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
@@ -36,8 +38,8 @@ import {
 import {
   Chart,
   ArcElement,
-  CategoryScale,
   LinearScale,
+  CategoryScale,
   PointElement,
   LineElement,
   Title,
@@ -316,9 +318,11 @@ router.reload()
     <div style={{isplay:media?"flex":"block",marginTop:"12px",marginLeft:"auto",justifyContent:"center",marginRight:"auto",width:media?"100%":"60%",backgroundColor:"white"}}   className="card card-compact card-side w-100 bg-base-100 shadow-xl"  >
 
   <div className="card-body" style={{ borderRadius:"10px"}} >
-    <div style={{right:"15px",top:"10px",position:"absolute",padding:"10px",borderRadius:"3px",color:"white",backgroundColor:"dodgerblue"}}>
-{e.fields["حالة الحجز"]}
-{/* {} */}
+    <div style={{right:"15px",top:"10px",position:"absolute",padding:"10px",borderRadius:"3px"}}>
+
+<h1 style={{cursor:"pointer",textDecoration:"underline" }} onClick={()=>router.push("/client/cvdetails/"+e.id)}  className={Style['almarai-bold']}> تفاصيل السيرة الذاتية</h1>
+
+
 </div>
 
    <div className="pic"> 
@@ -338,36 +342,320 @@ router.reload()
     <div className="textcard">
       {/* e.fields[ksd["age - العمر"] }
       {/* <p  >{e.fields['age - العمر']?e.fields['age - العمر']:""}</p> */}
-      <h1 className={Style['almarai-bold']}> الحالة الاجتماعية</h1>
+        {/* <h1 className={Style['almarai-bold']}> الحالة الاجتماعية</h1>
 
-      <h1 >{e.fields["marital status - الحالة الاجتماعية"]}</h1>
-      {/* <p  >{e.fields["External office - المكتب الخارجي"]}</p> */}
-      
-      <h1 className={Style['almarai-bold']}> التعليم</h1>
-      
-      <h1>{e.fields["Education - التعليم"]}</h1>
+        <h1 >{e.fields["marital status - الحالة الاجتماعية"]}</h1>
+        
+        {e.fields["Education - التعليم"]?<h1 className={Style['almarai-bold']}> التعليم</h1>:null}
+        
+        {e.fields["Education - التعليم"]?<h1>{e.fields["Education - التعليم"]}</h1>:null}
+  
+        {e.fields["Nationality copy"]?<h1 className={Style['almarai-bold']}> الجنسية</h1>:null}
+    {e.fields["Nationality copy"]? <h1 >{e.fields["Nationality copy"]}</h1>:null}
+        
+        {e.fields["Salary - الراتب"]?<h1 className={Style['almarai-bold']}> الراتب</h1>:null}
+        {e.fields["Salary - الراتب"]?<h1 >{e.fields["Salary - الراتب"]} sar</h1>:null} 
+
+        {e.fields["Religion - الديانة"]?<h1 className={Style['almarai-bold']}> الديانة</h1>:null}
+        {e.fields["Religion - الديانة"]?<h1   >{e.fields["Religion - الديانة"]}</h1>:null}
+
+
+      {e.fields['date of birth - تاريخ الميلاد']? <h1 className={Style['almarai-bold']}> العمر</h1>:null}
+
+  {e.fields['date of birth - تاريخ الميلاد']?<h1 >{Math.ceil(dayjs(new Date()).diff(e.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>:null}
+     */}
+
+      </div>
+      <div>
+        <h4 style={{justifyContent:"center",display:"flex"}} className={Style['almarai-bold']}>حالة الطلب</h4>
+{e.fields["حالة الحجز"] == "تم الاستقدام"?
+
+<VerticalTimeline>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"
+    iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
+  //  icon={}
+  style={{backgroundColor:e.fields.Picture[0].url}} 
+  >
+    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+      تم ارسال الطلب الى مؤسسة روائس القمم 
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"25
+    iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+     تم استلام الطلب ويتم مراجعته لدينا
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2008 - 2010"
+    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
  
-      <h1 className={Style['almarai-bold']}> الجنسية</h1>
-   <h1 >{e.fields["Nationality copy"]}</h1>
-      
-      <h1 className={Style['almarai-bold']}> الراتب</h1>
-      <h1 >{e.fields["Salary - الراتب"]} sar</h1> 
+  >
+    <h3 className="vertical-timeline-element-title">مؤكد</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p>
+      تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
+    </p>
+  </VerticalTimelineElement>
+    <VerticalTimelineElement
+    className="vertical-timeline-element--education"
+    // date="April 2013"
+    iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+  >
+<h3 className="vertical-timeline-element-title">انهاء</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p>
+      تهانينا , تم انهاء اجراءات الاستقدام
+    </p>
 
-      <h1 className={Style['almarai-bold']}> الديانة</h1>
-      <h1   >{e.fields["Religion - الديانة"]}</h1>
+
+  </VerticalTimelineElement>
 
 
-      <h1 className={Style['almarai-bold']}> العمر</h1>
 
-<h1 className={Style['almarai-bold']}>{Math.ceil(dayjs(new Date()).diff(e.fields['date of birth - تاريخ الميلاد'])/31556952000)}</h1>
-      {/* <p  >{e.fields["Nationality copy"]?e.fields[""Nationality copy"]:""}</p> */}
-      {/* <Rating  name="half-rating" defaultValue={4}  /> */}
-   
+
+</VerticalTimeline>
+
+:null}
+
+
+
+
+
+
+
+
+
+{e.fields["حالة الحجز"] == "مؤكد"?
+
+<VerticalTimeline>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"
+    iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+      تم ارسال الطلب الى مؤسسة روائس القمم 
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"25
+    iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+     تم استلام الطلب ويتم مراجعته لدينا
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2008 - 2010"
+    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+ 
+  >
+    <h3 className="vertical-timeline-element-title">مؤكد</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p>
+      تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
+    </p>
+  </VerticalTimelineElement>
+    <VerticalTimelineElement
+    className="vertical-timeline-element--education"
+    // date="April 2013"
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+  >
+<h3 className="vertical-timeline-element-title">انهاء</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p>
+      تهانينا , تم انهاء اجراءات الاستقدام
+    </p>
+
+
+  </VerticalTimelineElement>
+
+
+
+
+</VerticalTimeline>
+
+:null}
+
+
+
+
+
+
+
+
+
+
+{e.fields["حالة الحجز"] == "حجز جديد"?
+
+<VerticalTimeline>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"
+    iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+      تم ارسال الطلب الى مؤسسة روائس القمم 
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"25
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title" style={{color:'rgb(224, 224, 224)'}}>محتمل</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p  style={{color:'rgb(224, 224, 224)'}}>
+     تم استلام الطلب ويتم مراجعته لدينا
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2008 - 2010"
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+ 
+  >
+    <h3  style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">مؤكد</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p style={{color:'rgb(224, 224, 224)'}}>
+      تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
+    </p>
+  </VerticalTimelineElement>
+    <VerticalTimelineElement
+    className="vertical-timeline-element--education"
+    // date="April 2013"
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+  >
+<h3 style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">انهاء</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p style={{color:'rgb(224, 224, 224)'}}>
+      تهانينا , تم انهاء اجراءات الاستقدام
+    </p>
+
+
+  </VerticalTimelineElement>
+
+
+
+
+</VerticalTimeline>
+
+:null}
+
+
+
+
+{e.fields["حالة الحجز"] == "محتمل"?
+
+<VerticalTimeline>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"
+    iconStyle={{ background: 'rgb(128, 25, 243)', color: '#fff' }}
+  
+  >
+    <h3 className="vertical-timeline-element-title">التقديم</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+      تم ارسال الطلب الى مؤسسة روائس القمم 
+    </p>
+  </VerticalTimelineElement>
+ <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2010 - 2011"25
+    iconStyle={{ background: 'rgb(102,255,102)', color: '#fff' }}
+    
+  >
+    <h3 className="vertical-timeline-element-title">محتمل</h3>
+    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
+    <p>
+     تم استلام الطلب ويتم مراجعته لدينا
+    </p>
+  </VerticalTimelineElement>
+  <VerticalTimelineElement
+    className="vertical-timeline-element--work"
+    // date="2008 - 2010"
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+ 
+  >
+    <h3  style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">مؤكد</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p style={{color:'rgb(224, 224, 224)'}}>
+      تم تأكيد طلبك و اتخاذ اجراءات الاستقدام
+    </p>
+  </VerticalTimelineElement>
+    <VerticalTimelineElement
+    className="vertical-timeline-element--education"
+    // date="April 2013"
+    iconStyle={{ background: 'rgb(224, 224, 224)', color: '#fff' }}
+  >
+<h3 style={{color:'rgb(224, 224, 224)'}} className="vertical-timeline-element-title">انهاء</h3>
+    {/* <h4 className="vertical-timeline-element-subtitl"e">Los Angeles, CA</h4> */}
+    <p style={{color:'rgb(224, 224, 224)'}}>
+      تهانينا , تم انهاء اجراءات الاستقدام
+    </p>
+
+
+  </VerticalTimelineElement>
+
+
+
+
+</VerticalTimeline>
+
+:null}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       </div>
     <div style={{right:"15px",bottom:"1px",position:"absolute",borderRadius:"3px",color:"red"}}>
  
- <p>سيتم مراجعة الطلب و التواصل معك في اقرب وقت *</p>
+ {/* <p>سيتم مراجعة الطلب و التواصل معك في اقرب وقت *</p> */}
  
  </div>   
   </div> 
