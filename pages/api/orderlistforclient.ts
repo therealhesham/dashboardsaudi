@@ -44,11 +44,11 @@ console.log(verify)
         //@ts-ignore
         
         // res.status(200).json(arr)  
+        resolve(arr)
       }
       
       //@ts-ignore
     );
-    resolve(arr)
     
   })
   res.status(200).json(result)  

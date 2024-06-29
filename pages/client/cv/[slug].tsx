@@ -216,7 +216,7 @@ return (
       </div>
 {user.isUser?       
       <ul style={{backgroundColor:"whitesmoke"}} tabIndex={0}        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-<li  className='btn btn-ghost text-l' ><a href='rec.rawaes.com'>Home</a></li>
+<li  className='btn btn-ghost text-l' onClick={()=>router.push("/client")}>Home</li>
         
         <li  className='btn btn-ghost text-l'><a>About us</a></li>
     <li className='btn btn-ghost text-l'>
