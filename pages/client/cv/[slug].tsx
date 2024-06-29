@@ -316,7 +316,7 @@ router.reload()
 
  <li onClick={()=>router.push("/client")} className={'btn btn-ghost text-l hover:shadow-[rgba(0,0,0,0.5)_0px_0px_10px_0px]' } style={{ fontFamily: "Almarai",
   fontWeight: 800,
-  fontStyle: 'normal'}}> 
+  fontStyle: 'normal'}} onClick={()=>router.push("/client/login")}> 
   الرئيسية</li>
     
   </ul>

@@ -9,7 +9,6 @@ import Style from "styles/Home.module.css"
 // import "../api"
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'client/containers/Layout'
@@ -53,6 +52,7 @@ import { jwtDecode } from 'jwt-decode'
 import Cookies from 'js-cookie'
 import { useMediaQuery } from '@mui/material'
 import dayjs from 'dayjs'
+import { CircleLoader, GridLoader } from 'react-spinners'
 function Status() {
   Chart.register(
     ArcElement,
@@ -257,7 +257,7 @@ router.reload()
 
  <li className='btn btn-ghost text-l' style={{fontFamily: "Almarai",
   fontWeight: 800,
-  fontStyle: 'normal'}}>الرئيسية</li>
+  fontStyle: 'normal'}} onClick={()=>router.push("/client")}  >الرئيسية</li>
 
     
   </ul>:
@@ -311,7 +311,7 @@ router.reload()
 
 
 
-
+{fulldata.length >0 ?
 <div >
   {/* <h3  style={{fontFamily:"Almarai" , marginTop:"9px",justifySelf:"center"}}>حجز عاملة منزلية</h3> */}
 <h1 style={{fontSize:"23px",justifyContent:"center",marginRight:"12px",display:"flex"}}> قائمة حجوزاتي</h1>
@@ -665,7 +665,12 @@ router.reload()
      </div>
   )  } 
       {/* </div> */}
+      </div>:
+      <div style={{display:"flex",justifyContent:"center",height:"100vh",alignContent:"center",alignItems:"center"}}>
+      <CircleLoader/>
       </div>
+      
+      }
     </div>
   )
 }

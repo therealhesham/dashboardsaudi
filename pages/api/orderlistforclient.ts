@@ -20,14 +20,14 @@ export default async function handler(req: NextApiRequest,res: NextApiResponse) 
   const arr = [];
   try {
   const token = req.cookies.token;
-  console.log(token)
+  // console.log(token)
   const verify= jwt.verify(token,'secret');
   //@ts-nocheck
   //@ts-ignore
   if (verify.fullname == undefined) return  res.status(301).json("error")
   
     const result =  await new Promise((resolve,reject)=>{
-console.log(verify)
+// console.log(verify)
 
 
     base('السير الذاتية').select({
