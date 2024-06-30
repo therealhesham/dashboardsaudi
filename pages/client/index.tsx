@@ -469,8 +469,8 @@ router.reload()
 {/* </div> */}
   {data.length>0?
   <div  className={Style.divbox} style={{display: media?"grid":"grid",marginTop:"10px", gridTemplateColumns: media?"repeat(1, 80%)":"repeat(3, auto)"}}>{data?.map((e,i)=>
-  <div style={{width:"100%",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
-  <div className="pic"> 
+  <div style={{width:media?"100%":"90%",display:"grid",gridTemplateColumns:"repeat(2, auto)",justifyContent:"space-around",backgroundColor:"white"}}  key={i} className="card card-compact card-side w-100 bg-base-100 shadow-xl"  onClick={()=>console.log(e)}>
+  <div className="pic" style={{marginTop:"9px"}}> 
     <div  style={{width:"80px",height:"70px"}}> 
     <div style={{right:"15px",cursor:"pointer",top:"10px",position:"absolute"}}
     
@@ -484,9 +484,15 @@ router.reload()
     <ShareAltOutlined  />
 
 </WhatsappShareButton>
+
+
+
     </div>
       {e?.fields.Picture?<img     src={e?.fields.Picture[0].url}  />:""}
+
+
 </div>
+
 </div>
 
   <div className="card-body" >
@@ -505,12 +511,17 @@ router.reload()
       
       
       </div>
-    <div className="card-actions justify-end  pointer">
-<div style={{display:"inline-flex",justifyContent:"space-around"}}>
+    {/* <div className="card-actions justify-end  pointer"> */}
+<div style={{display:"flex",justifyItems:"space-around"}}>
 <div  onClick={()=>router.push("../client/book/"+e.id)} style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/book/"+e.id} > */}
 
- <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>حجز العاملة</span>
+ <span style={{backgroundColor:"#003749",cursor:"pointer",borderRadius:"6px",padding:"4px",color:"whitesmoke"}}>احجز الآن
+
+
+
+  
+ </span>
 {/* </Link> */}
  
   {/* <PlusOutlined  /> */}
@@ -519,7 +530,7 @@ router.reload()
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>السيرة الذاتية</span>
+ <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>التفاصيل</span>
 
 {/* </Link> */}
   {/* <FileOutlined /> */}
@@ -529,13 +540,15 @@ router.reload()
  
 </div>
    
-</div>
+{/* </div> */}
     
   </div>    
 </div>
 
 
 )}
+
+  
   </div>: <div style={{display:"flex",justifyContent:"center"}}>
     <GridLoader  loading={filterdatastatus?true:false} style={{width:"800px",height:"600px"}}/>
     </div>
