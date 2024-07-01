@@ -5,6 +5,7 @@ import CTA from 'example/components/CTA'
 import InfoCard from 'example/components/Cards/InfoCard'
 import ChartCard from 'example/components/Chart/ChartCard'
 import ChartLegend from 'example/components/Chart/ChartLegend'
+import _ from "lodash"
 import PageTitle from 'example/components/Typography/PageTitle'
 import RoundIcon from 'example/components/RoundIcon'
 import Layout from 'example/containers/Layout'
@@ -96,7 +97,7 @@ function onPageChange(p: number) {
 // console.log(json)
     json?setLength(json.length):"";
     setFulldata(json)
-    json?setPaginatedData(json?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");})
+    json?setPaginatedData(_.reverse(json)?.slice((0) * resultsPerPage, page * resultsPerPage)):console.log("e");})
 })()
 
 } catch (error) {
@@ -152,13 +153,16 @@ setClientOrderslist(e.data)
           <ul >
 {clientlistOrders.map((e,i)=>
   <div style={{display:"flex",flexWrap:"nowrap" ,justifyContent:"space-around",marginBottom:"15px",rowGap:"15px"}}>
-  <Link href={"/client/"+e.id}>
-  <li>{e.fields["م"]} </li>
+  <Link href={"/client/cv/"+e.id}>
+  <li><Button style={{backgroundColor:"#fb8b23"}}>{e.fields["م"]}</Button></li>
   </Link>
-  <li>{e.fields["Name - الاسم"]} </li>
+  <li style={{alignSelf:"center"}}>{e.fields["حالة الحجز"]}</li>
+  
   <li>
     <Select onChange={e=>setStatusBooking(e.target.value)}>
+  <option disabled>اختر</option>
 
+  <option value="">الغاء الحجز</option>
   
   <option value="محتمل">محتمل</option>
   <option value="مؤكد" >مؤكد</option>
