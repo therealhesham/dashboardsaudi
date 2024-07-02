@@ -43,7 +43,7 @@ function valuetext(value: number) {
 }
 
 //  const [initialdata,setinitidata]=useState(datasetiniti)
-  const [value, setValue] = React.useState<number[]>([20, 37]);
+  const [value, setValue] = React.useState<number[]>([10, 70]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
