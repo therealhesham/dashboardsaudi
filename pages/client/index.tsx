@@ -530,7 +530,7 @@ router.reload()
 </div>
 <div style={{display:"inline-flex",cursor:"pointer"}}> 
   {/* <Link href={"../client/cvdetails/"+e.id} > */}
- <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cvdetails/"+e.id)}>التفاصيل</span>
+ <span style={{backgroundColor:"#Ecc383",borderRadius:"6px",padding:"4px",color:"whitesmoke"}} onClick={()=>router.push("../client/cv/"+e.id)}>التفاصيل</span>
 
 {/* </Link> */}
   {/* <FileOutlined /> */}
